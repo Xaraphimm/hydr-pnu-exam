@@ -1,8 +1,11 @@
 import { SECTIONS, questions } from '../data/questions.js'
+import { useHistory } from '../HistoryContext.jsx'
 import logo from '../assets/phnx-logo.jpeg'
 import './HomeScreen.css'
 
-export default function HomeScreen({ onStart }) {
+export default function HomeScreen({ onStart, onStudy, onWeakDrill, onHistory }) {
+  const { attempts, questionStats } = useHistory()
+
   return (
     <div className="home">
       <div className="home-logo">
@@ -31,14 +34,19 @@ export default function HomeScreen({ onStart }) {
 
       <div className="home-card">
         <span className="home-card-label">SECTIONS</span>
+        <span className="home-card-hint">Tap a section to practice</span>
         <div className="home-sections">
           {SECTIONS.map(s => {
             const count = questions.filter(q => q.section === s.key).length
             return (
-              <div key={s.key} className="home-section-row">
+              <button
+                key={s.key}
+                className="home-section-row"
+                onClick={() => onStudy(s.key)}
+              >
                 <span className="home-section-name">{s.name}</span>
                 <span className="home-section-count">{count} Q</span>
-              </div>
+              </button>
             )
           })}
         </div>
@@ -51,6 +59,12 @@ export default function HomeScreen({ onStart }) {
       <button className="home-start" onClick={onStart}>
         BEGIN EXAM
       </button>
+
+      {attempts.length > 0 && (
+        <button className="home-history" onClick={onHistory}>
+          HISTORY
+        </button>
+      )}
     </div>
   )
 }

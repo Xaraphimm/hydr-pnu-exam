@@ -13,6 +13,8 @@ export default function ExamScreen({
   onToggleFlag,
   onFinish,
   initialIndex,
+  mode,
+  studySection,
 }) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex ?? 0)
   const [showFeedback, setShowFeedback] = useState(false)
@@ -23,6 +25,10 @@ export default function ExamScreen({
   const section = SECTIONS.find(s => s.key === q.section)
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const score = questions.reduce((acc, question) => acc + (answers[question.id] === question.c ? 1 : 0), 0)
+
+  const studySectionName = mode === 'study'
+    ? SECTIONS.find(s => s.key === studySection)?.name
+    : null
 
   useEffect(() => {
     const t = setInterval(() => setElapsed(Math.floor((Date.now() - startTime) / 1000)), 1000)
@@ -66,7 +72,13 @@ export default function ExamScreen({
   return (
     <div ref={topRef} className="exam">
       <div className="exam-header">
-        <span className="exam-timer">{formatTime(elapsed)}</span>
+        {mode === 'study' ? (
+          <span className="exam-study-badge">STUDY: {studySectionName}</span>
+        ) : mode === 'weak' ? (
+          <span className="exam-study-badge">WEAK AREAS</span>
+        ) : (
+          <span className="exam-timer">{formatTime(elapsed)}</span>
+        )}
         <span className="exam-progress">Q {currentIndex + 1} / {questions.length}</span>
         <span className="exam-score">{score} correct</span>
       </div>
@@ -134,13 +146,13 @@ export default function ExamScreen({
       <div className="exam-nav">
         <button className="exam-nav-prev" onClick={prev} disabled={currentIndex === 0}>← PREV</button>
         <button className={`exam-nav-next ${showFeedback ? 'exam-nav-next--ready' : ''}`} onClick={next}>
-          {currentIndex === questions.length - 1 ? 'FINISH EXAM' : 'NEXT →'}
+          {currentIndex === questions.length - 1 ? 'FINISH' : 'NEXT →'}
         </button>
       </div>
 
       <QuestionNav questions={questions} answers={answers} currentIndex={currentIndex} flagged={flagged} onGoTo={goTo} />
 
-      <button className="exam-end" onClick={onFinish}>End Exam &amp; View Results</button>
+      <button className="exam-end" onClick={onFinish}>End &amp; View Results</button>
     </div>
   )
 }
