@@ -1,0 +1,22 @@
+{
+  "name": "AMA 214: Hydraulics & Pneumatics",
+  "short_name": "AMA 214 Exam",
+  "description": "FAA A&P Practice Exam for Hydraulics & Pneumatics",
+  "start_url": "/hydr-pnu-exam/",
+  "scope": "/hydr-pnu-exam/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#F97316",
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
