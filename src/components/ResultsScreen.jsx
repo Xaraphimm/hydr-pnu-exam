@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { SECTIONS } from '../data/questions.js'
 import { useHistory } from '../HistoryContext.jsx'
 import logo from '../assets/phnx-logo.jpeg'
@@ -57,6 +57,34 @@ export default function ResultsScreen({
   const modeLabel = mode === 'study'
     ? `Study: ${SECTIONS.find(s => s.key === studySection)?.name ?? ''}`
     : mode === 'weak' ? 'Weak Areas' : null
+
+  const [shareLabel, setShareLabel] = useState('SHARE')
+
+  const handleShare = async () => {
+    const weakest = sectionScores
+      .filter(s => s.pct < 100)
+      .sort((a, b) => a.pct - b.pct)[0]
+
+    const title = mode === 'study'
+      ? `AMA 214: ${SECTIONS.find(s => s.key === studySection)?.name ?? ''} (Study)`
+      : 'AMA 214: Hydraulics & Pneumatics'
+
+    let text = `${title}\nScore: ${pct}% (${score}/${questions.length}) — ${passed ? 'PASSED' : 'NOT YET'}\nTime: ${formatTime(elapsed)}`
+    if (weakest) text += `\nWeakest: ${weakest.name} (${weakest.pct}%)`
+    text += `\nPractice at: ${window.location.origin}${window.location.pathname}`
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ text })
+      } catch {}
+    } else {
+      try {
+        await navigator.clipboard.writeText(text)
+        setShareLabel('COPIED!')
+        setTimeout(() => setShareLabel('SHARE'), 2000)
+      } catch {}
+    }
+  }
 
   return (
     <div className="results">
@@ -118,6 +146,7 @@ export default function ResultsScreen({
 
       <div className="results-actions">
         <button className="results-retake" onClick={onRetake}>RETAKE EXAM</button>
+        <button className="results-share" onClick={handleShare}>{shareLabel}</button>
         <button className="results-home" onClick={onHome}>HOME</button>
       </div>
 

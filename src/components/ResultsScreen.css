@@ -156,6 +156,22 @@
   opacity: 0.9;
 }
 
+.results-share {
+  flex: 1;
+  padding: 14px;
+  background: var(--color-bg-card);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.results-share:hover {
+  background: var(--color-accent-muted);
+}
+
 .results-home {
   flex: 1;
   padding: 14px;
