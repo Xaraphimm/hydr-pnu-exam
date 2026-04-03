@@ -475,6 +475,7 @@ export const questions = [
     a: ["compensator", "pressure regulator", "flow divider"],
     c: 1,
     exp: "A constant delivery (fixed displacement) pump requires a pressure regulator to route excess fluid back to the reservoir.",
+    diagram: "pumpTypes",
   },
   {
     id: 57,
