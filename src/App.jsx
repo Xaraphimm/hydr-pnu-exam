@@ -4,7 +4,7 @@ import ThemeToggle from './components/ThemeToggle.jsx'
 import HomeScreen from './components/HomeScreen.jsx'
 import ExamScreen from './components/ExamScreen.jsx'
 import ResultsScreen from './components/ResultsScreen.jsx'
-import { questions } from './data/questions.js'
+import { questions, SECTIONS } from './data/questions.js'
 import './styles/reset.css'
 import './styles/theme.css'
 import './styles/global.css'
@@ -26,15 +26,30 @@ export default function App() {
   const [startTime, setStartTime] = useState(null)
   const [endTime, setEndTime] = useState(null)
   const [reviewIndex, setReviewIndex] = useState(null)
+  const [mode, setMode] = useState('exam')
+  const [studySection, setStudySection] = useState(null)
 
-  const startExam = () => {
-    setExamQuestions(shuffle(questions))
+  const beginSession = (questionSet, sessionMode, sectionKey = null) => {
+    setExamQuestions(shuffle(questionSet))
     setAnswers({})
     setFlagged(new Set())
     setStartTime(Date.now())
     setEndTime(null)
     setReviewIndex(null)
+    setMode(sessionMode)
+    setStudySection(sectionKey)
     setScreen('exam')
+  }
+
+  const startExam = () => beginSession(questions, 'exam')
+
+  const startStudy = (sectionKey) => {
+    const filtered = questions.filter(q => q.section === sectionKey)
+    beginSession(filtered, 'study', sectionKey)
+  }
+
+  const startWeakDrill = (weakQuestions) => {
+    beginSession(weakQuestions, 'weak')
   }
 
   const handleAnswer = (qId, answerIndex) => {
@@ -63,7 +78,14 @@ export default function App() {
     <ThemeProvider>
       <ThemeToggle />
       <div className="container">
-        {screen === 'home' && <HomeScreen onStart={startExam} />}
+        {screen === 'home' && (
+          <HomeScreen
+            onStart={startExam}
+            onStudy={startStudy}
+            onWeakDrill={startWeakDrill}
+            onHistory={() => setScreen('history')}
+          />
+        )}
         {screen === 'exam' && (
           <ExamScreen
             questions={examQuestions}
@@ -74,6 +96,8 @@ export default function App() {
             onToggleFlag={handleToggleFlag}
             onFinish={finishExam}
             initialIndex={reviewIndex}
+            mode={mode}
+            studySection={studySection}
           />
         )}
         {screen === 'results' && (
@@ -85,7 +109,12 @@ export default function App() {
             onRetake={startExam}
             onHome={() => setScreen('home')}
             onGoToQuestion={goToQuestion}
+            mode={mode}
+            studySection={studySection}
           />
+        )}
+        {screen === 'history' && (
+          <div>History screen placeholder</div>
         )}
       </div>
     </ThemeProvider>
