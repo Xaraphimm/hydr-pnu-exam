@@ -1,0 +1,37 @@
+.trend-chart {
+  margin-bottom: 20px;
+}
+
+.trend-chart-svg {
+  width: 100%;
+  height: auto;
+}
+
+.trend-chart-label {
+  font-size: 9px;
+  fill: var(--color-text-tertiary);
+  font-family: 'Inter', sans-serif;
+}
+
+.trend-chart-grid {
+  stroke: var(--color-border-light);
+  stroke-width: 0.5;
+}
+
+.trend-chart-threshold {
+  stroke: var(--color-accent);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+  opacity: 0.5;
+}
+
+.trend-chart-line {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.trend-chart-dot {
+  fill: var(--color-accent);
+}

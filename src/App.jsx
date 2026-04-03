@@ -4,6 +4,7 @@ import ThemeToggle from './components/ThemeToggle.jsx'
 import HomeScreen from './components/HomeScreen.jsx'
 import ExamScreen from './components/ExamScreen.jsx'
 import ResultsScreen from './components/ResultsScreen.jsx'
+import HistoryScreen from './components/HistoryScreen.jsx'
 import { questions, SECTIONS } from './data/questions.js'
 import './styles/reset.css'
 import './styles/theme.css'
@@ -114,7 +115,7 @@ export default function App() {
           />
         )}
         {screen === 'history' && (
-          <div>History screen placeholder</div>
+          <HistoryScreen onHome={() => setScreen('home')} />
         )}
       </div>
     </ThemeProvider>
