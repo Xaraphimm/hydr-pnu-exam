@@ -3,6 +3,7 @@ import { ThemeProvider } from './ThemeContext.jsx'
 import ThemeToggle from './components/ThemeToggle.jsx'
 import HomeScreen from './components/HomeScreen.jsx'
 import ExamScreen from './components/ExamScreen.jsx'
+import ResultsScreen from './components/ResultsScreen.jsx'
 import { questions } from './data/questions.js'
 import './styles/reset.css'
 import './styles/theme.css'
@@ -75,7 +76,17 @@ export default function App() {
             initialIndex={reviewIndex}
           />
         )}
-        {screen === 'results' && <div>Results screen placeholder</div>}
+        {screen === 'results' && (
+          <ResultsScreen
+            questions={examQuestions}
+            answers={answers}
+            startTime={startTime}
+            endTime={endTime}
+            onRetake={startExam}
+            onHome={() => setScreen('home')}
+            onGoToQuestion={goToQuestion}
+          />
+        )}
       </div>
     </ThemeProvider>
   )
