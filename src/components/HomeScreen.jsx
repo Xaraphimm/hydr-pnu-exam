@@ -61,6 +61,45 @@ export default function HomeScreen({ onStart, onStudy, onWeakDrill, onHistory })
       </button>
 
       {attempts.length > 0 && (
+        <button className="home-weak-drill" onClick={() => {
+          const weak = questions.filter(q => {
+            const s = questionStats[q.id]
+            if (!s || s.timesAnswered === 0) return false
+            return s.timesCorrect / s.timesAnswered < 0.5
+          })
+          if (weak.length >= 5) {
+            onWeakDrill(weak)
+          } else {
+            // Backfill with least-answered questions
+            const sorted = [...questions].sort((a, b) => {
+              const sa = questionStats[a.id]?.timesAnswered ?? 0
+              const sb = questionStats[b.id]?.timesAnswered ?? 0
+              return sa - sb
+            })
+            const ids = new Set(weak.map(q => q.id))
+            const backfilled = [...weak]
+            for (const q of sorted) {
+              if (backfilled.length >= 20) break
+              if (!ids.has(q.id)) {
+                backfilled.push(q)
+                ids.add(q.id)
+              }
+            }
+            onWeakDrill(backfilled)
+          }
+        }}>
+          {(() => {
+            const weakCount = questions.filter(q => {
+              const s = questionStats[q.id]
+              if (!s || s.timesAnswered === 0) return false
+              return s.timesCorrect / s.timesAnswered < 0.5
+            }).length
+            return weakCount >= 5 ? `DRILL WEAK AREAS (${weakCount})` : 'DRILL LEAST PRACTICED'
+          })()}
+        </button>
+      )}
+
+      {attempts.length > 0 && (
         <button className="home-history" onClick={onHistory}>
           HISTORY
         </button>
