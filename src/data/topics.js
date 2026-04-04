@@ -13,7 +13,7 @@ export const TOPICS = {
   'AF-12': { id: 'AF-12', name: 'Ice & Rain Control Systems', subtitle: 'De-icing, anti-icing, rain removal', category: 'airframe', pdfFile: '/pdfs/airframe/ice-rain-control-systems.pdf', asaPages: [128, 131] },
   'AF-13': { id: 'AF-13', name: 'Airframe Fire Protection Systems', subtitle: 'Detection, extinguishing, fire zones', category: 'airframe', pdfFile: '/pdfs/airframe/airframe-fire-protection.pdf', asaPages: [132, 135] },
   'AF-14': { id: 'AF-14', name: 'Rotorcraft Fundamentals', subtitle: 'Rotor systems, autorotation, vibration', category: 'airframe', pdfFile: '/pdfs/airframe/rotorcraft-fundamentals.pdf', asaPages: [136, 137] },
-  'AF-15': { id: 'AF-15', name: 'Water & Waste Systems', subtitle: 'Potable water, lavatory, waste disposal', category: 'airframe', pdfFile: '/pdfs/airframe/water-waste-systems.pdf', asaPages: [138, 138] },
+  'AF-15': { id: 'AF-15', name: 'Water & Waste Systems', subtitle: 'Potable water, lavatory, waste disposal', category: 'airframe', pdfFile: null, asaPages: [138, 138] },
 
   'PP-01': { id: 'PP-01', name: 'Reciprocating Engines', subtitle: 'Cylinders, valves, crankshafts, timing', category: 'powerplant', pdfFile: '/pdfs/powerplant/reciprocating-engines.pdf', asaPages: [1, 17] },
   'PP-02': { id: 'PP-02', name: 'Turbine Engines', subtitle: 'Turbojets, turbofans, turboshafts', category: 'powerplant', pdfFile: '/pdfs/powerplant/turbine-engines.pdf', asaPages: [18, 34] },
