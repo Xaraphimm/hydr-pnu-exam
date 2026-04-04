@@ -14,7 +14,7 @@ The goal is to replace the need for PrepWare or Dauntless by providing a free, o
 
 ### In Scope
 - Airframe (AMA) — 15 subtopics
-- Powerplant (AMP) — 14 subtopics
+- Powerplant (AMP) — 13 subtopics
 - Three study modes per subtopic: Study (PDF), Flashcards, Test
 - Per-question confidence tracking (1-5 levels)
 - Global and per-subtopic progress dashboards
@@ -132,7 +132,7 @@ Subtopic Interior (after tapping a topic card)
 - **Home** — The main topic list
 - **Search** — Search across all questions by keyword
 - **Bookmarks** — Saved questions and PDF pages
-- **Progress** — Full dashboard showing mastery across all 29 subtopics
+- **Progress** — Full dashboard showing mastery across all 28 subtopics
 
 ### Routing
 Continue using React state-based routing (no router library). The navigation state expands to:
@@ -419,7 +419,7 @@ The current `hydr-pnu-attempts` and `hydr-pnu-qstats` keys will be migrated on f
 
 ### Progress Dashboard
 - Accessible from the Progress tab in the bottom bar
-- Shows all 29 subtopics in a compact view with mastery percentage and progress bar
+- Shows all 28 subtopics in a compact view with mastery percentage and progress bar
 - Grouped by category (Airframe / Powerplant)
 - Category-level stats: overall readiness %, total questions mastered, study time
 - Trend chart showing readiness over time (reuses existing TrendChart component)
@@ -553,7 +553,7 @@ Note: `split-pdfs` is a manual script, not part of the regular build. It reads s
 5. Existing diagram components continue to work without changes
 
 ### Question Data Entry
-Questions need to be extracted from the ASA test guide PDFs and entered into the data files. This is a significant manual effort for ~29 subtopics. Approach:
+Questions need to be extracted from the ASA test guide PDFs and entered into the data files. This is a significant manual effort for ~28 subtopics. Approach:
 - Start with the existing 145 Hydraulics & Pneumatics questions (already done)
 - Extract questions from the ASA PDFs subtopic by subtopic
 - Each subtopic can be added incrementally — the app works with however many subtopics have data
