@@ -66,8 +66,23 @@ export function HistoryProvider({ children }) {
     setQuestionStats({})
   }, [])
 
+  const recordFlashcard = useCallback((questionId, gotIt) => {
+    setQuestionStats(prev => {
+      const existing = prev[questionId] || { timesAnswered: 0, timesCorrect: 0 }
+      const next = {
+        ...prev,
+        [questionId]: {
+          timesAnswered: existing.timesAnswered + 1,
+          timesCorrect: existing.timesCorrect + (gotIt ? 1 : 0),
+        },
+      }
+      localStorage.setItem(QSTATS_KEY, JSON.stringify(next))
+      return next
+    })
+  }, [])
+
   return (
-    <HistoryContext.Provider value={{ attempts, questionStats, saveAttempt, clearHistory }}>
+    <HistoryContext.Provider value={{ attempts, questionStats, saveAttempt, clearHistory, recordFlashcard }}>
       {children}
     </HistoryContext.Provider>
   )
