@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ThemeProvider } from './ThemeContext.jsx'
 import ThemeToggle from './components/ThemeToggle.jsx'
+import TabBar from './components/TabBar.jsx'
 import HomeScreen from './components/HomeScreen.jsx'
 import ExamScreen from './components/ExamScreen.jsx'
 import ResultsScreen from './components/ResultsScreen.jsx'
@@ -20,6 +21,9 @@ function shuffle(arr) {
 }
 
 export default function App() {
+  const [tab, setTab] = useState('exam')
+
+  // Exam tab state
   const [screen, setScreen] = useState('home')
   const [examQuestions, setExamQuestions] = useState([])
   const [answers, setAnswers] = useState({})
@@ -29,6 +33,12 @@ export default function App() {
   const [reviewIndex, setReviewIndex] = useState(null)
   const [mode, setMode] = useState('exam')
   const [studySection, setStudySection] = useState(null)
+
+  // Flashcard tab state
+  const [fcScreen, setFcScreen] = useState('flashcard-home')
+  const [fcQuestions, setFcQuestions] = useState([])
+  const [fcSection, setFcSection] = useState(null)
+  const [fcResults, setFcResults] = useState([])
 
   const beginSession = (questionSet, sessionMode, sectionKey = null) => {
     setExamQuestions(shuffle(questionSet))
@@ -75,10 +85,34 @@ export default function App() {
     setScreen('exam')
   }
 
+  // Flashcard handlers
+  const startFlashcards = (sectionKey) => {
+    const filtered = sectionKey
+      ? questions.filter(q => q.section === sectionKey)
+      : questions
+    setFcQuestions(shuffle(filtered))
+    setFcSection(sectionKey)
+    setFcResults([])
+    setFcScreen('flashcard-session')
+  }
+
+  const finishFlashcards = (results) => {
+    setFcResults(results)
+    setFcScreen('flashcard-complete')
+  }
+
+  const studyMissedCards = (missedQuestions) => {
+    setFcQuestions(shuffle(missedQuestions))
+    setFcSection(null)
+    setFcResults([])
+    setFcScreen('flashcard-session')
+  }
+
   return (
     <ThemeProvider>
       <ThemeToggle />
-      <div className="container">
+
+      <div className="container" style={{ display: tab === 'exam' ? 'block' : 'none' }}>
         {screen === 'home' && (
           <HomeScreen
             onStart={startExam}
@@ -118,6 +152,20 @@ export default function App() {
           <HistoryScreen onHome={() => setScreen('home')} />
         )}
       </div>
+
+      <div className="container" style={{ display: tab === 'flashcards' ? 'block' : 'none' }}>
+        {fcScreen === 'flashcard-home' && (
+          <div>Flashcard home placeholder</div>
+        )}
+        {fcScreen === 'flashcard-session' && (
+          <div>Flashcard session placeholder</div>
+        )}
+        {fcScreen === 'flashcard-complete' && (
+          <div>Flashcard complete placeholder</div>
+        )}
+      </div>
+
+      <TabBar activeTab={tab} onTabChange={setTab} />
     </ThemeProvider>
   )
 }
