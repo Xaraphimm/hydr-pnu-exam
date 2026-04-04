@@ -25,3 +25,73 @@ export function seededShuffle(arr, seed) {
   }
   return a;
 }
+
+/**
+ * Calculate ACS-weighted question distribution.
+ * @param {Object} questionsByTopic - { topicId: questionArray[] }
+ * @param {number} totalQuestions - target exam size (e.g. 100)
+ * @returns {Object} { topicId: questionCount }
+ */
+export function getAcsDistribution(questionsByTopic, totalQuestions) {
+  const topicIds = Object.keys(questionsByTopic);
+
+  // Count distinct ACS codes per topic
+  const acsCounts = {};
+  for (const topicId of topicIds) {
+    const codes = new Set(questionsByTopic[topicId].map((q) => q.acs).filter(Boolean));
+    acsCounts[topicId] = Math.max(codes.size, 1); // at least 1
+  }
+
+  const totalAcs = Object.values(acsCounts).reduce((a, b) => a + b, 0);
+
+  // Proportional allocation with minimum 1 per topic
+  const dist = {};
+  let allocated = 0;
+
+  for (const topicId of topicIds) {
+    const raw = (acsCounts[topicId] / totalAcs) * totalQuestions;
+    dist[topicId] = Math.max(1, Math.round(raw));
+    allocated += dist[topicId];
+  }
+
+  // Adjust to hit exact total — add/remove from largest topics
+  const sorted = [...topicIds].sort((a, b) => acsCounts[b] - acsCounts[a]);
+  let diff = totalQuestions - allocated;
+  let idx = 0;
+  while (diff !== 0) {
+    const tid = sorted[idx % sorted.length];
+    if (diff > 0) {
+      dist[tid]++;
+      diff--;
+    } else if (diff < 0 && dist[tid] > 1) {
+      dist[tid]--;
+      diff++;
+    }
+    idx++;
+    if (idx > sorted.length * totalQuestions) break; // safety
+  }
+
+  return dist;
+}
+
+/**
+ * Generate a deterministic exam from question pools.
+ * @param {number} seed - PRNG seed (1-5 for versions, Date.now() for random)
+ * @param {Object} questionsByTopic - { topicId: questionArray[] }
+ * @param {number} totalQuestions - target exam size
+ * @returns {Array} array of question objects
+ */
+export function generateExam(seed, questionsByTopic, totalQuestions) {
+  const rng = seededRandom(seed);
+  const dist = getAcsDistribution(questionsByTopic, totalQuestions);
+  const selected = [];
+
+  for (const [topicId, count] of Object.entries(dist)) {
+    const pool = questionsByTopic[topicId];
+    const shuffled = seededShuffle(pool, rng);
+    selected.push(...shuffled.slice(0, count));
+  }
+
+  // Final shuffle so topics are interleaved
+  return seededShuffle(selected, rng);
+}
