@@ -2,6 +2,7 @@ import { TOPICS, getCachedQuestionIds, hasQuestionData } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx';
 import { getTopicMastery, getTopicCounts, getMasteryColor } from '../utils/mastery.js';
 import ProgressBarMulti from './ProgressBarMulti.jsx';
+import NotesEditor from './NotesEditor.jsx';
 import './SubtopicScreen.css';
 
 const CATEGORY_LABELS = { airframe: 'Airframe', powerplant: 'Powerplant' };
@@ -103,6 +104,8 @@ export default function SubtopicScreen({ topicId, onBack, onStartStudy, onStartF
           <button className="subtopic__history-link" onClick={onViewHistory}>View full history &rarr;</button>
         </div>
       )}
+
+      <NotesEditor topicId={topicId} />
     </div>
   );
 }
