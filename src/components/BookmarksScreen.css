@@ -30,7 +30,7 @@
 }
 
 .bookmarks-screen__item {
-  background: var(--color-card);
+  background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 10px 12px;
