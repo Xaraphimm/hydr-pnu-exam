@@ -3,40 +3,36 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 56px;
   display: flex;
+  justify-content: space-around;
   background: var(--color-bg-card);
   border-top: 1px solid var(--color-border);
+  padding: 10px 0 20px;
   z-index: 100;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .tab-bar-item {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 2px;
   background: none;
   border: none;
-  color: var(--color-text-tertiary);
-  padding: 0;
-  min-height: 48px;
-  transition: color 0.15s;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-family: inherit;
+  padding: 4px 0;
+  flex: 1;
+}
+
+.tab-bar-item__icon {
+  font-size: 20px;
+}
+
+.tab-bar-item__label {
+  font-size: 10px;
+  margin-top: 2px;
 }
 
 .tab-bar-item--active {
   color: var(--color-accent);
-}
-
-.tab-bar-icon {
-  width: 22px;
-  height: 22px;
-}
-
-.tab-bar-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
 }
