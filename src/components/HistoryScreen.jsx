@@ -1,20 +1,22 @@
-import { SECTIONS } from '../data/questions.js'
+import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
 import TrendChart from './TrendChart.jsx'
 import './HistoryScreen.css'
 
-export default function HistoryScreen({ onHome }) {
-  const { attempts, clearHistory } = useHistory()
+export default function HistoryScreen({ topicId, onHome }) {
+  const { getTopicAttempts, clearHistory } = useHistory()
+
+  const attempts = getTopicAttempts(topicId)
+  const topicName = TOPICS[topicId]?.name
 
   const totalAttempts = attempts.length
-  const examAttempts = attempts.filter(a => a.mode === 'exam')
-  const bestPct = examAttempts.length
-    ? Math.max(...examAttempts.map(a => Math.round((a.score / a.total) * 100)))
+  const bestPct = totalAttempts
+    ? Math.max(...attempts.map(a => Math.round((a.score / a.total) * 100)))
     : null
-  const avgPct = examAttempts.length
-    ? Math.round(examAttempts.reduce((acc, a) => acc + (a.score / a.total) * 100, 0) / examAttempts.length)
+  const avgPct = totalAttempts
+    ? Math.round(attempts.reduce((acc, a) => acc + (a.score / a.total) * 100, 0) / totalAttempts)
     : null
-  const totalTime = attempts.reduce((acc, a) => acc + a.elapsed, 0)
+  const totalTime = attempts.reduce((acc, a) => acc + (a.time || 0), 0)
 
   const formatTime = (s) => {
     const h = Math.floor(s / 3600)
@@ -29,12 +31,11 @@ export default function HistoryScreen({ onHome }) {
   }
 
   const getModeLabel = (a) => {
-    if (a.mode === 'study') {
-      const sec = SECTIONS.find(s => s.key === a.section)
-      return `Study: ${sec?.name ?? a.section}`
-    }
+    if (a.mode === 'all') return 'All Questions'
     if (a.mode === 'weak') return 'Weak Areas'
-    return 'Full Exam'
+    if (a.mode === 'mock') return 'Mock Exam'
+    if (a.mode === 'exam') return 'Full Exam'
+    return a.mode
   }
 
   const handleClear = () => {
@@ -47,8 +48,8 @@ export default function HistoryScreen({ onHome }) {
   return (
     <div className="history">
       <div className="history-header">
-        <button className="history-back" onClick={onHome}>← Back</button>
-        <h2 className="history-title">Exam History</h2>
+        <button className="history-back" onClick={onHome}>&larr; Back</button>
+        <h2 className="history-title">{topicName}</h2>
       </div>
 
       <div className="history-card">
@@ -58,11 +59,11 @@ export default function HistoryScreen({ onHome }) {
             <span className="history-stat-label">Attempts</span>
           </div>
           <div className="history-stat">
-            <span className="history-stat-value">{bestPct !== null ? `${bestPct}%` : '—'}</span>
+            <span className="history-stat-value">{bestPct !== null ? `${bestPct}%` : '\u2014'}</span>
             <span className="history-stat-label">Best Score</span>
           </div>
           <div className="history-stat">
-            <span className="history-stat-value">{avgPct !== null ? `${avgPct}%` : '—'}</span>
+            <span className="history-stat-value">{avgPct !== null ? `${avgPct}%` : '\u2014'}</span>
             <span className="history-stat-label">Average</span>
           </div>
           <div className="history-stat">
@@ -77,6 +78,9 @@ export default function HistoryScreen({ onHome }) {
       <div className="history-card">
         <span className="history-card-label">ALL ATTEMPTS</span>
         <div className="history-list">
+          {attempts.length === 0 && (
+            <div className="history-empty">No attempts yet for this topic.</div>
+          )}
           {attempts.map(a => {
             const pct = Math.round((a.score / a.total) * 100)
             const passed = pct >= 70
@@ -91,7 +95,7 @@ export default function HistoryScreen({ onHome }) {
                     {pct}%
                   </span>
                   <span className="history-item-detail">
-                    {a.score}/{a.total} in {formatTime(a.elapsed)}
+                    {a.score}/{a.total} in {formatTime(a.time || 0)}
                   </span>
                 </div>
               </div>

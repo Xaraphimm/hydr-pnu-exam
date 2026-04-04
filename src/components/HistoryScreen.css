@@ -101,12 +101,17 @@
   border-radius: 4px;
 }
 
+.history-item-mode--all {
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+}
+
 .history-item-mode--exam {
   background: var(--color-accent-muted);
   color: var(--color-accent);
 }
 
-.history-item-mode--study {
+.history-item-mode--mock {
   background: var(--color-correct-muted);
   color: var(--color-correct);
 }
@@ -114,6 +119,13 @@
 .history-item-mode--weak {
   background: var(--color-incorrect-muted);
   color: var(--color-incorrect);
+}
+
+.history-empty {
+  padding: 24px 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-tertiary);
 }
 
 .history-item-bottom {
