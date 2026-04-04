@@ -66,6 +66,29 @@
 
 .exam-qid { font-size: 12px; color: var(--color-text-tertiary); }
 
+.exam-subheader {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+
+.exam-card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.exam-bookmark {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--color-border);
+  padding: 0;
+  line-height: 1;
+}
+
+.exam-bookmark--active { color: var(--color-accent); }
+
 .exam-flag {
   background: none;
   border: none;
