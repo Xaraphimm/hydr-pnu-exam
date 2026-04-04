@@ -1,0 +1,124 @@
+.fc-complete {
+  padding-bottom: 48px;
+}
+
+.fc-complete-score {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.fc-complete-got-it {
+  color: var(--color-correct);
+}
+
+.fc-complete-divider {
+  color: var(--color-text-tertiary);
+  margin: 0 8px;
+}
+
+.fc-complete-missed {
+  color: var(--color-incorrect);
+}
+
+.fc-complete-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: var(--color-bg-card);
+}
+
+.fc-complete-bar-got-it {
+  background: var(--color-correct);
+  height: 100%;
+}
+
+.fc-complete-bar-missed {
+  background: var(--color-incorrect);
+  height: 100%;
+}
+
+.fc-complete-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.fc-complete-card-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.fc-complete-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.fc-complete-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.fc-complete-item:last-child {
+  border-bottom: none;
+}
+
+.fc-complete-item-q {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.fc-complete-item-a {
+  font-size: 14px;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.fc-complete-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fc-complete-study-missed {
+  width: 100%;
+  padding: 16px;
+  background: var(--color-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  min-height: 48px;
+  transition: opacity 0.2s;
+}
+
+.fc-complete-study-missed:hover {
+  opacity: 0.9;
+}
+
+.fc-complete-done {
+  width: 100%;
+  padding: 14px;
+  background: var(--color-bg-card);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  min-height: 48px;
+}
