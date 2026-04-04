@@ -14,7 +14,8 @@ import SearchScreen from './components/SearchScreen.jsx'
 import BookmarksScreen from './components/BookmarksScreen.jsx'
 import ProgressScreen from './components/ProgressScreen.jsx'
 import MockExamScreen from './components/MockExamScreen.jsx'
-import { loadQuestions } from './data/index.js'
+import PdfViewer from './components/PdfViewer.jsx'
+import { loadQuestions, TOPICS } from './data/index.js'
 import { shuffle } from './utils/shuffle.js'
 import './styles/reset.css'
 import './styles/theme.css'
@@ -223,11 +224,11 @@ export default function App() {
         )}
 
         {tab === 'home' && screen === 'study' && (
-          <div style={{ padding: 20 }}>
-            <button onClick={goToSubtopic}>&larr; Back</button>
-            <h2>Study Mode</h2>
-            <p>PDF viewer coming in Task 20</p>
-          </div>
+          <PdfViewer
+            topicId={activeTopicId}
+            pdfFile={TOPICS[activeTopicId]?.pdfFile}
+            onBack={goToSubtopic}
+          />
         )}
 
         {tab === 'search' && <SearchScreen />}
