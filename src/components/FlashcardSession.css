@@ -9,6 +9,14 @@
   margin-bottom: 20px;
 }
 
+.fc-session-back {
+  background: none;
+  border: none;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+  padding: 4px 0;
+}
+
 .fc-session-progress {
   font-size: 14px;
   font-weight: 600;

@@ -4,7 +4,7 @@ import { useHistory } from '../HistoryContext.jsx'
 import diagrams from '../diagrams/index.js'
 import './FlashcardSession.css'
 
-export default function FlashcardSession({ questions, sectionKey, onFinish }) {
+export default function FlashcardSession({ questions, sectionKey, onFinish, onBack }) {
   const { recordFlashcard } = useHistory()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
@@ -36,6 +36,7 @@ export default function FlashcardSession({ questions, sectionKey, onFinish }) {
   return (
     <div className="fc-session">
       <div className="fc-session-header">
+        <button className="fc-session-back" onClick={onBack}>← Back</button>
         <span className="fc-session-progress">Card {currentIndex + 1} / {questions.length}</span>
         <span className="fc-session-badge">{sectionName}</span>
       </div>

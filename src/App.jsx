@@ -165,6 +165,7 @@ export default function App() {
             questions={fcQuestions}
             sectionKey={fcSection}
             onFinish={finishFlashcards}
+            onBack={() => setFcScreen('flashcard-home')}
           />
         )}
         {fcScreen === 'flashcard-complete' && (
