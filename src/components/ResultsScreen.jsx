@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { SECTIONS } from '../data/questions.js'
+import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
 import logo from '../assets/phnx-logo.jpeg'
 import './ResultsScreen.css'
@@ -13,15 +13,17 @@ export default function ResultsScreen({
   onHome,
   onGoToQuestion,
   mode,
-  studySection,
+  topicId,
 }) {
-  const { saveAttempt } = useHistory()
+  const { saveAttempt, recordAnswer } = useHistory()
   const savedRef = useRef(false)
 
   const score = questions.reduce((acc, q) => acc + (answers[q.id] === q.c ? 1 : 0), 0)
   const pct = Math.round((score / questions.length) * 100)
   const passed = pct >= 70
   const elapsed = Math.floor((endTime - startTime) / 1000)
+
+  const topicName = TOPICS[topicId]?.name
 
   const formatTime = (s) => {
     const h = Math.floor(s / 3600).toString().padStart(2, '0')
@@ -30,47 +32,42 @@ export default function ResultsScreen({
     return `${h}:${m}:${sec}`
   }
 
-  const sectionScores = SECTIONS.map(s => {
-    const qs = questions.filter(q => q.section === s.key)
-    const correct = qs.filter(q => answers[q.id] === q.c).length
-    return { ...s, total: qs.length, correct, pct: qs.length ? Math.round((correct / qs.length) * 100) : 0 }
-  }).filter(s => s.total > 0)
+  const getModeLabel = (m) => {
+    if (m === 'all') return 'All Questions'
+    if (m === 'weak') return 'Weak Areas'
+    if (m === 'mock') return 'Mock Exam'
+    return m
+  }
 
   useEffect(() => {
     if (savedRef.current) return
     savedRef.current = true
     saveAttempt({
+      topicId,
       mode,
-      section: studySection,
       questions,
       answers,
       startTime,
       endTime,
-      sectionScores: sectionScores.map(s => ({ key: s.key, correct: s.correct, total: s.total })),
     })
-  }, [])
+    // Record confidence for each question
+    questions.forEach((q) => {
+      recordAnswer(q.id, answers[q.id] === q.c)
+    })
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const missed = questions
     .map((q, i) => ({ ...q, examIndex: i }))
     .filter(q => answers[q.id] !== q.c)
 
-  const modeLabel = mode === 'study'
-    ? `Study: ${SECTIONS.find(s => s.key === studySection)?.name ?? ''}`
-    : mode === 'weak' ? 'Weak Areas' : null
+  const modeLabel = getModeLabel(mode)
 
   const [shareLabel, setShareLabel] = useState('SHARE')
 
   const handleShare = async () => {
-    const weakest = sectionScores
-      .filter(s => s.pct < 100)
-      .sort((a, b) => a.pct - b.pct)[0]
+    const title = topicName || 'A&P Exam Practice'
 
-    const title = mode === 'study'
-      ? `AMA 214: ${SECTIONS.find(s => s.key === studySection)?.name ?? ''} (Study)`
-      : 'AMA 214: Hydraulics & Pneumatics'
-
-    let text = `${title}\nScore: ${pct}% (${score}/${questions.length}) — ${passed ? 'PASSED' : 'NOT YET'}\nTime: ${formatTime(elapsed)}`
-    if (weakest) text += `\nWeakest: ${weakest.name} (${weakest.pct}%)`
+    let text = `${title} (${modeLabel})\nScore: ${pct}% (${score}/${questions.length}) \u2014 ${passed ? 'PASSED' : 'NOT YET'}\nTime: ${formatTime(elapsed)}`
     text += `\nPractice at: ${window.location.origin}${window.location.pathname}`
 
     if (navigator.share) {
@@ -89,7 +86,7 @@ export default function ResultsScreen({
   return (
     <div className="results">
       <div className="results-score">
-        {modeLabel && <div className="results-mode-badge">{modeLabel}</div>}
+        <div className="results-mode-badge">{topicName} &mdash; {modeLabel}</div>
         <div className={`results-pct ${passed ? 'results-pct--pass' : 'results-pct--fail'}`}>
           {pct}%
         </div>
@@ -102,23 +99,27 @@ export default function ResultsScreen({
       </div>
 
       <div className="results-card">
-        <span className="results-card-label">SECTION BREAKDOWN</span>
-        {sectionScores.map(s => (
-          <div key={s.key} className="results-section">
-            <div className="results-section-header">
-              <span className="results-section-name">{s.name}</span>
-              <span className={`results-section-score ${s.pct >= 70 ? 'results-section-score--pass' : 'results-section-score--fail'}`}>
-                {s.correct}/{s.total} ({s.pct}%)
-              </span>
-            </div>
-            <div className="results-bar">
-              <div
-                className={`results-bar-fill ${s.pct >= 70 ? '' : 'results-bar-fill--fail'}`}
-                style={{ width: `${s.pct}%` }}
-              />
-            </div>
+        <span className="results-card-label">SCORE BREAKDOWN</span>
+        <div className="results-overview">
+          <div className="results-overview-row">
+            <span className="results-overview-label">Correct</span>
+            <span className="results-overview-value results-overview-value--pass">{score}</span>
           </div>
-        ))}
+          <div className="results-overview-row">
+            <span className="results-overview-label">Missed</span>
+            <span className="results-overview-value results-overview-value--fail">{missed.length}</span>
+          </div>
+          <div className="results-overview-row">
+            <span className="results-overview-label">Total</span>
+            <span className="results-overview-value">{questions.length}</span>
+          </div>
+        </div>
+        <div className="results-bar">
+          <div
+            className={`results-bar-fill ${pct >= 70 ? '' : 'results-bar-fill--fail'}`}
+            style={{ width: `${pct}%` }}
+          />
+        </div>
       </div>
 
       {missed.length > 0 && (
@@ -145,7 +146,7 @@ export default function ResultsScreen({
       )}
 
       <div className="results-actions">
-        <button className="results-retake" onClick={onRetake}>RETAKE EXAM</button>
+        <button className="results-retake" onClick={onRetake}>RETAKE</button>
         <button className="results-share" onClick={handleShare}>{shareLabel}</button>
         <button className="results-home" onClick={onHome}>HOME</button>
       </div>

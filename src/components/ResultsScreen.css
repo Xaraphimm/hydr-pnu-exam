@@ -49,31 +49,34 @@
   margin-bottom: 16px;
 }
 
-.results-section {
-  margin-bottom: 14px;
+.results-overview {
+  margin-bottom: 12px;
 }
 
-.results-section:last-of-type {
-  margin-bottom: 0;
-}
-
-.results-section-header {
+.results-overview-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
-.results-section-name {
+.results-overview-row:last-child {
+  border-bottom: none;
+}
+
+.results-overview-label {
   font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.results-overview-value {
+  font-size: 13px;
+  font-weight: 600;
   color: var(--color-text);
 }
 
-.results-section-score {
-  font-size: 13px;
-}
-
-.results-section-score--pass { color: var(--color-correct); }
-.results-section-score--fail { color: var(--color-incorrect); }
+.results-overview-value--pass { color: var(--color-correct); }
+.results-overview-value--fail { color: var(--color-incorrect); }
 
 .results-bar {
   background: var(--color-bg);
