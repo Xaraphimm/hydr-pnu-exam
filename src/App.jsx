@@ -6,6 +6,9 @@ import HomeScreen from './components/HomeScreen.jsx'
 import ExamScreen from './components/ExamScreen.jsx'
 import ResultsScreen from './components/ResultsScreen.jsx'
 import HistoryScreen from './components/HistoryScreen.jsx'
+import FlashcardHome from './components/FlashcardHome.jsx'
+import FlashcardSession from './components/FlashcardSession.jsx'
+import FlashcardComplete from './components/FlashcardComplete.jsx'
 import { questions, SECTIONS } from './data/questions.js'
 import './styles/reset.css'
 import './styles/theme.css'
@@ -155,13 +158,21 @@ export default function App() {
 
       <div className="container" style={{ display: tab === 'flashcards' ? 'block' : 'none' }}>
         {fcScreen === 'flashcard-home' && (
-          <div>Flashcard home placeholder</div>
+          <FlashcardHome onStart={startFlashcards} />
         )}
         {fcScreen === 'flashcard-session' && (
-          <div>Flashcard session placeholder</div>
+          <FlashcardSession
+            questions={fcQuestions}
+            sectionKey={fcSection}
+            onFinish={finishFlashcards}
+          />
         )}
         {fcScreen === 'flashcard-complete' && (
-          <div>Flashcard complete placeholder</div>
+          <FlashcardComplete
+            results={fcResults}
+            onStudyMissed={studyMissedCards}
+            onDone={() => setFcScreen('flashcard-home')}
+          />
         )}
       </div>
 
