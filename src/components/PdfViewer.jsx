@@ -22,6 +22,20 @@ export default function PdfViewer({ topicId, pdfFile, onBack }) {
   const isPageBookmarked = (page) =>
     bookmarks.pdfPages.some((p) => p.topicId === topicId && p.page === page);
 
+  if (!pdfFile) {
+    return (
+      <div className="pdf-viewer">
+        <div className="pdf-viewer__nav">
+          <button className="pdf-viewer__back" onClick={onBack}>&larr;</button>
+          <span>Study</span>
+        </div>
+        <div className="pdf-viewer__error">
+          <p>No handbook chapter available for this topic.</p>
+        </div>
+      </div>
+    );
+  }
+
   if (error) {
     return (
       <div className="pdf-viewer">
