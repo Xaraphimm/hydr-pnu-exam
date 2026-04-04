@@ -5,9 +5,10 @@
   right: 0;
   height: 56px;
   display: flex;
-  background: var(--color-bg);
-  border-top: 1px solid var(--color-border-light);
+  background: var(--color-bg-card);
+  border-top: 1px solid var(--color-border);
   z-index: 100;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .tab-bar-item {
