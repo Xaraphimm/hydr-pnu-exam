@@ -59,7 +59,7 @@ export default function PdfViewer({ topicId, pdfFile, onBack }) {
       </div>
       <div className="pdf-viewer__content">
         <Document
-          file={pdfFile}
+          file={`${import.meta.env.BASE_URL}${pdfFile.replace(/^\//, '')}`}
           onLoadSuccess={onDocumentLoadSuccess}
           onLoadError={(err) => setError(err.message)}
           loading={<div className="pdf-viewer__loading">Loading chapter...</div>}
