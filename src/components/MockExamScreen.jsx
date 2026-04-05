@@ -8,8 +8,17 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
   const [remaining, setRemaining] = useState(totalSeconds)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState({})
+  const [flagged, setFlagged] = useState(new Set())
   const topRef = useRef(null)
   const timerRef = useRef(null)
+
+  const toggleFlag = (qId) => {
+    setFlagged((prev) => {
+      const s = new Set(prev)
+      s.has(qId) ? s.delete(qId) : s.add(qId)
+      return s
+    })
+  }
 
   const topicName = TOPICS[topicId]?.name
 
@@ -17,6 +26,17 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
     if (timerRef.current) clearInterval(timerRef.current)
     onFinish(answers)
   }, [answers, onFinish])
+
+  const handleFinish = () => {
+    const unanswered = questions.length - Object.keys(answers).length
+    if (unanswered > 0) {
+      const confirmed = window.confirm(
+        `Are you sure? You have ${unanswered} unanswered question${unanswered > 1 ? 's' : ''}.`
+      )
+      if (!confirmed) return
+    }
+    finish()
+  }
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
@@ -83,6 +103,12 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
       <div className="mock-card">
         <div className="mock-card-top">
           <span className="mock-qnum">Q {currentIndex + 1}</span>
+          <button
+            className={`mock-flag ${flagged.has(q.id) ? 'mock-flag--active' : ''}`}
+            onClick={() => toggleFlag(q.id)}
+          >
+            {flagged.has(q.id) ? '\u2605' : '\u2606'}
+          </button>
         </div>
 
         <p className="mock-question">{q.q}</p>
@@ -141,7 +167,7 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
         </button>
       </div>
 
-      <button className="mock-finish" onClick={finish}>
+      <button className="mock-finish" onClick={handleFinish}>
         Finish Exam
       </button>
     </div>

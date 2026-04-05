@@ -74,6 +74,9 @@
 }
 
 .mock-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 12px;
 }
 
@@ -190,4 +193,17 @@
 
 .mock-finish:hover {
   opacity: 0.9;
+}
+
+.mock-flag {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--color-text-tertiary, #666);
+  padding: 4px 8px;
+}
+
+.mock-flag--active {
+  color: var(--color-accent, #E8651A);
 }
