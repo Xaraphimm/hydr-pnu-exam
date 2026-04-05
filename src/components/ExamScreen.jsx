@@ -28,6 +28,12 @@ export default function ExamScreen({
   const score = questions.reduce((acc, question) => acc + (answers[question.id] === question.c ? 1 : 0), 0)
   const topicName = TOPICS[topicId]?.name
 
+  const getQuestionTopic = (question) => {
+    const prefix = question.id.split('-')[0];
+    const topicKey = prefix.replace(/([A-Z]+)(\d+)/, '$1-$2');
+    return TOPICS[topicKey]?.name || '';
+  };
+
   useEffect(() => {
     const t = setInterval(() => setElapsed(Math.floor((Date.now() - startTime) / 1000)), 1000)
     return () => clearInterval(t)
@@ -88,7 +94,10 @@ export default function ExamScreen({
 
       <div className="exam-card">
         <div className="exam-card-top">
-          <span className="exam-qid">#{q.id}</span>
+          <span className="exam-card-meta">
+            <span className="exam-topic-label">{getQuestionTopic(q)}</span>
+            <span className="exam-qid">#{q.id}</span>
+          </span>
           <div className="exam-card-actions">
             <button
               className={`exam-bookmark ${isQuestionBookmarked(q.id) ? 'exam-bookmark--active' : ''}`}
@@ -128,22 +137,24 @@ export default function ExamScreen({
 
             return (
               <button key={i} className={cls} onClick={() => selectAnswer(i)} disabled={showResult}>
-                <span className="exam-answer-indicator">
-                  {showResult && isCorrect && '\u2713'}
-                  {showResult && isSelected && !isCorrect && '\u2717'}
-                </span>
-                <span className="exam-answer-text">{String.fromCharCode(65 + i)}. {opt}</span>
+                <span className="exam-answer-letter">{String.fromCharCode(65 + i)}</span>
+                <span className="exam-answer-text">{opt}</span>
               </button>
             )
           })}
         </div>
 
         {showFeedback && answers[q.id] !== undefined && (
-          <div className={`exam-explanation ${answers[q.id] === q.c ? 'exam-explanation--correct' : 'exam-explanation--incorrect'}`}>
-            <div className="exam-explanation-label">
-              {answers[q.id] === q.c ? 'Correct' : 'Incorrect'}
-            </div>
-            <div className="exam-explanation-text">{q.exp}</div>
+          <div className="exam-explanation-panel">
+            <div className="exam-explanation-panel__header">EXPLANATION</div>
+            <div className="exam-explanation-panel__text">{q.exp}</div>
+            {(q.ref || q.acs) && (
+              <div className="exam-explanation-panel__refs">
+                <span className="exam-explanation-panel__refs-label">References:</span>
+                {q.acs && <span className="exam-explanation-panel__ref">{q.acs}</span>}
+                {q.ref && <span className="exam-explanation-panel__ref">{q.ref}</span>}
+              </div>
+            )}
           </div>
         )}
       </div>
