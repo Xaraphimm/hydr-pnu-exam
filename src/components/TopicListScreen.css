@@ -142,3 +142,23 @@
 .progress-bar-multi {
   margin-top: 5px;
 }
+
+.topic-list__exam-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md, 16px);
+  width: 100%;
+  padding: var(--spacing-md, 16px);
+  margin-bottom: var(--spacing-sm, 8px);
+  background: var(--color-accent, #E8651A);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.topic-list__exam-icon { font-size: 1.5rem; }
+.topic-list__exam-name { display: block; font-weight: 700; font-size: 0.9375rem; }
+.topic-list__exam-desc { display: block; font-size: 0.75rem; opacity: 0.8; }
+.topic-list__exam-arrow { margin-left: auto; font-size: 1.5rem; opacity: 0.6; }

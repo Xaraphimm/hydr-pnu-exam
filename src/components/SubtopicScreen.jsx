@@ -7,7 +7,7 @@ import './SubtopicScreen.css';
 
 const CATEGORY_LABELS = { airframe: 'Airframe', powerplant: 'Powerplant' };
 
-export default function SubtopicScreen({ topicId, onBack, onStartStudy, onStartFlashcards, onStartTest, onStartMockExam, onViewHistory }) {
+export default function SubtopicScreen({ topicId, onBack, onStartStudy, onStartFlashcards, onStartTest, onStartMockExam, onViewHistory, onOpenExamSelect }) {
   const topic = TOPICS[topicId];
   const { confidence, getTopicAttempts } = useHistory();
   const qIds = getCachedQuestionIds(topicId);
@@ -69,6 +69,13 @@ export default function SubtopicScreen({ topicId, onBack, onStartStudy, onStartF
       {hasQuestions && (
         <div className="subtopic__test-options">
           <h3 className="subtopic__section-title">TEST OPTIONS</h3>
+          <button className="subtopic__option" onClick={onOpenExamSelect}>
+            <div>
+              <span className="subtopic__option-name">Take an Exam</span>
+              <span className="subtopic__option-desc">Study or Test mode &middot; Pick a version</span>
+            </div>
+            <span className="subtopic__option-arrow">&rsaquo;</span>
+          </button>
           <button className="subtopic__option" onClick={() => onStartTest('all')}>
             <div><span className="subtopic__option-name">All Questions</span><span className="subtopic__option-desc">{qIds.length} questions, randomized</span></div>
             <span className="subtopic__option-arrow">&rsaquo;</span>

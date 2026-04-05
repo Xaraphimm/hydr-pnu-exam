@@ -15,7 +15,10 @@ import BookmarksScreen from './components/BookmarksScreen.jsx'
 import ProgressScreen from './components/ProgressScreen.jsx'
 import MockExamScreen from './components/MockExamScreen.jsx'
 import PdfViewer from './components/PdfViewer.jsx'
-import { loadQuestions, TOPICS } from './data/index.js'
+import ExamSelectionScreen from './components/ExamSelectionScreen.jsx'
+import ExamResultsScreen from './components/ExamResultsScreen.jsx'
+import { generateExam, seededShuffle } from './utils/exam-generator.js'
+import { loadQuestions, TOPICS, CATEGORIES } from './data/index.js'
 import { shuffle } from './utils/shuffle.js'
 import './styles/reset.css'
 import './styles/theme.css'
@@ -39,11 +42,71 @@ export default function App() {
   const [reviewIndex, setReviewIndex] = useState(null)
   const [mode, setMode] = useState('all')
 
+  const [examVersion, setExamVersion] = useState(null)
+  const [examSeed, setExamSeed] = useState(null)
+  const [examMode, setExamMode] = useState(null)
+
   // Flashcard state
   const [fcQuestions, setFcQuestions] = useState([])
   const [fcResults, setFcResults] = useState([])
 
   // --- Navigation functions ---
+
+  const openExamSelection = (scopeTopicId) => {
+    setActiveTopicId(scopeTopicId)
+    setScreen('exam-select')
+  }
+
+  const handleExamSelect = async ({ mode, version, seed, topicId: scopeId, isFullCategory }) => {
+    setExamMode(mode)
+    setExamVersion(version)
+    setExamSeed(seed)
+
+    let qs
+    if (isFullCategory) {
+      const questionsByTopic = {}
+      for (const tid of CATEGORIES.airframe.topics) {
+        const topicQs = await loadQuestions(tid)
+        if (topicQs.length > 0) questionsByTopic[tid] = topicQs
+      }
+      qs = generateExam(seed, questionsByTopic, 100)
+    } else {
+      const topicQs = await loadQuestions(scopeId)
+      qs = seededShuffle(topicQs, seed)
+    }
+
+    setExamQuestions(qs)
+    setAnswers({})
+    setFlagged(new Set())
+    setStartTime(Date.now())
+    setEndTime(null)
+    setReviewIndex(null)
+    setActiveTopicId(isFullCategory ? 'airframe' : scopeId)
+
+    if (mode === 'study') {
+      setMode('all')
+      setScreen('test')
+    } else {
+      setMode('mock')
+      setScreen('mock')
+    }
+  }
+
+  const handleStudyMissedFromResults = (missedQuestions) => {
+    setFcQuestions(shuffle(missedQuestions))
+    setFcResults([])
+    setScreen('flashcards')
+  }
+
+  const handleRetakeFromResults = () => {
+    handleExamSelect({
+      mode: examMode,
+      version: examVersion,
+      seed: examVersion === 'random' ? Date.now() : examSeed,
+      topicId: activeTopicId,
+      isFullCategory: activeTopicId === 'airframe',
+    })
+  }
 
   const selectTopic = async (topicId) => {
     setActiveTopicId(topicId)
@@ -99,7 +162,7 @@ export default function App() {
 
   const finishExam = () => {
     setEndTime(Date.now())
-    setScreen('results')
+    setScreen('exam-results')
   }
 
   const studyMissedCards = (missed) => {
@@ -131,7 +194,7 @@ export default function App() {
         <ThemeToggle />
 
         {tab === 'home' && screen === 'topic-list' && (
-          <TopicListScreen onSelectTopic={selectTopic} />
+          <TopicListScreen onSelectTopic={selectTopic} onStartExam={openExamSelection} />
         )}
 
         {tab === 'home' && screen === 'subtopic' && (
@@ -143,6 +206,7 @@ export default function App() {
             onStartTest={startTest}
             onStartMockExam={startMockExam}
             onViewHistory={() => setScreen('history')}
+            onOpenExamSelect={() => openExamSelection(activeTopicId)}
           />
         )}
 
@@ -174,7 +238,7 @@ export default function App() {
             onFinish={(mockAnswers) => {
               setAnswers(mockAnswers)
               setEndTime(Date.now())
-              setScreen('results')
+              setScreen('exam-results')
             }}
           />
         )}
@@ -228,6 +292,31 @@ export default function App() {
             topicId={activeTopicId}
             pdfFile={TOPICS[activeTopicId]?.pdfFile}
             onBack={goToSubtopic}
+          />
+        )}
+
+        {tab === 'home' && screen === 'exam-select' && (
+          <ExamSelectionScreen
+            topicId={activeTopicId}
+            onSelectExam={handleExamSelect}
+            onBack={() => activeTopicId === 'airframe' ? goToTopicList() : goToSubtopic()}
+          />
+        )}
+
+        {tab === 'home' && screen === 'exam-results' && (
+          <ExamResultsScreen
+            questions={examQuestions}
+            answers={answers}
+            flagged={flagged}
+            startTime={startTime}
+            endTime={endTime}
+            topicId={activeTopicId}
+            mode={examMode}
+            version={examVersion}
+            seed={examSeed}
+            onRetake={handleRetakeFromResults}
+            onStudyMissed={handleStudyMissedFromResults}
+            onHome={activeTopicId === 'airframe' ? goToTopicList : goToSubtopic}
           />
         )}
 
