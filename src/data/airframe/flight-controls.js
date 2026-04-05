@@ -1,0 +1,856 @@
+export const questions = [
+  {
+    id: "AF03-8265",
+    q: "How are changes in direction of a control cable accomplished?",
+    a: [
+      "Pulleys.",
+      "Bell cranks.",
+      "Fairleads."
+    ],
+    c: 0,
+    exp: "Changes in the direction a control cable is run is accomplished by the use of pulleys.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K1",
+    diagram: null,
+  },
+  {
+    id: "AF03-8266",
+    q: "What is the smallest size cable that may be used in aircraft primary control systems?",
+    a: [
+      "1/4 inch.",
+      "5/16 inch.",
+      "1/8 inch."
+    ],
+    c: 2,
+    exp: "According to 14 CFR \u00A723.2250, no cable smaller than 1/8-inch diameter may be used in aircraft primary control systems.",
+    ref: "14 CFR \u00A723.2250",
+    acs: "AM.II.C.K1",
+    diagram: null,
+  },
+  {
+    id: "AF03-8269",
+    q: "The cable-operated control system of an all-metal aircraft, not incorporating a temperature compensating device, has been rigged to the correct tension in a heated hangar. If the aircraft is operated in very cold weather, the cable tension will",
+    a: [
+      "decrease when the aircraft structure and cables become cold.",
+      "increase when the aircraft structure and cables become cold.",
+      "be unaffected if stainless steel cable is installed."
+    ],
+    c: 0,
+    exp: "An all-metal aircraft structure expands and contracts far more than steel control cables with changes in temperature. If the control cable tension is adjusted when the aircraft and cables become cold, the tension will decrease when the aircraft structure and cables become cold. Most large aircraft have cable tension regulators to maintain a constant cable tension with changes in temperature.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K1",
+    diagram: null,
+  },
+  {
+    id: "AF03-8259",
+    q: "When inspecting a control cable turnbuckle for proper installation, determine that",
+    a: [
+      "no more than four threads are exposed on either side of the turnbuckle barrel.",
+      "the terminal end threads are visible through the safety hole in the barrel.",
+      "the safety wire ends are wrapped a minimum of four turns around the terminal end shanks."
+    ],
+    c: 1,
+    exp: "When a turnbuckle is properly installed there should be no more than three threads exposed from either side of the turnbuckle barrel, and it should be safetied with at least four turns of the safety wire around the terminal-end shanks.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.C.K2",
+    diagram: null,
+  },
+  {
+    id: "AF03-8260",
+    q: "If all instructions issued by the swaging tool manufacturer are followed when swaging a cable terminal, the resultant swaged terminal strength should be",
+    a: [
+      "the full rated strength of the cable.",
+      "80 percent of the full rated strength of the cable.",
+      "70 percent of the full rated strength of the cable."
+    ],
+    c: 0,
+    exp: "Standard swaged cable terminals develop the full cable strength. They may be substituted for the original terminal wherever practical.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.C.K2",
+    diagram: null,
+  },
+  {
+    id: "AF03-8268",
+    q: "Placing a piece of cloth around a stainless steel control cable and running it back and forth over the length of the cable is generally a satisfactory method of inspecting for",
+    a: [
+      "corrosion.",
+      "broken strands.",
+      "excessive wear."
+    ],
+    c: 1,
+    exp: "Run a piece of cloth over the control cable to check for broken wires. If there are any broken wires in the cable, they will snag the cloth.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K2",
+    diagram: null,
+  },
+  {
+    id: "AF03-8271",
+    q: "Excessive wear on both of the sides of a control cable pulley groove is evidence of",
+    a: [
+      "pulley misalignment.",
+      "cable misalignment.",
+      "excessive cable tension."
+    ],
+    c: 0,
+    exp: "If a control pulley is misaligned, the cable will wear both sides of the groove in the pulley. If the cable is misaligned, it will wear only one side of the groove. If the cable is rigged with too much tension, the center of the groove will be worn deeply.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.C.K2",
+    diagram: null,
+  },
+  {
+    id: "AF03-8287",
+    q: "(Refer to Figure 8.) Identify the cable that is used in primary control systems and in other places where operation over pulleys is frequent.",
+    a: [
+      "2.",
+      "1.",
+      "3."
+    ],
+    c: 2,
+    exp: "The extra-flexible control cable shown in illustration 3 is used in aircraft primary control systems where operation over pulleys is frequent. This cable is called a 7 by 19 cable and is made up of seven strands of 19 wires each.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K1",
+    diagram: null,
+  },
+  {
+    id: "AF03-8289",
+    q: "(Refer to Figure 9.) When the outside air temperature is 80\u00B0F, select the acceptable 3/16 cable tension range.",
+    a: [
+      "130 pounds minimum, 140 pounds maximum.",
+      "117 pounds minimum, 143 pounds maximum.",
+      "120 pounds minimum, 140 pounds maximum."
+    ],
+    c: 1,
+    exp: "Follow the vertical line for 80\u00B0F upward until it intersects the curve for 3/16-inch cable. This intersection falls on the horizontal line for a nominal cable tension of 130 pounds. The chart gives a tolerance of plus or minus 10 percent of the nominal reading. This gives a range between 117 pounds (130 pounds - 13 pounds) as a minimum value and 143 pounds (130 pounds + 13 pounds) as the maximum value.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K1",
+    diagram: null,
+  },
+  {
+    id: "AF03-8273",
+    q: "Where does the breakage of control cable wires occur most frequently?",
+    a: [
+      "Breakage usually occurs where cables pass over pulleys and through fairleads.",
+      "Breakage sites are unpredictable and usually occur randomly anywhere along the length of a cable.",
+      "Breakage usually occurs where cables are swaged to turnbuckle and ball terminals."
+    ],
+    c: 0,
+    exp: "The wires in a control cable are most likely to break where the cable runs over, under, or around a pulley, sleeve, or through a fair-lead.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.C.K2",
+    diagram: null,
+  },
+  {
+    id: "AF03-8275",
+    q: "Which statement concerning the 100-hour inspection of an airplane equipped with a push-pull tube-type control system is true?",
+    a: [
+      "The threaded rod ends should not be adjusted in length for rigging purposes because the rod ends have been properly positioned and staked during manufacture.",
+      "The terminal end threads of the turnbuckles should be visible through the safety hole in the barrel.",
+      "The threaded rod ends should be checked for the amount of thread engagement by means of the inspection hole provided."
+    ],
+    c: 2,
+    exp: "You can determine that the threaded rod ends are properly inserted into a push-pull control rod when the threads on the rod end extend beyond the inspection hole. You should not be able to insert a piece of safety wire in the inspection hole, as it should be covered by the threaded rod end.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K2",
+    diagram: null,
+  },
+  {
+    id: "AF03-8276",
+    q: "If control cables are adjusted properly and the control surfaces tend to vibrate, the probable cause is",
+    a: [
+      "worn attachment fittings.",
+      "oil can effects on the control surfaces.",
+      "excessive cable tension."
+    ],
+    c: 0,
+    exp: "If a control surface vibrates when all the cables are properly adjusted, there is a probability that the attachment fittings are worn.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K2",
+    diagram: null,
+  },
+  {
+    id: "AF03-8285",
+    q: "A universal propeller protractor used to measure the degrees of aileron travel should be zeroed",
+    a: [
+      "with the aileron in the NEUTRAL position.",
+      "with the aileron in the DOWN position.",
+      "when the aircraft is in a level flight attitude."
+    ],
+    c: 0,
+    exp: "When measuring aileron travel with a universal propeller protractor, the aileron is placed in its neutral position and the protractor is zeroed in this position. With it zeroed in this position, the amount of aileron travel upward and downward from the neutral position can be measured.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K2",
+    diagram: null,
+  },
+  {
+    id: "AF03-8286",
+    q: "The universal propeller protractor can be used to measure",
+    a: [
+      "propeller track.",
+      "aspect ratio of a wing.",
+      "degrees of flap travel."
+    ],
+    c: 2,
+    exp: "The universal propeller protractor is the type of protractor most generally used in aircraft maintenance shops for measuring the amount of control surface travel. This includes the number of degrees of flap travel.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K2",
+    diagram: null,
+  },
+  {
+    id: "AF03-8257",
+    q: "The vast majority of aircraft control cables are terminated with swaged terminals, that must be",
+    a: [
+      "corrosion treated to show compliance with the manufacturer's requirements after the swaging operation.",
+      "pull tested to show compliance with the manufacturer's requirements after the swaging operation.",
+      "checked with a go-no-go gauge before and after, to show compliance with the manufacturer's requirements after the swaging operation."
+    ],
+    c: 2,
+    exp: "The barrel of a swaged control cable terminal slips over the steel cable, and when the terminal is swaged, its inside diameter is reduced enough that the metal grips the cable tight enough that the swaged fitting provides 100 percent of the strength of the cable. To ensure that the terminal is properly swaged, its diameter should be checked with go-no-go gauges before and after it is swaged.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.C.K3",
+    diagram: null,
+  },
+  {
+    id: "AF03-8258",
+    q: "What nondestructive checking method is normally used to ensure that the correct amount of swaging has taken place when installing swaged-type terminals on aircraft control cable?",
+    a: [
+      "Check the surface of the swaged portion of the terminal for small cracks which indicate incomplete swaging.",
+      "Measure the finished length of the terminal barrel and compare with the beginning length.",
+      "Use a terminal gauge to check the diameter of the swaged portion of the terminal."
+    ],
+    c: 2,
+    exp: "The gauge mentioned here is a two-step go-no-go gauge. One step determines the correct diameter before it is swaged, and the other step (the \"after\" step) determines the correct diameter after the terminal has been swaged.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.C.K3",
+    diagram: null,
+  },
+  {
+    id: "AF03-8272",
+    q: "Fairleads should never deflect the alignment of a cable more than",
+    a: [
+      "12\u00B0.",
+      "8\u00B0.",
+      "3\u00B0."
+    ],
+    c: 2,
+    exp: "Fairleads should not cause a change in direction of a control cable of more than 3\u00B0.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.C.K4",
+    diagram: null,
+  },
+  {
+    id: "AF03-8288",
+    q: "A tension regulator in the flight control cable system of a large all-metal aircraft is used primarily to",
+    a: [
+      "increase the cable tension in cold weather.",
+      "provide a means of changing cable tension in flight.",
+      "retain a set tension."
+    ],
+    c: 2,
+    exp: "Cable tension regulators are used in some flight control systems to compensate for the difference in the expansion of the aluminum aircraft structure and the steel control cables. These cable tension regulators automatically maintain a given cable tension as the physical dimensions of the aircraft changes due to temperature changes.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K5",
+    diagram: null,
+  },
+  {
+    id: "AF03-8267",
+    q: "After repairing or re-covering a rudder, the surface should be rebalanced",
+    a: [
+      "to its spanwise axis.",
+      "in its normal flight position.",
+      "to manufacturer's specifications."
+    ],
+    c: 2,
+    exp: "If the aircraft manufacturer requires it, any flight control surface that has been repaired or re-covered should be rebalanced to the manufacturer's specifications.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K9",
+    diagram: null,
+  },
+  {
+    id: "AF03-8270",
+    q: "Very often, repairs to a control surface require static rebalancing of the control surface. Generally, flight control balance condition may be determined by",
+    a: [
+      "checking for equal distribution of weight throughout the control surface.",
+      "the behavior of the trailing edge when the surface is suspended from its hinge points.",
+      "suspending the control surface from its leading edge in the stream line position and checking weight distribution."
+    ],
+    c: 1,
+    exp: "The static balance of a control surface can be checked by suspending the surface from its hinge points and noting the movement of the trailing edge. If the trailing edge moves down, the surface is underbalanced. If the trailing edge moves upward, the surface is overbalanced.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K9",
+    diagram: null,
+  },
+  {
+    id: "AF03-8247",
+    q: "Buffeting is the intermittent application of forces to a part of an airplane. It is caused by",
+    a: [
+      "incorrect rigging of flaps.",
+      "an unsteady flow from turbulence.",
+      "incorrect rigging of ailerons."
+    ],
+    c: 1,
+    exp: "Buffeting is an intermittent application of forces on aircraft surfaces caused by an unsteady flow of air from turbulence.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K9",
+    diagram: null,
+  },
+  {
+    id: "AF03-8253",
+    q: "Where would you find precise information to perform a symmetry alignment check for a particular aircraft?",
+    a: [
+      "Aircraft Specification or Type Certificate Data Sheet.",
+      "Manufacturer's service bulletins.",
+      "Aircraft service or maintenance manual."
+    ],
+    c: 2,
+    exp: "The precise information needed to perform a symmetry-alignment check for a particular aircraft is in the service or maintenance manual for that aircraft.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K9",
+    diagram: null,
+  },
+  {
+    id: "AF03-8230",
+    q: "If the vertical fin of a single-engine, propeller-driven airplane is rigged properly, it will generally be parallel to",
+    a: [
+      "the longitudinal axis but not the vertical axis.",
+      "the vertical axis but not the longitudinal axis.",
+      "both the longitudinal and vertical axes."
+    ],
+    c: 2,
+    exp: "The vertical fin of a single-engine aircraft is offset to the left. Therefore, it is not parallel to the longitudinal axis of the aircraft. This offset provides directional stability. The fin is parallel to the vertical axis; therefore, it is straight up and down.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8237",
+    q: "Washing-in the left wing of a monoplane, for purposes of rigging corrections after flight test, will have what effect on the lift and drag of that wing?",
+    a: [
+      "Both drag and lift will decrease due to decreased angle of attack.",
+      "Both drag and lift will increase due to increased angle of attack.",
+      "The drag will decrease due to the effect of the lift increase."
+    ],
+    c: 1,
+    exp: "When a wing is washed-in, its angle of incidence, and thus its angle of attack, is increased. Increasing the angle of incidence increases the lift it produces. As the lift increases, the induced drag also increases.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8239",
+    q: "If the right wing of a monoplane is improperly rigged to a greater angle of incidence than designated in the manufacturer's specifications, it will cause the",
+    a: [
+      "airplane to be off balance both laterally and directionally.",
+      "airplane to pitch and roll about the lateral axis.",
+      "right wing to have both an increased lift and a decreased drag."
+    ],
+    c: 0,
+    exp: "If the right wing of an airplane is rigged with a greater angle of incidence than is required, the right wing will have a greater amount of lift than the left wing. This additional lift will cause the airplane to be unbalanced laterally and will cause the airplane to turn. An improper angle of incidence on one wing will cause the airplane to be out of balance both laterally and directionally.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8243",
+    q: "Improper rigging of the elevator trim tab system will affect the balance of the airplane about its",
+    a: [
+      "lateral axis.",
+      "longitudinal axis.",
+      "vertical axis."
+    ],
+    c: 0,
+    exp: "The elevator trim tab adjusts the steady-state inflight balance of an aircraft about its lateral axis. This is the longitudinal trim of the aircraft.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8250",
+    q: "Rigging and alignment checks should not be undertaken in the open. However, if this cannot be avoided, the aircraft should be positioned with the",
+    a: [
+      "tail into the wind.",
+      "left wing into the wind.",
+      "nose into the wind."
+    ],
+    c: 2,
+    exp: "Normally, rigging and alignment checks should not be undertaken in the open. If this cannot be avoided, the aircraft should be positioned with the nose pointed into the wind.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8274",
+    q: "With which system is differential control associated?",
+    a: [
+      "Trim.",
+      "Aileron.",
+      "Elevator."
+    ],
+    c: 1,
+    exp: "Differential control is a term used to describe an aileron system in which the aileron moving upward deflects a greater number of degrees than the aileron moving downward.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8280",
+    q: "If the control stick of an aircraft with properly rigged flight controls is moved rearward and to the left, the right aileron will move",
+    a: [
+      "down and the elevator will move down.",
+      "up and the elevator will move down.",
+      "down and the elevator will move up."
+    ],
+    c: 0,
+    exp: "When the control stick of a properly rigged airplane is moved rearward and to the left, the right aileron will move down and the elevators will move up. When the controls move in this direction, the airplane will bank to the left and the nose will rotate upward.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8282",
+    q: "If the control stick of an aircraft with properly rigged flight controls is moved forward and to the right, the left aileron will move",
+    a: [
+      "up and the elevator will move down.",
+      "down and the elevator will move up.",
+      "down and the elevator will move down."
+    ],
+    c: 0,
+    exp: "When the control stick of a properly rigged airplane is moved forward and to the right, the left aileron will move down and the elevators will move down. When the controls move in this direction, the airplane will bank to the right and the nose will rotate downward.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8283",
+    q: "If the travel of an airplane's controls is correct but the cables are rigged exceptionally tight, what probable effect will this have when flying the airplane?",
+    a: [
+      "The airplane will tend to fall off on one wing.",
+      "The airplane will be heavy on the controls.",
+      "The pilot will be unable to fly the airplane hands-off."
+    ],
+    c: 1,
+    exp: "If the travel of the control surfaces is correct, but the cables are rigged too tight, the aircraft will be heavy on the controls. The controls will be difficult to operate and there will be extreme wear in the control system.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8284",
+    q: "During inspection of the flight control system of an airplane equipped with differential-type aileron control, side-to-side movement of the control stick will cause",
+    a: [
+      "each aileron to have a greater up travel (from the streamlined position) than down travel.",
+      "each aileron to have greater down travel (from the streamlined position) than up travel.",
+      "the left aileron to move through a greater number of degrees (from full up to full down) than the right aileron."
+    ],
+    c: 0,
+    exp: "Differential control of an aileron means that the aileron moving upward deflects a greater number of degrees than the one moving downward. This differential movement is used to minimize adverse yaw.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8290",
+    q: "Differential control on an aileron system means that",
+    a: [
+      "the down travel is more than the up travel.",
+      "the up travel is more than the down travel.",
+      "one aileron on one wing travels further up than the aileron on the opposite wing to adjust for wash-in and wash-out."
+    ],
+    c: 1,
+    exp: "Differential control of an aileron causes the aileron moving upward to deflect a greater number of degrees than the one moving downward.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K10",
+    diagram: null,
+  },
+  {
+    id: "AF03-8231",
+    q: "An airplane which has good longitudinal stability should have a minimum tendency to",
+    a: [
+      "roll.",
+      "pitch.",
+      "yaw."
+    ],
+    c: 1,
+    exp: "Longitudinal stability is also called pitch stability. An airplane that has good longitudinal stability has a minimum tendency to pitch.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K11",
+    diagram: null,
+  },
+  {
+    id: "AF03-8234",
+    q: "An airplane's center of lift is usually located aft of its center of gravity",
+    a: [
+      "so that the airplane will have a tail-heavy tendency.",
+      "so that the airplane will have a nose-heavy tendency.",
+      "to improve stability about the longitudinal axis."
+    ],
+    c: 1,
+    exp: "The center of lift is usually located slightly behind the CG of an airplane to improve longitudinal stability. Locating the center of lift behind the CG produces a nose-heavy tendency that is balanced by the downward aerodynamic tail load. When the nose pitches up, the aircraft slows down and the tail load decreases. Longitudinal stability causes the nose to drop back to the level flight attitude. If the nose pitches down, the airspeed builds up and the tail load increases. The increased tail load brings the nose back to the level flight attitude.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K11",
+    diagram: null,
+  },
+  {
+    id: "AF03-8235",
+    q: "An airplane is controlled directionally about its vertical axis by the",
+    a: [
+      "rudder.",
+      "elevator(s).",
+      "ailerons."
+    ],
+    c: 0,
+    exp: "An airplane is rotated about its vertical axis with the rudder, but directional flight is controlled by a combination of the ailerons and the rudder. The ailerons tilt the lift produced by the airplane wings. This changes the direction of flight. The rudder alone controls the rotation of the aircraft about its vertical axis.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K11",
+    diagram: null,
+  },
+  {
+    id: "AF03-8236",
+    q: "The elevators of a conventional airplane are used to provide rotation about the",
+    a: [
+      "longitudinal axis.",
+      "lateral axis.",
+      "vertical axis."
+    ],
+    c: 1,
+    exp: "The elevators rotate an airplane about its lateral axis to produce pitch.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K11",
+    diagram: null,
+  },
+  {
+    id: "AF03-8244",
+    q: "An airplane that has a tendency to gradually increase a pitching moment that has been set into motion has",
+    a: [
+      "poor longitudinal stability.",
+      "good lateral stability.",
+      "poor lateral stability."
+    ],
+    c: 0,
+    exp: "An aircraft with good (positive) static longitudinal stability automatically generates a restoring force anytime it pitches either nose up or nose down. If the amount of pitching increases, the aircraft has dynamic longitudinal instability. The aircraft in this question has poor longitudinal stability.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K11",
+    diagram: null,
+  },
+  {
+    id: "AF03-8248",
+    q: "Movement of an airplane along its lateral axis (roll) is also movement",
+    a: [
+      "around or about the longitudinal axis controlled by the elevator.",
+      "around or about the lateral axis controlled by the ailerons.",
+      "around or about the longitudinal axis controlled by the ailerons."
+    ],
+    c: 2,
+    exp: "Movement of an aircraft along its lateral axis is also a movement around, or about, its longitudinal axis. This movement is controlled by the ailerons.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K11",
+    diagram: null,
+  },
+  {
+    id: "AF03-8251",
+    q: "The correct dihedral angle can be determined by",
+    a: [
+      "measuring the angular setting of each wing at the rear spar with a bubble protractor.",
+      "placing a straightedge and bubble protractor across the spars while the airplane is in flying position.",
+      "using a dihedral board and bubble level along the front spar of each wing."
+    ],
+    c: 2,
+    exp: "A dihedral board and a bubble level are used along the front spar of each wing to determine the correct amount of dihedral when rigging an airplane.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K11",
+    diagram: null,
+  },
+  {
+    id: "AF03-8252",
+    q: "The dihedral angle of a wing may be measured by placing a straightedge and level protractor on the",
+    a: [
+      "front spar.",
+      "wing root.",
+      "wing chord."
+    ],
+    c: 0,
+    exp: "The dihedral angle of an aircraft wing is usually measured by placing a straightedge on the surface of the wing along its front spar and measuring the angle of the spar relative to the horizon, as is shown with a bubble protractor. The rear spar is not used because if there is any twist in the wing, it would not give a true indication of the dihedral.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K11",
+    diagram: null,
+  },
+  {
+    id: "AF03-8264",
+    q: "The purpose of the vertical fin is to provide",
+    a: [
+      "directional stability.",
+      "longitudinal stability.",
+      "lateral stability."
+    ],
+    c: 0,
+    exp: "The vertical fin on an airplane is used to provide directional stability.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K11",
+    diagram: null,
+  },
+  {
+    id: "AF03-8216",
+    q: "The acute angle formed by the chord line of a wing and the relative wind is known as the",
+    a: [
+      "longitudinal dihedral angle.",
+      "angle of incidence.",
+      "angle of attack."
+    ],
+    c: 2,
+    exp: "The angle of attack is the acute angle formed between the chord line of a wing and the direction of the relative wind.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8229",
+    q: "If a pilot reports that an airplane flies left wing heavy, this condition may be corrected by",
+    a: [
+      "increasing the angle of incidence of the left wing, or decreasing the angle of incidence of the right wing, or both.",
+      "increasing the dihedral angle of the left wing, or decreasing the dihedral angle of the right wing, or both.",
+      "adjusting the dihedral angle of the left wing so that differential pressure between the upper and lower wing surfaces is increased."
+    ],
+    c: 0,
+    exp: "A left-wing-heavy condition may be corrected by increasing the angle of incidence of (washing in) the left wing, decreasing the angle of incidence of (washing out) the right wing, or both. A wing is washed-in by increasing its angle of incidence. Washing in a wing increases the lift it produces. A wing is washed-out by decreasing its angle of incidence. Washing out a wing decreases the amount of lift it produces.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8232",
+    q: "As the angle of attack of an airfoil increases, the center of pressure will",
+    a: [
+      "move toward the trailing edge.",
+      "remain stationary because both lift and drag components increase proportionally to increased angle of attack.",
+      "move toward the leading edge."
+    ],
+    c: 2,
+    exp: "The center of pressure of an asymmetrical airfoil moves forward as the angle of attack increases and backwards as it decreases. The center of pressure of a symmetrical airfoil does not move as the angle of attack changes.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8233",
+    q: "The angle of incidence is that acute angle formed by",
+    a: [
+      "the angular difference between the setting of the main airfoil and the auxiliary airfoil (horizontal stabilizer) in reference to the longitudinal axis of the aircraft.",
+      "a line parallel to the wing chord and a line parallel to the longitudinal axis of the aircraft.",
+      "a line parallel to the wing from root to tip and a line parallel to the lateral axis of the aircraft."
+    ],
+    c: 1,
+    exp: "The angle of incidence is the acute angle formed between a line parallel to the wing chord and a line parallel to the longitudinal axis of the aircraft. The British definition for angle of attack is the same as the American definition for angle of incidence.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8240",
+    q: "The chord of a wing is measured from",
+    a: [
+      "wingtip to wingtip.",
+      "wing root to the wingtip.",
+      "leading edge to trailing edge."
+    ],
+    c: 2,
+    exp: "The chord of a wing is the distance from the leading edge to the trailing edge.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8241",
+    q: "When the lift of an airfoil increases, the drag will",
+    a: [
+      "decrease.",
+      "also increase.",
+      "increase while the lift is changing but will return to its original value."
+    ],
+    c: 1,
+    exp: "The lift produced by air flowing over an airfoil and the induced drag depend upon the same aerodynamic forces. As the lift increases, the induced drag also increases.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8242",
+    q: "What physical factors are involved in the aspect ratio of airplane wings?",
+    a: [
+      "Thickness and chord.",
+      "Span and chord.",
+      "Dihedral and angle of attack."
+    ],
+    c: 1,
+    exp: "The aspect ratio of a wing is the ratio of the span of the wing (length) to its chord (width).",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8246",
+    q: "The angle of incidence of an airplane at rest",
+    a: [
+      "affects the dihedral of the wings in flight.",
+      "is the same as the angle between the relative wind and the chord of the wing.",
+      "does not change when in flight."
+    ],
+    c: 2,
+    exp: "The angle of incidence is a fixed angle between the chord line of the wing and the longitudinal axis of the airplane. The angle of incidence does not change when in flight.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8254",
+    q: "Where is the buttock line or buttline of an aircraft?",
+    a: [
+      "A height measurement left or right of, and perpendicular to, the horizontal centerline.",
+      "A width measurement left of, and perpendicular to, the vertical centerline.",
+      "A width measurement left or right of, and parallel to, the vertical centerline."
+    ],
+    c: 2,
+    exp: "A buttock line on an aircraft is a width measurement to the left or right of, and parallel to, the vertical center line of an aircraft.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8255",
+    q: "Where is fuselage station No. 137 located?",
+    a: [
+      "137 centimeters aft of the nose or fixed reference line.",
+      "137 inches aft of the zero or fixed reference line.",
+      "Aft of the engine."
+    ],
+    c: 1,
+    exp: "Fuselage station 137 is located 137 inches aft of fuselage station 0 (the datum line).",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8256",
+    q: "Proper wing twist in a sheet metal constructed wing can usually be checked by utilizing a",
+    a: [
+      "plum bob, string, and straightedge.",
+      "bubble level and special fixtures described by the manufacturer.",
+      "straightedge, tape measure, and carpenter's square."
+    ],
+    c: 1,
+    exp: "A bubble level and a special fixture may be used to determine the amount of twist that is put into a sheet-metal wing.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8278",
+    q: "Stability about the axis which runs parallel to line of flight is referred to as",
+    a: [
+      "longitudinal stability.",
+      "lateral stability.",
+      "directional stability."
+    ],
+    c: 1,
+    exp: "Stability about the axis of an aircraft that runs parallel to the line of flight (the longitudinal axis) is lateral, or roll stability.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8659",
+    q: "Dutch roll, a combination yawing and rolling oscillation that affects many sweptwing aircraft, is counteracted with",
+    a: [
+      "a flight director system.",
+      "an aileron damper system.",
+      "a yaw damper system."
+    ],
+    c: 2,
+    exp: "A yaw damper is installed in many swept wing airplanes to counteract Dutch roll. Dutch roll is an undesirable, low-amplitude oscillation about both the yaw and roll axes. These oscillations are sensed by a rate gyro. Signals are sent to the rudder servo that provides the correct rudder movement to cancel these oscillations.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K12",
+    diagram: null,
+  },
+  {
+    id: "AF03-8238",
+    q: "What type of flap system increases the wing area and changes the wing camber?",
+    a: [
+      "Fowler flaps.",
+      "Slotted flaps.",
+      "Split flaps."
+    ],
+    c: 0,
+    exp: "Fowler flaps slide out and downward from the trailing edge of the wing. When lowered, they increase the wing area as well as the wing camber.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K13",
+    diagram: null,
+  },
+  {
+    id: "AF03-8245",
+    q: "The purpose of wing slats is to",
+    a: [
+      "reduce stalling speed.",
+      "decrease drag.",
+      "reduce lift."
+    ],
+    c: 0,
+    exp: "A wing slat allows an aircraft to fly at a higher angle of attack before it stalls. Allowing flight at a higher angle of attack reduces the stalling speed.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K13",
+    diagram: null,
+  },
+  {
+    id: "AF03-8249",
+    q: "The primary purpose of stall strips is to",
+    a: [
+      "provide added lift at slow speeds.",
+      "stall the inboard portion of the wings first.",
+      "provide added lift at high angles of attack."
+    ],
+    c: 1,
+    exp: "Stall strips are small triangular wedges fastened to the leading edge of the wing in the root area. Stall strips cause the wing root to stall before the tip. This allows the pilot to have aileron control during the stall.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K13",
+    diagram: null,
+  },
+  {
+    id: "AF03-8277",
+    q: "Aircraft flight control trim systems must be designed and installed so that the",
+    a: [
+      "pilot can determine the relative position of the trim tab from the flight deck.",
+      "operating control and the trim tab will always move in the same direction.",
+      "trim system will disengage or become inoperative if the primary flight control system fails."
+    ],
+    c: 0,
+    exp: "An aircraft flight control trim system must provide a means to indicate to the pilot the position of the trim device with respect to the range of adjustment. This means must be visible to the pilot and must be located and designed to prevent confusion.",
+    ref: "14 CFR \u00A723.2300, 23.2600",
+    acs: "AM.II.C.K13",
+    diagram: null,
+  },
+  {
+    id: "AF03-8279",
+    q: "The purpose of spring tabs or servo tabs is to",
+    a: [
+      "assist the pilot in moving the control surfaces.",
+      "contribute to the static balance of the control surface.",
+      "make in-flight trim adjustments possible."
+    ],
+    c: 0,
+    exp: "Spring tabs and servo tabs are both used to assist the pilot in moving the control surface. A servo tab is moved by the flight deck control and it produces an aerodynamic force that moves the primary control on which it is mounted. A spring tab does not move until the aerodynamic forces on the control surface are great enough to compress the spring in the system linkage. When this spring is compressed, the tab deflects and produces an aerodynamic force that aids the pilot in moving the control surface on which the tab is mounted.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K13",
+    diagram: null,
+  },
+  {
+    id: "AF03-8281",
+    q: "Movement of the flight deck control toward the nosedown position during a ground operational check of the elevator trim tab system will cause the trailing edge of the trim tab to move in which direction?",
+    a: [
+      "Downward regardless of elevator position.",
+      "Upward regardless of elevator position.",
+      "Downward if the elevator is in the UP position and upward if the elevator is in the DOWN position."
+    ],
+    c: 1,
+    exp: "If the flight deck control for the elevator trim tab is rotated toward the nose-down position, the trailing edge of the trim tab will move upward, regardless of the position of the elevator. When the trim tab moves upward, it produces an aerodynamic force that moves the elevators downward. This movement of the elevator rotates the airplane nose downward.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.C.K13",
+    diagram: null,
+  },
+];
