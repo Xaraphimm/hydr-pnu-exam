@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/hydr-pnu-exam/sw.js', { scope: '/hydr-pnu-exam/' })})}
