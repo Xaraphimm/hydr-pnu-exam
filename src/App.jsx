@@ -1,183 +1,331 @@
 import { useState } from 'react'
 import { ThemeProvider } from './ThemeContext.jsx'
+import { useHistory } from './HistoryContext.jsx'
 import ThemeToggle from './components/ThemeToggle.jsx'
 import TabBar from './components/TabBar.jsx'
-import HomeScreen from './components/HomeScreen.jsx'
+import TopicListScreen from './components/TopicListScreen.jsx'
+import SubtopicScreen from './components/SubtopicScreen.jsx'
 import ExamScreen from './components/ExamScreen.jsx'
 import ResultsScreen from './components/ResultsScreen.jsx'
 import HistoryScreen from './components/HistoryScreen.jsx'
-import FlashcardHome from './components/FlashcardHome.jsx'
 import FlashcardSession from './components/FlashcardSession.jsx'
 import FlashcardComplete from './components/FlashcardComplete.jsx'
-import { questions, SECTIONS } from './data/questions.js'
+import SearchScreen from './components/SearchScreen.jsx'
+import BookmarksScreen from './components/BookmarksScreen.jsx'
+import ProgressScreen from './components/ProgressScreen.jsx'
+import MockExamScreen from './components/MockExamScreen.jsx'
+import PdfViewer from './components/PdfViewer.jsx'
+import ExamSelectionScreen from './components/ExamSelectionScreen.jsx'
+import ExamResultsScreen from './components/ExamResultsScreen.jsx'
+import { generateExam, seededShuffle } from './utils/exam-generator.js'
+import { loadQuestions, TOPICS, CATEGORIES } from './data/index.js'
+import { shuffle } from './utils/shuffle.js'
 import './styles/reset.css'
 import './styles/theme.css'
 import './styles/global.css'
 
-function shuffle(arr) {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
-
 export default function App() {
-  const [tab, setTab] = useState('exam')
+  const { confidence } = useHistory()
 
-  // Exam tab state
-  const [screen, setScreen] = useState('home')
+  // Navigation
+  const [tab, setTab] = useState('home')
+  const [screen, setScreen] = useState('topic-list')
+  const [activeTopicId, setActiveTopicId] = useState(null)
+  const [topicQuestions, setTopicQuestions] = useState([])
+
+  // Session state (reused for test/flashcard sessions)
   const [examQuestions, setExamQuestions] = useState([])
   const [answers, setAnswers] = useState({})
   const [flagged, setFlagged] = useState(new Set())
   const [startTime, setStartTime] = useState(null)
   const [endTime, setEndTime] = useState(null)
   const [reviewIndex, setReviewIndex] = useState(null)
-  const [mode, setMode] = useState('exam')
-  const [studySection, setStudySection] = useState(null)
+  const [mode, setMode] = useState('all')
 
-  // Flashcard tab state
-  const [fcScreen, setFcScreen] = useState('flashcard-home')
+  const [examVersion, setExamVersion] = useState(null)
+  const [examSeed, setExamSeed] = useState(null)
+  const [examMode, setExamMode] = useState(null)
+
+  // Flashcard state
   const [fcQuestions, setFcQuestions] = useState([])
-  const [fcSection, setFcSection] = useState(null)
   const [fcResults, setFcResults] = useState([])
 
-  const beginSession = (questionSet, sessionMode, sectionKey = null) => {
-    setExamQuestions(shuffle(questionSet))
+  // --- Navigation functions ---
+
+  const openExamSelection = (scopeTopicId) => {
+    setActiveTopicId(scopeTopicId)
+    setScreen('exam-select')
+  }
+
+  const handleExamSelect = async ({ mode, version, seed, topicId: scopeId, isFullCategory }) => {
+    setExamMode(mode)
+    setExamVersion(version)
+    setExamSeed(seed)
+
+    let qs
+    if (isFullCategory) {
+      const questionsByTopic = {}
+      for (const tid of CATEGORIES.airframe.topics) {
+        const topicQs = await loadQuestions(tid)
+        if (topicQs.length > 0) questionsByTopic[tid] = topicQs
+      }
+      qs = generateExam(seed, questionsByTopic, 100)
+    } else {
+      const topicQs = await loadQuestions(scopeId)
+      qs = seededShuffle(topicQs, seed)
+    }
+
+    setExamQuestions(qs)
     setAnswers({})
     setFlagged(new Set())
     setStartTime(Date.now())
     setEndTime(null)
     setReviewIndex(null)
-    setMode(sessionMode)
-    setStudySection(sectionKey)
-    setScreen('exam')
+    setActiveTopicId(isFullCategory ? 'airframe' : scopeId)
+
+    if (mode === 'study') {
+      setMode('all')
+      setScreen('test')
+    } else {
+      setMode('mock')
+      setScreen('mock')
+    }
   }
 
-  const startExam = () => beginSession(questions, 'exam')
-
-  const startStudy = (sectionKey) => {
-    const filtered = questions.filter(q => q.section === sectionKey)
-    beginSession(filtered, 'study', sectionKey)
+  const handleStudyMissedFromResults = (missedQuestions) => {
+    setFcQuestions(shuffle(missedQuestions))
+    setFcResults([])
+    setScreen('flashcards')
   }
 
-  const startWeakDrill = (weakQuestions) => {
-    beginSession(weakQuestions, 'weak')
-  }
-
-  const handleAnswer = (qId, answerIndex) => {
-    setAnswers(prev => ({ ...prev, [qId]: answerIndex }))
-  }
-
-  const handleToggleFlag = (qId) => {
-    setFlagged(prev => {
-      const next = new Set(prev)
-      next.has(qId) ? next.delete(qId) : next.add(qId)
-      return next
+  const handleRetakeFromResults = () => {
+    handleExamSelect({
+      mode: examMode,
+      version: examVersion,
+      seed: examVersion === 'random' ? Date.now() : examSeed,
+      topicId: activeTopicId,
+      isFullCategory: activeTopicId === 'airframe',
     })
+  }
+
+  const selectTopic = async (topicId) => {
+    setActiveTopicId(topicId)
+    const qs = await loadQuestions(topicId)
+    setTopicQuestions(qs)
+    setScreen('subtopic')
+  }
+
+  const startTest = (testMode) => {
+    let qs
+    if (testMode === 'weak') {
+      qs = topicQuestions.filter((q) => {
+        const c = confidence[q.id]
+        return c && c.attempts > 0 && c.level <= 2
+      })
+      if (qs.length < 20) {
+        const remaining = topicQuestions
+          .filter((q) => !qs.some((w) => w.id === q.id))
+          .sort((a, b) => {
+            const ca = confidence[a.id]?.attempts || 0
+            const cb = confidence[b.id]?.attempts || 0
+            return ca - cb
+          })
+        qs = [...qs, ...remaining.slice(0, 20 - qs.length)]
+      }
+    } else {
+      qs = topicQuestions
+    }
+    setExamQuestions(shuffle(qs))
+    setAnswers({})
+    setFlagged(new Set())
+    setStartTime(Date.now())
+    setEndTime(null)
+    setReviewIndex(null)
+    setMode(testMode)
+    setScreen('test')
+  }
+
+  const startMockExam = () => {
+    setExamQuestions(shuffle([...topicQuestions]))
+    setAnswers({})
+    setStartTime(Date.now())
+    setEndTime(null)
+    setMode('mock')
+    setScreen('mock')
+  }
+
+  const startFlashcards = () => {
+    setFcQuestions(shuffle([...topicQuestions]))
+    setFcResults([])
+    setScreen('flashcards')
   }
 
   const finishExam = () => {
     setEndTime(Date.now())
-    setScreen('results')
+    setScreen('exam-results')
   }
 
-  const goToQuestion = (examIndex) => {
-    setReviewIndex(examIndex)
-    setScreen('exam')
-  }
-
-  // Flashcard handlers
-  const startFlashcards = (sectionKey) => {
-    const filtered = sectionKey
-      ? questions.filter(q => q.section === sectionKey)
-      : questions
-    setFcQuestions(shuffle(filtered))
-    setFcSection(sectionKey)
+  const studyMissedCards = (missed) => {
+    setFcQuestions(shuffle(missed.map((r) => r.question)))
     setFcResults([])
-    setFcScreen('flashcard-session')
+    setScreen('flashcards')
   }
 
-  const finishFlashcards = (results) => {
-    setFcResults(results)
-    setFcScreen('flashcard-complete')
+  const goToSubtopic = () => {
+    setScreen('subtopic')
   }
 
-  const studyMissedCards = (missedQuestions) => {
-    setFcQuestions(shuffle(missedQuestions))
-    setFcSection(null)
-    setFcResults([])
-    setFcScreen('flashcard-session')
+  const goToTopicList = () => {
+    setScreen('topic-list')
+    setActiveTopicId(null)
+  }
+
+  const handleTabChange = (newTab) => {
+    setTab(newTab)
+    if (newTab === 'home') {
+      setScreen('topic-list')
+      setActiveTopicId(null)
+    }
   }
 
   return (
     <ThemeProvider>
-      <ThemeToggle />
+      <div className="app">
+        <ThemeToggle />
 
-      <div className="container" style={{ display: tab === 'exam' ? 'block' : 'none' }}>
-        {screen === 'home' && (
-          <HomeScreen
-            onStart={startExam}
-            onStudy={startStudy}
-            onWeakDrill={startWeakDrill}
-            onHistory={() => setScreen('history')}
+        {tab === 'home' && screen === 'topic-list' && (
+          <TopicListScreen onSelectTopic={selectTopic} onStartExam={openExamSelection} />
+        )}
+
+        {tab === 'home' && screen === 'subtopic' && (
+          <SubtopicScreen
+            topicId={activeTopicId}
+            onBack={goToTopicList}
+            onStartStudy={() => setScreen('study')}
+            onStartFlashcards={startFlashcards}
+            onStartTest={startTest}
+            onStartMockExam={startMockExam}
+            onViewHistory={() => setScreen('history')}
+            onOpenExamSelect={() => openExamSelection(activeTopicId)}
           />
         )}
-        {screen === 'exam' && (
+
+        {tab === 'home' && screen === 'test' && (
           <ExamScreen
             questions={examQuestions}
             answers={answers}
             flagged={flagged}
             startTime={startTime}
-            onAnswer={handleAnswer}
-            onToggleFlag={handleToggleFlag}
+            onAnswer={(qId, idx) => setAnswers((prev) => ({ ...prev, [qId]: idx }))}
+            onToggleFlag={(qId) =>
+              setFlagged((prev) => {
+                const s = new Set(prev)
+                s.has(qId) ? s.delete(qId) : s.add(qId)
+                return s
+              })
+            }
             onFinish={finishExam}
             initialIndex={reviewIndex}
             mode={mode}
-            studySection={studySection}
+            topicId={activeTopicId}
           />
         )}
-        {screen === 'results' && (
+
+        {tab === 'home' && screen === 'mock' && (
+          <MockExamScreen
+            questions={examQuestions}
+            topicId={activeTopicId}
+            onFinish={(mockAnswers) => {
+              setAnswers(mockAnswers)
+              setEndTime(Date.now())
+              setScreen('exam-results')
+            }}
+          />
+        )}
+
+        {tab === 'home' && screen === 'results' && (
           <ResultsScreen
             questions={examQuestions}
             answers={answers}
             startTime={startTime}
             endTime={endTime}
-            onRetake={startExam}
-            onHome={() => setScreen('home')}
-            onGoToQuestion={goToQuestion}
+            topicId={activeTopicId}
             mode={mode}
-            studySection={studySection}
+            onRetake={() => startTest(mode)}
+            onHome={goToSubtopic}
+            onGoToQuestion={(idx) => {
+              setReviewIndex(idx)
+              setScreen('test')
+            }}
           />
         )}
-        {screen === 'history' && (
-          <HistoryScreen onHome={() => setScreen('home')} />
-        )}
-      </div>
 
-      <div className="container" style={{ display: tab === 'flashcards' ? 'block' : 'none' }}>
-        {fcScreen === 'flashcard-home' && (
-          <FlashcardHome onStart={startFlashcards} />
-        )}
-        {fcScreen === 'flashcard-session' && (
+        {tab === 'home' && screen === 'flashcards' && (
           <FlashcardSession
             questions={fcQuestions}
-            sectionKey={fcSection}
-            onFinish={finishFlashcards}
-            onBack={() => setFcScreen('flashcard-home')}
+            topicId={activeTopicId}
+            onFinish={(results) => {
+              setFcResults(results)
+              setScreen('flashcard-complete')
+            }}
+            onBack={goToSubtopic}
           />
         )}
-        {fcScreen === 'flashcard-complete' && (
+
+        {tab === 'home' && screen === 'flashcard-complete' && (
           <FlashcardComplete
             results={fcResults}
-            onStudyMissed={studyMissedCards}
-            onDone={() => setFcScreen('flashcard-home')}
+            onStudyMissed={() => studyMissedCards(fcResults.filter((r) => !r.gotIt))}
+            onDone={goToSubtopic}
           />
         )}
-      </div>
 
-      <TabBar activeTab={tab} onTabChange={setTab} />
+        {tab === 'home' && screen === 'history' && (
+          <HistoryScreen
+            topicId={activeTopicId}
+            onHome={goToSubtopic}
+          />
+        )}
+
+        {tab === 'home' && screen === 'study' && (
+          <PdfViewer
+            topicId={activeTopicId}
+            pdfFile={TOPICS[activeTopicId]?.pdfFile}
+            onBack={goToSubtopic}
+          />
+        )}
+
+        {tab === 'home' && screen === 'exam-select' && (
+          <ExamSelectionScreen
+            topicId={activeTopicId}
+            onSelectExam={handleExamSelect}
+            onBack={() => activeTopicId === 'airframe' ? goToTopicList() : goToSubtopic()}
+          />
+        )}
+
+        {tab === 'home' && screen === 'exam-results' && (
+          <ExamResultsScreen
+            questions={examQuestions}
+            answers={answers}
+            flagged={flagged}
+            startTime={startTime}
+            endTime={endTime}
+            topicId={activeTopicId}
+            mode={examMode}
+            version={examVersion}
+            seed={examSeed}
+            onRetake={handleRetakeFromResults}
+            onStudyMissed={handleStudyMissedFromResults}
+            onHome={activeTopicId === 'airframe' ? goToTopicList : goToSubtopic}
+          />
+        )}
+
+        {tab === 'search' && <SearchScreen />}
+        {tab === 'bookmarks' && <BookmarksScreen />}
+        {tab === 'progress' && <ProgressScreen />}
+
+        <TabBar activeTab={tab} onTabChange={handleTabChange} />
+      </div>
     </ThemeProvider>
   )
 }

@@ -1,0 +1,163 @@
+.exam-select {
+  padding: 0 0 80px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Header */
+.exam-select__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px 10px;
+}
+
+.exam-select__back {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--color-accent);
+  padding: 0;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+}
+
+.exam-select__title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text);
+}
+
+/* Tabs */
+.exam-select__tabs {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--color-border);
+  margin: 0 16px 0;
+}
+
+.exam-select__tab {
+  flex: 1;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-family: inherit;
+  min-height: 44px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.exam-select__tab--active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* Subtitle */
+.exam-select__subtitle {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 12px 16px 10px;
+}
+
+/* Version grid */
+.exam-select__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 0 16px;
+}
+
+@media (max-width: 359px) {
+  .exam-select__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Cards */
+.exam-select__card {
+  background: var(--color-bg-card);
+  border: none;
+  border-radius: 10px;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  text-align: center;
+  color: var(--color-text);
+  font-family: inherit;
+  min-height: 44px;
+  transition: background 0.15s;
+}
+
+.exam-select__card:hover,
+.exam-select__card:active {
+  background: var(--color-bg-card-hover);
+}
+
+.exam-select__card-num {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.exam-select__card-label {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  line-height: 1.2;
+}
+
+.exam-select__card-score {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  line-height: 1.2;
+}
+
+.exam-select__card-score--taken {
+  color: var(--color-accent);
+}
+
+/* Random card */
+.exam-select__card--random {
+  border: 1px dashed rgba(249, 115, 22, 0.3);
+  background: var(--color-accent-muted);
+}
+
+.exam-select__card--random:hover,
+.exam-select__card--random:active {
+  background: rgba(249, 115, 22, 0.22);
+}
+
+.exam-select__card-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.exam-select__card-label--accent {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* Info bar */
+.exam-select__info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border);
+  margin: 20px 16px 0;
+  padding: 12px 0 0;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}

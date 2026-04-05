@@ -1,0 +1,1896 @@
+export const questions = [
+  // ASA page 111
+  {
+    id: "AF11-8803",
+    q: "Some electric motors have two sets of field windings wound in opposite directions so that the",
+    a: [
+      "speed of the motor can be more closely controlled.",
+      "power output of the motor can be more closely controlled.",
+      "motor can be operated in either direction."
+    ],
+    c: 2,
+    exp: "Reversible DC motors have two sets of field windings wound in opposite directions. By using two sets of windings, the direction of the armature rotation can be reversed by the action of a switch.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8804",
+    q: "One purpose of a growler test is to determine the presence of",
+    a: [
+      "an out-of-round commutator.",
+      "a broken field lead.",
+      "a shorted armature."
+    ],
+    c: 2,
+    exp: "A growler test may be made of an armature to determine if any of the windings are shorted.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  // ASA page 112
+  {
+    id: "AF11-8806",
+    q: "What is the principal advantage of the series-wound DC motor?",
+    a: [
+      "High starting torque.",
+      "Suitable for constant speed use.",
+      "Low starting torque."
+    ],
+    c: 0,
+    exp: "One of the chief characteristics, or advantages, of a series-wound DC motor is its high starting torque.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8807",
+    q: "If a generator is equipped with a vibrator-type voltage regulator, the actual time the voltage regulator points remain open",
+    a: [
+      "depends on the load carried by the generator.",
+      "is controlled by the reverse-current cutout relay point clearance.",
+      "is increased when the external load is greater than the generator output."
+    ],
+    c: 0,
+    exp: "The actual time the voltage regulator points in a vibrator-type voltage regulator remain open is determined by the amount of load being carried by the generator. When the load is great, the voltage drops and the points must remain closed longer to allow the voltage to rise. When the load is light, the voltage is high and the points remain closed a very short time.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8808",
+    q: "What is a cause of generator brush arcing?",
+    a: [
+      "Seating brushes with No. 000 sandpaper.",
+      "Carbon dust particles.",
+      "Low spring tension."
+    ],
+    c: 2,
+    exp: "Low spring tension on generator brushes could cause the brushes to bounce and arc.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8810",
+    q: "The starting current of a series-wound DC motor, in passing through both the field and armature windings, produces a",
+    a: [
+      "low starting torque.",
+      "speed slightly higher when unloaded.",
+      "high starting torque."
+    ],
+    c: 2,
+    exp: "A series-wound DC motor has a very high starting torque because all of the current that passes through the armature also passes through the field.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8811",
+    q: "Which motor would be most likely to have an armature brake?",
+    a: [
+      "Starter motor.",
+      "Landing light retraction motor.",
+      "Inverter drive motor."
+    ],
+    c: 1,
+    exp: "A landing light retraction motor is the most likely of the motors listed here to have an armature brake. The brake causes the armature to stop turning as soon as the switch is released.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8812",
+    q: "The method most often used in overcoming the effect of armature reaction is through the use of",
+    a: [
+      "interpoles.",
+      "shaded poles.",
+      "drum-wound armatures in combination with a negatively connected series field."
+    ],
+    c: 0,
+    exp: "Interpoles are used in large compound-wound DC generators to overcome the effect of armature reaction. If armature reaction is not corrected, it will cause the brushes to arc under certain load conditions.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8813",
+    q: "The only practical method of maintaining a constant voltage output from an aircraft generator under varying conditions of speed and load is to vary the",
+    a: [
+      "strength of the magnetic field.",
+      "number of conductors in the armature.",
+      "speed at which the armature rotates."
+    ],
+    c: 0,
+    exp: "A constant generator output voltage is maintained under varying load and speed conditions by varying the strength of the magnetic field in the generator.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8814",
+    q: "The pole pieces or shoes used in a DC generator are a part of the",
+    a: [
+      "armature assembly.",
+      "field assembly.",
+      "brush assembly."
+    ],
+    c: 1,
+    exp: "The pole pieces (pole shoes) are part of the field assembly. The pole pieces form a part of the magnetic circuit for the field.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8816",
+    q: "If the reverse current cutout relay contact points fail to open after the generator output has dropped below battery potential, current will flow through the generator armature",
+    a: [
+      "in the normal direction and through the shunt field opposite the normal direction.",
+      "and the shunt field opposite the normal direction.",
+      "opposite the normal direction and through the shunt field in the normal direction."
+    ],
+    c: 2,
+    exp: "If the reverse current cutout relay contacts fail to open when the generator output drops below the battery potential, current will flow from the battery through the armature in the direction opposite its normal flow. Current will also flow through the shunt field but it will flow through the field coils in the normal direction of flow.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  // ASA page 113
+  {
+    id: "AF11-8817",
+    q: "How does the magnetic brake used to stop rotation of an electric motor armature operate?",
+    a: [
+      "Centrifugal force releases a rotating brake cog from a stationary notch when the armature reaches a certain speed and magnetic force re-engages the cog when the electrical power is turned off.",
+      "A friction brake is applied by a magnet and released by a spring.",
+      "A friction brake is applied by a spring and released by a magnet."
+    ],
+    c: 2,
+    exp: "A magnetic brake used to stop rotation of an electric-motor armature is applied by spring force and is released by an electromagnet energized when the motor is turned on. As soon as the motor is turned off, the spring applies the brake and stops the rotation of the armature.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8818",
+    q: "In a generator, what eliminates any possible sparking to the brush guides caused by the movement of the brushes within the holder?",
+    a: [
+      "The brush pigtail.",
+      "Brush spring tension.",
+      "Undercutting the mica on the commutator."
+    ],
+    c: 0,
+    exp: "The brush pigtail eliminates any possible sparking between the brush and the brush guide. All of the current is carried from the brush into the holder through the pigtail rather than through the sliding contact made between the brush and the brush guide.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8819",
+    q: "A series-wound DC electric motor will normally require",
+    a: [
+      "more current at high RPM than at low RPM.",
+      "approximately the same current throughout its operating range of speed.",
+      "more current at low RPM than at high RPM."
+    ],
+    c: 2,
+    exp: "A series-wound DC motor produces an extremely high starting torque. It uses a large amount of current when it first starts to rotate and when it is operating at slow speeds. The current drops off as the armature speed and the counter EMF builds up.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8822",
+    q: "The commutator of a generator",
+    a: [
+      "changes direct current produced in the armature into alternating current as it is taken from the armature.",
+      "changes alternating current produced in the armature into direct current as it is taken from the armature.",
+      "reverses the current in the field coils at the proper time in order to produce direct current."
+    ],
+    c: 1,
+    exp: "The commutator and the brushes used on a DC generator act as a mechanical rectifier that changes the AC produced in the armature coils into DC before it leaves the generator.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8824",
+    q: "Which of the following is not one of the purposes of interpoles in a generator?",
+    a: [
+      "Reduce field strength.",
+      "Overcome armature reaction.",
+      "Reduce arcing at the brushes."
+    ],
+    c: 0,
+    exp: "Interpoles are used in high-output compound-wound DC generators to counteract field distortion and to overcome armature reaction. Armature reaction causes arcing at the brushes. Interpoles do not reduce the field strength, they increase it.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8825",
+    q: "To test generator or motor armature windings for opens,",
+    a: [
+      "place armature in a growler and connect a 110V test light on adjacent segments; light should light.",
+      "check adjacent segments on commutator with an ohmmeter on the high resistance scale.",
+      "use a 12/24V test light between the armature core segments and the shaft."
+    ],
+    c: 0,
+    exp: "A generator armature may be checked for an open winding by placing it on a growler and using the built-in 110-volt test lamp to test for continuity between the individual segments. The lamp will light if the segments being checked are good.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8827",
+    q: "To what depth is the mica insulation between commutator bars of a DC generator undercut?",
+    a: [
+      "One-half the width of the mica.",
+      "Equal to twice the width of the mica.",
+      "Equal to the width of the mica."
+    ],
+    c: 2,
+    exp: "When a DC generator is overhauled, the commutator is turned on a lathe until it is perfectly round and smooth. After the commutator is turned, the mica separators between the commutator bars are undercut to approximately the width of the mica, or somewhere in the neighborhood of 0.02 inch.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  // ASA page 114
+  {
+    id: "AF11-8829",
+    q: "Which type of DC generator is not used as an airplane generator?",
+    a: [
+      "Externally grounded.",
+      "Series wound.",
+      "Compound wound."
+    ],
+    c: 1,
+    exp: "Series-wound DC generators are not used in aircraft electrical systems because of the difficulty in regulating and controlling the output voltage.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8831",
+    q: "During ground operation, aircraft generator cooling is usually accomplished by",
+    a: [
+      "auxiliary air cooled through an air/fuel heat exchanger.",
+      "an integral fan.",
+      "an external motor-driven fan."
+    ],
+    c: 1,
+    exp: "When an aircraft is operating on the ground, the generator is cooled by air pulled through its windings by an integral fan (a fan that is mounted on the armature shaft).",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8838",
+    q: "Which of the following are the major parts of a DC motor?",
+    a: [
+      "Armature assembly, field assembly, brush assembly, and end frame.",
+      "Field assembly, brush assembly, commutator, and pole piece.",
+      "Brush assembly, pole piece, rheostat, and end frame."
+    ],
+    c: 0,
+    exp: "The major parts of a practical DC motor are the armature assembly, the field assembly, the brush assembly, and the end frame.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8839",
+    q: "(1) There are three basic types of DC motors; series, shunt, and compound.\n(2) In the series motor, the field windings, consisting of relatively few turns of heavy wire, are connected in series with the armature winding.\nRegarding the above statements,",
+    a: [
+      "only 1 is true.",
+      "only 2 is true.",
+      "both 1 and 2 are true."
+    ],
+    c: 2,
+    exp: "Statement 1 is true. There are three basic types of DC motors: series motors, shunt motors, and compound motors.\nStatement 2 is also true. In a series motor, the field windings, consisting of a relatively few turns of heavy wire, are connected in series with the armature winding.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8897",
+    q: "If the positive field lead between a generator and a generator control panel breaks and is shorted while the engine is running, a voltmeter connected to generator output would indicate",
+    a: [
+      "zero voltage.",
+      "residual voltage.",
+      "normal voltage."
+    ],
+    c: 1,
+    exp: "If the positive field lead between a generator and its control panel or voltage regulator breaks and shorts to ground while the engine is running, the generator can produce only residual voltage. With both ends of the field at ground potential there can be no field current. The only magnetic field for the armature windings to cut is that caused by the permanent magnetism in the generator field frame. Permanent magnetism in the field frame produces residual voltage, which is somewhere between one and two volts.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8898",
+    q: "What is a method used for restoring generator field residual magnetism?",
+    a: [
+      "Flash the fields.",
+      "Reseat the brushes.",
+      "Energize the armature."
+    ],
+    c: 0,
+    exp: "Residual magnetism may be restored to a generator by flashing its field. To flash the field, momentarily pass direct current from the battery through the generator field coils in the normal direction of current flow.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8901",
+    q: "The inductor-type inverter output voltage is controlled by the",
+    a: [
+      "number of poles and the speed of the motor.",
+      "voltage regulator.",
+      "DC stator field current."
+    ],
+    c: 2,
+    exp: "An inductor-type inverter uses a rotor made of soft iron laminations. Grooves are cut laterally across the surface of the rotor to provide poles that correspond to the stator poles. The voltage produced by an inductor-type inverter is controlled by the DC stator-field current.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  // ASA page 115
+  {
+    id: "AF11-8906",
+    q: "When DC generators are operated in parallel to supply power for a single load, their controls include an equalizer circuit to assure that all generators share the load equally. The equalizer circuit operates by",
+    a: [
+      "increasing the output of the low generator to equal the output of the high generator.",
+      "decreasing the output of the high generator to equal the output of the low generator.",
+      "increasing the output of the low generator and decreasing the output of the high generator until they are equal."
+    ],
+    c: 2,
+    exp: "An equalizer circuit in a multiengine DC generator system maintains an equal sharing of the load between all of the generators. When the load is shared unequally, the output voltage of the low generator is increased, and the output voltage of the high generator is decreased.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8912-1",
+    q: "How can the direction of rotation of a DC electric motor be changed?",
+    a: [
+      "Interchange the wires which connect the motor to the external power source.",
+      "Reverse the electrical connections to either the field or armature windings.",
+      "Rotate the positive brush one commutator segment."
+    ],
+    c: 1,
+    exp: "The direction of rotation of a DC motor may be changed by reversing the connection to either the field or the armature winding, but not to both of them.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8921",
+    q: "How are generators rated?",
+    a: [
+      "Watts at rated voltage.",
+      "Amperes at rated voltage.",
+      "The impedance at rated voltage."
+    ],
+    c: 1,
+    exp: "Generators are rated according to the current they can produce at their rated voltage.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8922",
+    q: "How is a shunt-wound DC generator connected?",
+    a: [
+      "One field is shunted across the other.",
+      "Both fields are shunted across the armature.",
+      "The field and armature are shunted with a capacitor."
+    ],
+    c: 1,
+    exp: "This question assumes the generator has two field poles and two field coils. The two field coils are connected together in series, and the two coils are shunted across (connected in parallel with) the armature.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8923",
+    q: "The poles of a generator are laminated to",
+    a: [
+      "reduce flux losses.",
+      "increase flux concentration.",
+      "reduce eddy current losses."
+    ],
+    c: 2,
+    exp: "The pole shoes of a generator are usually made of laminated soft iron to reduce the eddy current losses. Eddy currents produce heat and are a source of power loss in the generator.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8907",
+    q: "What is the maximum amount of time a circuit can be in operation and still be an intermittent duty circuit?",
+    a: [
+      "Three minutes.",
+      "Two minutes.",
+      "One minute."
+    ],
+    c: 1,
+    exp: "An intermittent duty circuit is one that is in operation for a maximum of two minutes.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8908",
+    q: "The most common method of regulating the voltage output of a compound DC generator is to vary the",
+    a: [
+      "current flowing through the shunt field coils.",
+      "total effective field strength by changing the reluctance of the magnetic circuit.",
+      "resistance of the series field circuit."
+    ],
+    c: 0,
+    exp: "The most common method of regulating the output voltage of a compound DC generator is by varying the current flow through the shunt field coils.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8911",
+    q: "If any one generator in a 24-volt DC system shows low voltage, the most likely cause is",
+    a: [
+      "an out-of-adjustment voltage regulator.",
+      "shorted or grounded wiring.",
+      "a defective reverse current cutout relay."
+    ],
+    c: 0,
+    exp: "If one generator in a 24-volt DC system produces too low a voltage, the most logical cause would be an out-of-adjustment voltage regulator.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8912-2",
+    q: "Static inverters are electronic devices that change DC to AC with the",
+    a: [
+      "use of an oscillator.",
+      "properties of an exclusive OR gate.",
+      "input from an amplifier control by integrated circuits."
+    ],
+    c: 0,
+    exp: "A static inverter is an electronic device that changes DC into AC. It incorporates an oscillator that changes DC into AC with the proper frequency and waveform. Then an amplifier changes the voltage to the value needed.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K6",
+    diagram: null,
+  },
+  // ASA page 116
+  {
+    id: "AF11-8925",
+    q: "Where is the generator rating and performance data located?",
+    a: [
+      "In the pilot operating handbook.",
+      "Stamped on the generator data plate.",
+      "In the aircraft maintenance manual."
+    ],
+    c: 1,
+    exp: "The current rating of a generator is usually stamped on the generator data plate. If the rating is not on the data plate, it may be found in the generator specifications by referring to the part number of the generator, which is stamped on the data plate.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K1",
+    diagram: null,
+  },
+  {
+    id: "AF11-8809",
+    q: "What is required when operating two aircraft AC generators in parallel?",
+    a: [
+      "Amperes and frequency must both be equal.",
+      "Frequency and voltage must both be equal.",
+      "Amperes and voltage must both be equal."
+    ],
+    c: 1,
+    exp: "Before AC generators may be connected in parallel, it must be determined that the output voltage, the frequency, and the phase rotation of all the generators are the same.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8815",
+    q: "How many cycles of AC voltage are produced in a six-pole alternator of the revolving-field type for each revolution of the rotor?",
+    a: [
+      "Four.",
+      "Three.",
+      "Six."
+    ],
+    c: 1,
+    exp: "Three cycles of alternating current are produced by a six-pole alternator for each revolution of the rotor. Each pair of poles produces one cycle of AC.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8832",
+    q: "What does a rectifier do?",
+    a: [
+      "Changes direct current into alternating current.",
+      "Changes alternating current into direct current.",
+      "Reduces voltage."
+    ],
+    c: 1,
+    exp: "A rectifier is an electrical device or circuit that allows electrons to pass in one direction but blocks them when they try to flow in the opposite direction. A rectifier changes alternating current into direct current.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8834",
+    q: "When a diode is checked for an open circuit or a short circuit, it should be",
+    a: [
+      "in the circuit.",
+      "checked with a milliamp ammeter.",
+      "disconnected from the circuit."
+    ],
+    c: 2,
+    exp: "When a semiconductor diode is checked for an open or short circuit, it is removed from the circuit and its resistance is checked with an ohmmeter. The diode is good if it has a high resistance when checked in one direction and a low resistance when it is checked in the opposite direction. The diode is shorted if both readings are low, and it is open if both readings are high.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8835",
+    q: "When handling a high voltage capacitor in an electrical circuit, be sure it",
+    a: [
+      "has a full charge before removing it from the circuit.",
+      "has at least a residual charge before removing it from the circuit.",
+      "is fully discharged before removing it from the circuit."
+    ],
+    c: 2,
+    exp: "A high-voltage capacitor can store enough electrical charge to cause a dangerous shock when it is removed from the circuit. Before removing any high-voltage capacitor, short across its terminals with an insulated-handle screwdriver to fully discharge it.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8849",
+    q: "The voltage output of an alternator may be regulated by controlling the",
+    a: [
+      "speed of the alternator.",
+      "voltage output of the DC exciter.",
+      "resistance in the rotor windings."
+    ],
+    c: 1,
+    exp: "The voltage output of an AC alternator is determined by the amount of current flowing in its exciter field. The alternator output voltage may be controlled by varying the output voltage of the DC exciter.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8866",
+    q: "To help minimize radio interference a capacitor will largely eliminate and provide a steady direct current if the capacitor is connected to the generator in",
+    a: [
+      "parallel.",
+      "series.",
+      "series/parallel."
+    ],
+    c: 0,
+    exp: "The output of a DC generator normally has some AC hash, or noise, caused by brush arcing superimposed on it. This AC can cause radio interference, and it may be removed by connecting a capacitor between the armature and ground, in parallel with the armature windings. The AC passes to ground through the low impedance path provided by the capacitor.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  // ASA page 117
+  {
+    id: "AF11-8893",
+    q: "One advantage of using AC electrical power in aircraft is",
+    a: [
+      "that AC electrical motors can be reversed while DC motors cannot.",
+      "greater ease in stepping the voltage up or down.",
+      "that the effective voltage is 1.41 times the maximum instantaneous voltage; therefore, less power input is required."
+    ],
+    c: 1,
+    exp: "One advantage of using AC electrical power in aircraft is the ease with which the voltage may be increased or decreased. Passing alternating current through a transformer changes its voltage.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8896",
+    q: "The voltage in an AC transformer secondary that contains twice as many loops as the primary will be",
+    a: [
+      "greater and the amperage less than in the primary.",
+      "greater and the amperage greater than in the primary.",
+      "less and the amperage greater than in the primary."
+    ],
+    c: 0,
+    exp: "A transformer that contains twice as many turns (loops) in the secondary winding as there are turns in the primary winding will have a secondary voltage that is twice the voltage in the primary. The current in the secondary will be only one-half the current in the primary.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8899",
+    q: "The major advantages of alternating current (AC) over direct current (DC) is the fact that its current and voltage can easily be increased or decreased",
+    a: [
+      "by means of an inverter.",
+      "by means of a rectifier.",
+      "by means of a transformer."
+    ],
+    c: 2,
+    exp: "Alternating current may have its voltage changed to any other value of AC by the use of a transformer. A transformer does not change the power of the AC, but when the voltage is increased, the current will correspondingly decrease.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8913",
+    q: "Aircraft which operate only AC generators (alternators) as a primary source of electrical power normally provide current suitable for battery charging through use of",
+    a: [
+      "a stepdown transformer and a rectifier.",
+      "an inverter and a voltage-dropping resistor.",
+      "a dynamotor with a half-wave DC output."
+    ],
+    c: 0,
+    exp: "Aircraft that use AC generators as the primary source of electrical power usually have a transformer-rectifier unit to provide direct current where it is needed.",
+    ref: "AC 43.13-2A",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8920",
+    q: "In an AC circuit with no phase lead or lag, which is true?",
+    a: [
+      "Real power is zero.",
+      "Real power is greater than apparent power.",
+      "Real power equals apparent power."
+    ],
+    c: 2,
+    exp: "In an AC circuit that has no phase lead or lag, the power factor is one (100 percent). All of the current is in phase with the voltage. The real power is equal to the apparent power.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8924",
+    q: "What is the frequency of an alternator dependent upon?",
+    a: [
+      "Voltage.",
+      "RPM.",
+      "Current."
+    ],
+    c: 1,
+    exp: "The frequency of the alternating current produced by an aircraft alternator is dependent upon the speed (RPM) of the alternator.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K2",
+    diagram: null,
+  },
+  {
+    id: "AF11-8928",
+    q: "CSD generators are usually cooled by",
+    a: [
+      "oil spray.",
+      "an integral fan.",
+      "both ram air and an integral fan."
+    ],
+    c: 0,
+    exp: "An AC generator that is built integral with the constant-speed drive is cooled by an oil spray delivered by the CSD section. The oil used in cooling is held in a reservoir in the CSD.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K4",
+    diagram: null,
+  },
+  {
+    id: "AF11-8929",
+    q: "A CSD unit drives a generator through the use of",
+    a: [
+      "a synchronous electric motor.",
+      "an infinitely variable mechanical gearing system.",
+      "a variable hydraulic pump and hydraulic motor."
+    ],
+    c: 2,
+    exp: "AC generator speed is held constant as the engine speed varies by a CSD unit. A variable-delivery hydraulic pump supplies fluid to a hydraulic motor. The ratio of the speed between the input and output of the CSD is varied to maintain a constant generator speed by controlling the pressure of the fluid that is delivered to the motor.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K4",
+    diagram: null,
+  },
+  // ASA page 118
+  {
+    id: "AF11-8930",
+    q: "Integrated drive generators (IDG) employ a type of high output AC generator that utilizes",
+    a: [
+      "brushes and slip rings to carry generated DC exciter current to the rotating field.",
+      "battery current to excite the field.",
+      "a brushless system to produce current."
+    ],
+    c: 2,
+    exp: "An IDG is a high-output brushless alternator built into a single unit with a constant-speed drive. A permanent-magnet generator produces three-phase AC, which is sent to the voltage regulator section of the GCU. The output of the GCU supplies current to the exciter field coil which controls the output voltage of the generator.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K4",
+    diagram: null,
+  },
+  {
+    id: "AF11-8931",
+    q: "If the Integrated Drive Generator (IDG) scavenge oil filter is contaminated with metal, you should",
+    a: [
+      "do an oil analysis to diagnose the problem.",
+      "remove and replace the IDG.",
+      "replace the oil and filter at 25 hour intervals."
+    ],
+    c: 1,
+    exp: "An IDG has its own integral lubrication system. Contamination of the IDG scavenge oil filter with chunks or pieces of metal indicates a mechanical failure in the IDG, and the IDG must be removed and replaced.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K4",
+    diagram: null,
+  },
+  {
+    id: "AF11-8932",
+    q: "When necessary during operation, CSD disconnect is usually accomplished by",
+    a: [
+      "a switch in the flight deck.",
+      "circuit breaker activation.",
+      "a shear section in the input shaft."
+    ],
+    c: 0,
+    exp: "Constant speed drive units are equipped with an electrically actuated disconnect that is controlled manually by a switch in the flight deck or automatically by the generator control unit. The disconnect is actuated in the event of certain types of generator malfunctions.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K4",
+    diagram: null,
+  },
+  {
+    id: "AF11-8933",
+    q: "A CSD unit that is disconnected in flight, due to a malfunction such as overtemperature, may be reconnected",
+    a: [
+      "automatically if the temperature falls back into the normal operating range.",
+      "manually by the flightcrew.",
+      "only on the ground by maintenance personnel."
+    ],
+    c: 2,
+    exp: "Some jet transport aircraft that use AC as the primary electrical power have a switch on the flight engineer's panel that allows the CSD unit to be disconnected in flight if there is a malfunction, such as an excessively high generator-drive oil temperature. The CSD unit can be reconnected only by maintenance personnel when the aircraft is on the ground.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K4",
+    diagram: null,
+  },
+  {
+    id: "AF11-8828",
+    q: "A voltage regulator controls generator output by",
+    a: [
+      "introducing a resistance in generator-to-battery lead in the event of overload.",
+      "shorting out field coil in the event of overload.",
+      "varying current flow to generator field coil."
+    ],
+    c: 2,
+    exp: "A voltage regulator controls generator output voltage by varying the amount of current allowed to flow in the generator field coil.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8869",
+    q: "Electric circuits are protected from overheating by",
+    a: [
+      "thermocouples.",
+      "AN/MS connectors.",
+      "fuses."
+    ],
+    c: 2,
+    exp: "Electrical circuits are protected from overheating by means of fuses or circuit breakers.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8872",
+    q: "In installations where the ammeter is in the generator or alternator lead, and the regulator system does not limit the maximum current that the generator or alternator can deliver, the ammeter can be redlined at what percent of the generator or alternator rating?",
+    a: [
+      "50.",
+      "75.",
+      "100."
+    ],
+    c: 2,
+    exp: "According to AC 43.13-1, paragraph 426(c), in installations where the ammeter is in the generator or alternator lead and the regulator system does not limit the maximum current the generator or alternator can deliver, the ammeter can be redlined at 100 percent of the generator or alternator rating.",
+    ref: "AC 43.13-1A",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8878",
+    q: "A circuit protection device called a current limiter is essentially a slow-blow fuse and is designed to be used in",
+    a: [
+      "400 cycle AC circuits.",
+      "heavy power circuits.",
+      "starter-generator circuits."
+    ],
+    c: 1,
+    exp: "A current limiter, such as is used in the armature circuit of a high-current DC generator, is a form of slow-blow fuse that will accept a surge of current greater than the generator rating. But if there is a continual flow of current in excess of the generator rating, it will open the armature circuit and remove the generator from the system. These current limiters cannot normally be replaced in flight.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  // ASA page 119
+  {
+    id: "AF11-8880",
+    q: "Which of the following are considered circuit-protective devices that are used in aircraft electrical systems?",
+    a: [
+      "Circuit breakers, relays, and current limiters.",
+      "Circuit breakers, fuses, and current limiters.",
+      "Circuit breakers, capacitors, and current limiters."
+    ],
+    c: 1,
+    exp: "The three most commonly used circuit-protection devices are circuit breakers, fuses, and current limiters. Circuit breakers and fuses protect the wiring in the load circuits of the aircraft and are accessible to the pilot in flight. Current limiters, a form of slow-blow fuse in the generator output circuit, are not available for replacement in flight.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8885",
+    q: "What is the advantage of a circuit breaker when compared to a fuse?",
+    a: [
+      "It is easily replaced.",
+      "It controls current flow.",
+      "It is resettable and reusable."
+    ],
+    c: 2,
+    exp: "A circuit breaker is resettable and reusable, whereas a fuse, once it is blown, must be replaced with a new one.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8886",
+    q: "What is the advantage of a current limiter?",
+    a: [
+      "It breaks circuit quickly.",
+      "It can be reset easily.",
+      "It will take overload for a short period."
+    ],
+    c: 2,
+    exp: "A current limiter is a type of slow-blow fuse that will take a momentarily high overload of current but will open the circuit under a sustained overload in excess of its rating.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8888",
+    q: "In aircraft electrical systems, automatic reset circuit breakers",
+    a: [
+      "should not be used as circuit protective devices.",
+      "are useful where only temporary overloads are normally encountered.",
+      "must be used in all circuits essential to safe operation of the aircraft."
+    ],
+    c: 1,
+    exp: "14 CFR Part 23 states that each resettable circuit protective device must be so designed that a manual operation is required to restore service after tripping.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8891",
+    q: "What is an important factor in selecting aircraft fuses?",
+    a: [
+      "The current exceeds a predetermined value.",
+      "The voltage rating should be lower than the maximum circuit voltage.",
+      "Capacity matches the needs of the circuit."
+    ],
+    c: 2,
+    exp: "It is important when aircraft fuses are selected that all the current ratings are appropriate for the circuit protection required. The aircraft service manual specifies the current ratings to be used.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8892",
+    q: "The circuit breaker in the instrument lighting system protects the",
+    a: [
+      "lights from too much current.",
+      "wiring from too much current.",
+      "wiring from too much voltage."
+    ],
+    c: 1,
+    exp: "A circuit breaker is installed in an aircraft electrical system primarily to protect the wiring from too much current. Circuit breakers are installed as close to the source of electrical power as is practical, usually on the main bus.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8894",
+    q: "Why are the iron cores of most induction coils laminated?",
+    a: [
+      "To reduce the core reluctance.",
+      "To increase the core permeability.",
+      "To reduce the effects of eddy currents."
+    ],
+    c: 2,
+    exp: "The iron cores used in most induction coils, transformers, and motors are made of laminated soft iron. The thin laminations reduce the losses caused by eddy currents flowing in the iron.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8904",
+    q: "A voltage regulator controls generator voltage by changing the",
+    a: [
+      "resistance in the generator output circuit.",
+      "current in the generator output circuit.",
+      "resistance of the generator field circuit."
+    ],
+    c: 2,
+    exp: "A voltage regulator controls generator output voltage by varying the resistance of the generator field circuit. This may be done by using a carbon-pile voltage regulator, a vibrator-type voltage regulator, or a transistor voltage regulator. The resistance in the field circuit determines the amount of field current allowed to flow.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8905",
+    q: "The overvoltage control automatically protects the generator system when excessive voltage is present by",
+    a: [
+      "opening the shunt field circuit.",
+      "opening and resetting the field control relay.",
+      "breaking a circuit to the trip coil of the field control relay."
+    ],
+    c: 0,
+    exp: "An overvoltage control protects a generator system when there is excessive voltage in the system. The overvoltage control opens the generator shunt field circuit to reduce the output voltage.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  // ASA page 120
+  {
+    id: "AF11-8926",
+    q: "Residual voltage is a result of magnetism in the",
+    a: [
+      "field windings.",
+      "field shoes.",
+      "armature."
+    ],
+    c: 1,
+    exp: "Residual voltage produced by a generator when no current is flowing through the field coils is produced by the permanent magnetism in the field shoes of the generator.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K5",
+    diagram: null,
+  },
+  {
+    id: "AF11-8916",
+    q: "A battery-generator system provides direct current. On installations requiring alternating current from the battery-generator system, it is necessary to have",
+    a: [
+      "a transformer.",
+      "an inverter.",
+      "a variable resistor between the battery and generator."
+    ],
+    c: 1,
+    exp: "An inverter is a device that converts direct current into alternating current.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K6",
+    diagram: null,
+  },
+  {
+    id: "AF11-8805",
+    q: "Electric wire terminals for most aircraft applications must be what type?",
+    a: [
+      "Slotted.",
+      "Hook.",
+      "Ring."
+    ],
+    c: 2,
+    exp: "Most aircraft electrical wiring is terminated with ring-type rather than hook or slotted terminals. If the nut on the terminal stud should become loose, the ring-type terminal will remain on the stud whereas a hook or slotted terminal will slip off.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8820",
+    q: "The type of electric wire terminals used for most aircraft applications, in addition to providing good current carrying capabilities, are designed primarily",
+    a: [
+      "to prevent circuit failure due to terminal disconnection.",
+      "for uncomplicated and rapid circuit connection and disconnection.",
+      "for permanent connection to the circuit."
+    ],
+    c: 0,
+    exp: "Terminals used on aircraft electrical wires must safely carry all of the current the wire can carry. They must also be designed in such a way that they cannot cause a circuit failure by inadvertently disconnecting from the terminal on which they are installed.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8821",
+    q: "Aluminum wire must be stripped very carefully because",
+    a: [
+      "high resistance will develop in stripping nicks.",
+      "stripping nicks can cause short circuits.",
+      "individual strands will break easily after being nicked."
+    ],
+    c: 2,
+    exp: "Aluminum wire must be stripped very carefully, because if a strand is nicked, it will quite likely break.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8840",
+    q: "What is the appropriate method for installing pre-insulated terminal lugs and splices to electric wires?",
+    a: [
+      "Using a crimping tool to secure the terminal lug.",
+      "Soldering the terminal lug to the end of the wire.",
+      "Soldering the exposed wire prior to crimping on the terminal lug."
+    ],
+    c: 0,
+    exp: "Crimped terminals on an aircraft electrical wire transmit the tension and vibration loads from the wire into the terminal gradually and do not cause stress concentrations, as is done with a soldered connection. Soldered terminals are not considered satisfactory for aircraft wiring because vibration will likely cause them to break off of the wire.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8841",
+    q: "Which of the following factors must be taken into consideration when determining the wire size to use for an aircraft installation?",
+    a: [
+      "Allowable power loss, permissible voltage drop, current carrying capability of the conductor, type of load.",
+      "Mechanical strength, allowable power loss, resistance of current return path through the aircraft structure, type of load.",
+      "Allowable power loss, resistance of current path through the aircraft structure, type of load."
+    ],
+    c: 0,
+    exp: "When selecting the size wire to use in an aircraft electrical system, you must consider the allowable power loss (the amount of electrical energy converted into heat), the permissible voltage drop, the current-carrying ability of the wire, and the type of load (continuous or intermittent) that is carried by the wire.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  // ASA page 121
+  {
+    id: "AF11-8843",
+    q: "How should the splices be arranged if several are to be located in an electrical wire bundle?",
+    a: [
+      "Staggered along the length of the bundle.",
+      "Grouped together to facilitate inspection.",
+      "Splicing within wire bundles is not permitted."
+    ],
+    c: 0,
+    exp: "Splices of the individual wires in a wire bundle should be staggered so the bundle does not become excessively enlarged.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8844",
+    q: "What is the minimum bend radius for an electrical wire bundle?",
+    a: [
+      "Ten times the outside diameter of the bundle.",
+      "Five times the outside diameter of the bundle.",
+      "Fifteen times the outside diameter of the bundle."
+    ],
+    c: 0,
+    exp: "Wire bundles should not be bent with a bend radius of less than 10 times the outside diameter of the bundle.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8845",
+    q: "When approved, splices may be used to repair manufactured harnesses or installed wiring. The maximum number of splices permitted between any two connectors is",
+    a: [
+      "one.",
+      "two.",
+      "three."
+    ],
+    c: 0,
+    exp: "There shall not be more than one splice in any one wire segment between any two connectors or other disconnect point unless it is specifically approved by the engineering department of the aircraft manufacturer.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8858",
+    q: "Electric wiring installed in aircraft without special enclosing means (open wiring) offers the advantages of ease of installation, simple maintenance, and reduced weight. When bundling open wiring, the bundles should",
+    a: [
+      "be limited as to the number of cables to minimize damage from a single electrical fault.",
+      "include at least one shielded cable to provide good bonding of the bundle to the airframe.",
+      "be limited to a minimum bend radius of five times the bundle diameter to avoid excessive stresses on the cable insulation."
+    ],
+    c: 0,
+    exp: "The number of wires run in a single bundle in an open wiring installation should be limited to minimize the damage that could result from a single electrical fault.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8860",
+    q: "What protection to wires and cables does conduit provide when used in aircraft installations?",
+    a: [
+      "Electromagnetic.",
+      "Mechanical.",
+      "Structural."
+    ],
+    c: 1,
+    exp: "Conduit is used to give mechanical protection to electrical wiring in an aircraft installation.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8861",
+    q: "Which of the following should be accomplished in the installation of aircraft wiring?",
+    a: [
+      "Support the bundle to structure and/or solid fluid lines to prevent chafing damage.",
+      "Provide adequate slack in the wire bundle to compensate for large changes in temperature.",
+      "Locate the bundle above flammable fluid lines and securely clamp to structure."
+    ],
+    c: 2,
+    exp: "Any time a wiring bundle is installed in an aircraft in such a way that it passes through a compartment parallel to a fluid line carrying flammable fluids, the bundle should be routed above the fluid line, and it should be clamped securely to the aircraft structure. In no case should a wire bundle be supported by a flammable fluid line.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8867",
+    q: "The primary considerations when selecting electric cable size are",
+    a: [
+      "current-carrying capacity and allowable voltage drop.",
+      "the voltage and amperage of the load it must carry.",
+      "the system voltage and cable length."
+    ],
+    c: 0,
+    exp: "When selecting electrical cable size, you must consider both the current-carrying capacity of the wire and the allowable voltage drop.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8871",
+    q: "Which of the following copper electrical cable sizes should be selected to replace a No. 6 aluminum electrical cable?",
+    a: [
+      "No. 4.",
+      "No. 6.",
+      "No. 8."
+    ],
+    c: 2,
+    exp: "The general rule of thumb for replacing aluminum electrical cable with copper is that copper of two wire gages smaller (larger number) may be used to replace aluminum. This rule does not hold in this instance. According to the current-carrying capacity charts in Figures 11.5 and 11.6 of AC 43.13-1, a 6-gage aluminum electrical cable is rated at 83 amps in free air and 50 amps in a bundle or conduit, and an 8-gage copper electrical cable in free air is rated at only 73 amps and 46 amps in a bundle.",
+    ref: "AC 43.13-1",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  // ASA page 122
+  {
+    id: "AF11-8873",
+    q: "Which statement relating to electric wiring is true?",
+    a: [
+      "When attaching a terminal to the end of an electric cable, it should be determined that the strength of the cable-to-terminal joint is at least twice the tensile strength of the cable.",
+      "When attaching a terminal to the end of an electric cable, it should be determined that the strength of the cable-to-terminal joint is at least equal to the tensile strength of the wire itself.",
+      "All electric cable splices should be covered with soft insulating tubing (spaghetti) for mechanical protection against external abrasion."
+    ],
+    c: 1,
+    exp: "The tensile strength of the wire-to-terminal joint should be at least equivalent to the tensile strength of the wire itself. The resistance of the joint should be negligible, relative to the normal resistance of the wire.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8876",
+    q: "A circuit breaker is installed in an aircraft electrical system primarily to protect the",
+    a: [
+      "circuit and should be located as close to the source as possible.",
+      "circuit and should be located as close to the unit as possible.",
+      "electrical unit in the circuit and should be located as close to the source as possible."
+    ],
+    c: 0,
+    exp: "A circuit breaker is installed in an aircraft electrical system primarily to protect the circuit. It is installed as close to the source as possible. Circuit breakers are usually mounted directly on the main bus.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8882",
+    q: "In the American Wire Gauge (AWG) system of numbers used to designate electrical wire sizes, the number assigned to a size is related to its",
+    a: [
+      "combined resistance and current-carrying capacity.",
+      "current-carrying capacity.",
+      "cross-sectional area."
+    ],
+    c: 2,
+    exp: "The AWG system is used to indicate the size of electrical wire. The AWG number relates to the diameter of the wire and therefore to its cross-sectional area. There is no direct correlation between the AWG number of a wire and its area, but the larger the number, the smaller the wire size.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8887",
+    q: "What should be used to protect wires from chafing when they must pass through bulkheads, firewalls, ribs, etc.?",
+    a: [
+      "Aerodynamic duct tape.",
+      "Suitable grommet.",
+      "Plastic spiral wrap."
+    ],
+    c: 1,
+    exp: "When an electrical cable must pass through a hole in a metal structure, the edges of the hole are covered with a rubber grommet to keep the metal from cutting or chafing the wire. The cable should be attached to the structure with a clamp that holds it centered in the hole.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8890",
+    q: "When considering an alteration, the criteria upon which the selection of electric cable size should be based are",
+    a: [
+      "applied voltage and allowable voltage drop.",
+      "current-carrying capacity and allowable voltage drop.",
+      "current-carrying capacity and applied voltage."
+    ],
+    c: 1,
+    exp: "When wire size is selected for an alteration of an aircraft electrical system, both the current-carrying capacity of the wire and the allowable voltage drop for the length of the wire must be considered.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K7",
+    diagram: null,
+  },
+  {
+    id: "AF11-8881",
+    q: "If a wire is installed so that it comes in contact with some moving parts, what protection should be given the wire?",
+    a: [
+      "Wrap with soft wire solder into a shield.",
+      "Wrap with friction tape.",
+      "Pass through conduit."
+    ],
+    c: 2,
+    exp: "Anytime an electrical cable, a wire bundle, or an individual wire comes into contact with some moving part of the aircraft, the wire must be protected by passing it through conduit.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K9",
+    diagram: null,
+  },
+  {
+    id: "AF11-8854",
+    q: "When adding a rheostat to a light circuit to control the light intensity, it should be connected in",
+    a: [
+      "parallel with the light.",
+      "series with the light.",
+      "series parallel with the light switch."
+    ],
+    c: 1,
+    exp: "When installing a rheostat in a light circuit to control the light intensity, install it in series with the light.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K10",
+    diagram: null,
+  },
+  // ASA page 123
+  {
+    id: "AF11-8826",
+    q: "What is the color and orientation of the position lights for navigation on civil airplanes?",
+    a: [
+      "Left side, green; right side, red; rear aft, white.",
+      "Left side, red; right side, green; rear aft, white.",
+      "Left side, white; right side, green; rear aft, red."
+    ],
+    c: 1,
+    exp: "Position lights for navigation on an aircraft are located on the wing tips and the tail. There is a red light on the left wing, a green light on the right wing, and a white light on the tail that shines aft.",
+    ref: "14 CFR \u00a723.2530",
+    acs: "AM.II.K.K12",
+    diagram: null,
+  },
+  {
+    id: "AF11-8868",
+    q: "The navigation lights of some aircraft consist of a single circuit controlled by a single switch which has an ON position and an OFF position, with no additional positions possible. This switch is referred to as a",
+    a: [
+      "double-pole, single-throw (DPST), two-position switch.",
+      "single-pole, double-throw (SPDT), two-position switch.",
+      "single-pole, single-throw (SPST), two-position switch."
+    ],
+    c: 2,
+    exp: "A switch that controls a single circuit and has only an OFF and an ON position is referred to as a single-pole, single-throw (SPST), two-position switch.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K12",
+    diagram: null,
+  },
+  {
+    id: "AF11-8900",
+    q: "Which of the following must be accomplished when installing an anticollision light?",
+    a: [
+      "Install a switch independent of the position light switch.",
+      "Use shielded electrical cable to assure fail-safe operation.",
+      "Connect the anticollision light to the aircraft position light switch."
+    ],
+    c: 0,
+    exp: "When installing an anticollision light, you must use a switch that is independent of the position light switch.",
+    ref: "AC 43.13-2A",
+    acs: "AM.II.K.K12",
+    diagram: null,
+  },
+  {
+    id: "AF11-8910",
+    q: "(Refer to Figure 19.) Upon completion of the landing gear extension cycle, the green light illuminated and the red light remained lit. What is the probable cause?",
+    a: [
+      "Short in the down limit switch.",
+      "Short in the gear safety switch.",
+      "Short in the up limit switch."
+    ],
+    c: 2,
+    exp: "In order for the red light to remain on when the landing gear is down and locked, there must be a short in the up-limit switch that keeps wire 19 electrically connected to wire 8. This keeps power supplied to the red light.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K12",
+    diagram: null,
+  },
+  {
+    id: "AF11-8914",
+    q: "During inspection of an anticollision light installation for condition and proper operation, it should be determined that",
+    a: [
+      "electrical or mechanical interconnections are provided so that the anticollision light will operate at all times that the position light switch is in the ON position.",
+      "an appropriately rated fuse is in position at the light to protect the connecting wiring against electrical faults.",
+      "the anticollision light can be operated independently of the position lights."
+    ],
+    c: 2,
+    exp: "An anticollision light must be installed so that it can be operated independently of the position lights.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K12",
+    diagram: null,
+  },
+  {
+    id: "AF11-8833",
+    q: "What type of instrument is used for measuring very high values of resistance?",
+    a: [
+      "Megohmmeter.",
+      "Shunt-type ohmmeter.",
+      "Multimeter."
+    ],
+    c: 0,
+    exp: "A megohmmeter is a special type of ohmmeter used to measure very high values of resistance. Many megohmmeters have their own high-voltage power supply built into them.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K13",
+    diagram: null,
+  },
+  {
+    id: "AF11-8837",
+    q: "How can it be determined if a transformer winding has some of its turns shorted together?",
+    a: [
+      "Measure the input voltage with an ohmmeter.",
+      "The output voltage will be high.",
+      "The transformer will get hot in normal operation."
+    ],
+    c: 2,
+    exp: "If some of the windings in a transformer are shorted together, an excessive amount of current will flow in the windings and the transformer will get hot in normal operation.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K13",
+    diagram: null,
+  },
+  {
+    id: "AF11-8851",
+    q: "Grounding is electrically connecting a conductive object to the primary structure. One purpose of grounding is to",
+    a: [
+      "prevent current return paths.",
+      "allow static charge accumulation.",
+      "prevent development of radio frequency potentials."
+    ],
+    c: 2,
+    exp: "The most reasonable choice is that electrically grounding a conductive object prevents the development of radio-frequency potential that causes static in a radio. Grounding actually keeps all components at the same electrical potential, so there is no buildup of static charges. Static charges cause sparks to jump and these sparks produce radio frequency energy.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K13",
+    diagram: null,
+  },
+  // ASA page 124
+  {
+    id: "AF11-8857",
+    q: "Oil canning of the sides of aluminum or steel electrical junction boxes is considered to be",
+    a: [
+      "normal operation in vibration prone areas.",
+      "a shorting hazard.",
+      "acceptable operation."
+    ],
+    c: 1,
+    exp: "Oil canning is the condition of a piece of sheet metal that causes it to snap back and forth when it is distorted or vibrated. If the sides of an electrical junction box oil-can, there is a possibility of some of the wires becoming shorted.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K13",
+    diagram: null,
+  },
+  {
+    id: "AF11-8859",
+    q: "During inspection of the terminal strips of an aircraft electrical system, it should be determined that",
+    a: [
+      "only locknuts have been used for terminal attachment to the studs.",
+      "the terminal studs are anchored against rotation.",
+      "only plain nuts and lockwashers have been used for terminal attachment to the studs."
+    ],
+    c: 1,
+    exp: "Studs used in terminal strips must be anchored to prevent their rotation. This anchoring is normally done by using a square end on the stud set into a square hole in the terminal strip.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K13",
+    diagram: null,
+  },
+  {
+    id: "AF11-8862",
+    q: "If the (+) terminal of a voltmeter is connected to the (-) terminal of the source voltage and the (-) terminal of the meter is connected to the (+) terminal of the source voltage, the voltmeter will read",
+    a: [
+      "correctly.",
+      "low voltage.",
+      "backwards."
+    ],
+    c: 2,
+    exp: "If a voltmeter is connected into a circuit with the polarity reversed, the meter will read backwards.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K13",
+    diagram: null,
+  },
+  {
+    id: "AF11-8863",
+    q: "When using the voltage drop method of checking circuit resistance, the",
+    a: [
+      "input voltage must be maintained at a constant value.",
+      "output voltage must be maintained at a constant value.",
+      "input voltage must be varied."
+    ],
+    c: 0,
+    exp: "When using the voltage-drop method to check circuit resistance, the input voltage must be maintained at a constant value.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K13",
+    diagram: null,
+  },
+  {
+    id: "AF11-8846",
+    q: "Electrical connectors used in aircraft assemblies should meet which of the following specifications?",
+    a: [
+      "Parts Manufacturer Approval (PMA).",
+      "Military Specifications (MS).",
+      "Society of Electrical Specifications (SES)."
+    ],
+    c: 1,
+    exp: "Electrical connectors are specifically designed to meet military specifications. Components that meet these specifications are almost all approved for use in FAA-certificated aircraft.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8847",
+    q: "The most common method of attaching a pin or socket to an individual wire in an MS electrical connector is by",
+    a: [
+      "crimping.",
+      "soldering.",
+      "crimping and soldering."
+    ],
+    c: 0,
+    exp: "For years, wires were connected into AN or MS connectors by soldering them into pots on the end of the pin or socket. A newer and far more common method of attachment to MS connectors is by crimping a tapered pin on the end of the wire and inserting this pin into a tapered hole in the back side of the pin or socket in the connector.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8848",
+    q: "The pin section of an AN/MS connector is normally installed on",
+    a: [
+      "the power supply side of a circuit.",
+      "the ground side of a circuit.",
+      "either side of a circuit (makes no difference)."
+    ],
+    c: 1,
+    exp: "The pin section of an AN/MS connector should be installed on the ground side of a circuit and the socket on the \"hot\" side. This arrangement minimizes the possibility of a short between a connector and ground when the connectors are separated.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8850",
+    q: "If several long lengths of electrical cable are to be installed in rigid conduit, the possibility of damage to cable as it is pulled through the conduit will be reduced by",
+    a: [
+      "dusting the cable with powdered graphite.",
+      "dusting the cable with powdered soapstone.",
+      "applying a light coat of dielectric grease."
+    ],
+    c: 1,
+    exp: "Long lengths of electrical cable may be lubricated as they are slid into either a rigid or a flexible conduit by dusting the cable and the inside of the conduit with powdered soapstone, tire talc, or regular talcum powder.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  // ASA page 125
+  {
+    id: "AF11-8852",
+    q: "What is normally used to bond noncontinuous stainless steel aircraft components?",
+    a: [
+      "Stainless steel jumpers.",
+      "Copper jumpers.",
+      "Aluminum jumpers."
+    ],
+    c: 1,
+    exp: "Electrolytic action may rapidly corrode a bonding connection if suitable precautions are not taken. Copper jumpers may be safely used to bond together noncontinuous stainless steel components.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8853",
+    q: "Aircraft fuse capacity is rated in",
+    a: [
+      "volts.",
+      "ohms.",
+      "amperes."
+    ],
+    c: 2,
+    exp: "Aircraft fuse capacity is rated in amperes.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8855",
+    q: "Circuits that must be operated only in an emergency or whose inadvertent activation could endanger a system frequently employ",
+    a: [
+      "guarded switches.",
+      "push-pull-type circuit breakers only (no switches).",
+      "spring-loaded to off toggle or rocker switches."
+    ],
+    c: 0,
+    exp: "When it is important that an electrical switch not be inadvertently operated, it is normally installed with a guard over its operating handle. The guard requires a conscious effort to get to the switch to actuate it.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8856",
+    q: "If one switch is used to control all navigation lights, the lights are most likely connected",
+    a: [
+      "in series with each other and parallel to the switch.",
+      "in series with each other and in series with the switch.",
+      "parallel to each other and in series with the switch."
+    ],
+    c: 2,
+    exp: "If navigation lights on an aircraft are controlled by one switch, the lights are connected in parallel with each other and in series with the switch.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8864",
+    q: "The nominal rating of electrical switches refers to continuous",
+    a: [
+      "current rating with the contacts open.",
+      "voltage rating with the contacts closed.",
+      "current rating with the contacts closed."
+    ],
+    c: 2,
+    exp: "The nominal current rating of conventional aircraft switches is usually stamped on the switch housing. This rating represents the continuous current rating of the switch with the contacts closed.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8865",
+    q: "Aircraft electrical junction boxes located in a fire zone are usually constructed of",
+    a: [
+      "aluminum sheets.",
+      "carbon steel.",
+      "stainless steel."
+    ],
+    c: 2,
+    exp: "A stainless steel junction box is recommended for installation in a fire zone.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8875",
+    q: "What kind of switch would you install in a single wire circuit that required the switch to be manually held in the ON position?",
+    a: [
+      "Single-pole, single-throw (SPST), two-position normally open (NO).",
+      "Single-pole, single-throw (SPST), single-position.",
+      "Single-pole, double-throw (SPDT), single-position normally open (NO)."
+    ],
+    c: 0,
+    exp: "A switch used in a single-wire circuit that requires the switch to be manually held in the closed, or ON, position is a single-pole, single-throw, normally open switch.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8879",
+    q: "If it is necessary to use an electrical connector where it may be exposed to moisture, the mechanic should",
+    a: [
+      "coat the connector with grease.",
+      "use a special moisture-proof type.",
+      "spray the connector with varnish or zinc-chromate."
+    ],
+    c: 1,
+    exp: "When electrical connectors are exposed to moisture, a special moisture-proof-type connector should be used.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8884",
+    q: "What is the purpose of the selection of derated switches for known continuous load current applications?",
+    a: [
+      "To calculate the voltage drop across the circuit.",
+      "To prevent short circuits in the motor field windings.",
+      "To obtain reasonable switch efficiency and service life."
+    ],
+    c: 2,
+    exp: "Electrical switches must be derated when they are used with certain types of electrical loads. These loads either have an abnormally high current inflow when the switch is first closed, or else they have extremely high voltage from an induced load when the switch is opened. The use of derated switches is important to obtain reasonable switch efficiency and service life.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  // ASA page 126
+  {
+    id: "AF11-8889",
+    q: "A certain switch is described as a single-pole, double-throw (SPDT) switch. The throw of a switch indicates the number of",
+    a: [
+      "circuits each pole can complete through the switch.",
+      "terminals at which current can enter or leave the switch.",
+      "places at which the operating device (toggle, plunger, etc.) will come to rest and at the same time open or close a circuit."
+    ],
+    c: 0,
+    exp: "The throws of a switch indicate the number of circuits, or paths for current, the switch can select for each of its poles. An SPDT switch can select either of two paths.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8903",
+    q: "The strength of the core of an electromagnet depends upon the material from which it is constructed and which of the following?",
+    a: [
+      "The number of turns of wire in the coil and the applied voltage.",
+      "The number of turns of wire in the coil and the amount of current (amperes) passing through the coil.",
+      "The size (cross section) and the number of turns of wire in the coil and the applied voltage."
+    ],
+    c: 1,
+    exp: "The strength of an electromagnet depends upon the material used for the core, the number of turns of wire in the coil, and the amount of current flowing through the coil.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8917",
+    q: "An aircraft electrical circuit control relay is",
+    a: [
+      "an electrically operated switch.",
+      "a device which converts electrical energy to kinetic energy.",
+      "any conductor which receives electrical energy and passes it on with little or no resistance."
+    ],
+    c: 0,
+    exp: "A relay is a magnetically operated electrical switch.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8918",
+    q: "The purpose of a rectifier in an electrical system is to change",
+    a: [
+      "the frequency of alternating current.",
+      "direct current to alternating current.",
+      "alternating current to direct current."
+    ],
+    c: 2,
+    exp: "A rectifier is an electrical check valve that allows electrons to flow in one direction only. A rectifier is used to change alternating current into direct current.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8919",
+    q: "What is the ratio of turns between the primary coil winding and the secondary coil winding of a transformer designed to triple its input voltage?",
+    a: [
+      "Primary will have one-third as many turns as its secondary.",
+      "Primary will have twice as many turns as its secondary.",
+      "Primary will have three times as many turns as its secondary."
+    ],
+    c: 0,
+    exp: "If a transformer has a three-to-one step-up ratio, its secondary winding will have three times as many turns as the primary winding. The secondary voltage will be three times the primary voltage.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8963",
+    q: "The rotor in an Autosyn remote indicating system uses",
+    a: [
+      "an electromagnet.",
+      "a permanent magnet.",
+      "neither an electromagnet nor a permanent magnet."
+    ],
+    c: 0,
+    exp: "The Autosyn remote indicating system uses an electromagnet as its rotor.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8964",
+    q: "The basic difference between an autosyn and a magnesyn indicating system is the",
+    a: [
+      "rotor.",
+      "transmitter.",
+      "receiver."
+    ],
+    c: 0,
+    exp: "A basic difference between the Autosyn and Magnesyn remote indicating systems is the type of rotor used by each system. The Magnesyn system uses a permanent magnet and the Autosyn system uses an electromagnet.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8965",
+    q: "The rotor in a Magnesyn remote indicating system uses",
+    a: [
+      "a permanent magnet.",
+      "an electromagnet.",
+      "an electromagnet and a permanent magnet."
+    ],
+    c: 0,
+    exp: "The Magnesyn remote indicating system uses a permanent magnet as its rotor.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8966",
+    q: "Microswitches are used primarily as limit switches to",
+    a: [
+      "limit generator output.",
+      "control electrical units automatically.",
+      "prevent overcharging of a battery."
+    ],
+    c: 1,
+    exp: "Microswitches are used primarily as limit switches to provide automatic control of such electrical units as flap and landing gear actuator motors.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  // ASA page 127
+  {
+    id: "AF11-8967",
+    q: "Which of the following are some uses for a DC selsyn system?",
+    a: [
+      "Indicate the position of retractable landing gear, cowl flaps position, cooler door position, fuel quantity, and position of wing flaps.",
+      "Indicate the position of retractable landing gear, angle of incidence, and altitude.",
+      "Indicate the fuel quantity, rate of climb, and position of wing flaps."
+    ],
+    c: 0,
+    exp: "DC selsyn systems are a widely used electrical method of indicating remote mechanical condition. They are used to show the movement and position of retractable landing gear, wing flaps, cowl flaps, oil cooler doors, and other movable parts of an aircraft. They are also used for measuring fuel quantity.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8968",
+    q: "(1) A DC selsyn system is a widely used electrical method of indicating a remote mechanical movement or position.\n(2) A synchro-type indicating system is an electrical system used for transmitting information from one point to another.\nRegarding the above statements,",
+    a: [
+      "only 1 is true.",
+      "only 2 is true.",
+      "both 1 and 2 are true."
+    ],
+    c: 2,
+    exp: "Statement 1 is true. A DC selsyn system is a widely used electrical method of indicating a remote mechanical movement or position. Statement 2 is also true. A synchro-type indicating system is an electrical system used for transmitting information from one point to another.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K15",
+    diagram: null,
+  },
+  {
+    id: "AF11-8877",
+    q: "How should a voltmeter be connected?",
+    a: [
+      "In series with the source.",
+      "In parallel with the load.",
+      "In series with the load."
+    ],
+    c: 1,
+    exp: "In order for a voltmeter to read the voltage drop across the load, it must be connected in parallel with the load.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K16",
+    diagram: null,
+  },
+  {
+    id: "AF11-8883",
+    q: "What is the voltage drop for a No. 18 copper wire 50 feet long to carry 12.5 amperes, continuous operation? Use the formula VD = RLA.",
+    a: [
+      "1/2V.",
+      "1V.",
+      "4V."
+    ],
+    c: 2,
+    exp: "Using the formula given with this question, the voltage drop in an 18-gauge copper wire, 50 feet long, carrying 12.5 amps, is 4.025 volts. VD = RLA = 0.00644 x 50 x 12.5 = 4.025 volts.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.K.K16",
+    diagram: null,
+  },
+  {
+    id: "AF11-8902",
+    q: "When using an ohmmeter to check the continuity of a generator field coil, the coil should",
+    a: [
+      "be removed from the generator housing.",
+      "show high resistance when the meter prods are connected to the terminals of the coil.",
+      "show very low resistance if it is a series field coil."
+    ],
+    c: 2,
+    exp: "Series field coils are wound of relatively few turns of heavy wire and have a very low resistance. All of the generator output current flows through them.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K16",
+    diagram: null,
+  },
+  {
+    id: "AF11-8915",
+    q: "Major adjustments on equipment such as regulators, contactors, and inverters are best accomplished outside the airplane on test benches with necessary instruments and equipment. Adjustment procedure should be as outlined by",
+    a: [
+      "the equipment manufacturer.",
+      "the FAA.",
+      "aircraft technical orders."
+    ],
+    c: 0,
+    exp: "Any major adjustments on electrical equipment must be done in direct compliance with the equipment manufacturer's maintenance recommendations.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K16",
+    diagram: null,
+  },
+  {
+    id: "AF11-8927",
+    q: "In troubleshooting an electrical circuit, if an ohmmeter is properly connected across a circuit component and some value of resistance is read,",
+    a: [
+      "the component has continuity and is open.",
+      "either the component or the circuit is shorted.",
+      "the component has continuity and is not open."
+    ],
+    c: 2,
+    exp: "If the ohmmeter is connected correctly and indicates some value of resistance, current is flowing through the component and it has continuity. It is not open.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K16",
+    diagram: null,
+  },
+  // ASA page 128 (still electrical)
+  {
+    id: "AF11-8823",
+    q: "An ammeter in a battery charging system is for the purpose of indicating the",
+    a: [
+      "amperage available for use.",
+      "total amperes being used in the airplane.",
+      "rate of current used to charge the battery."
+    ],
+    c: 2,
+    exp: "An ammeter in a battery-charging circuit in an aircraft is used to indicate the rate of current that flows into or out of the battery.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K17",
+    diagram: null,
+  },
+  {
+    id: "AF11-8836",
+    q: "Which of the following is most likely to cause thermal runaway in a nickel-cadmium battery?",
+    a: [
+      "A high internal resistance condition.",
+      "Excessive current draw from the battery.",
+      "Constant current charging of the battery to more than 100 percent of its capacity."
+    ],
+    c: 2,
+    exp: "Thermal runaway of a nickel-cadmium battery occurs when some of the cells become excessively hot. The heat lowers both the voltage and the resistance so the cells can accept a high rate of charging current. This high current produces more heat and the battery can destroy itself. The temperature rise that triggers the thermal problems can come from heat generated by a fast discharge, from high ambient temperature, or from a breakdown of the separator material.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K17",
+    diagram: null,
+  },
+  {
+    id: "AF11-8895",
+    q: "Certain transport aircraft use AC electrical power for all normal operation and battery furnished DC electrical power for standby emergency use. In aircraft of this type that operate no DC generators, the batteries are kept charged by",
+    a: [
+      "inverters which use the aircraft's AC generators as a source of power.",
+      "alternators which use the aircraft's generators as a source of power.",
+      "rectifiers which use the aircraft's AC generators as a source of power."
+    ],
+    c: 2,
+    exp: "Large aircraft that use AC for normal electrical operation often use battery furnished DC for standby use. These systems use transformers to reduce the voltage and rectifiers to change the alternating current into direct current to keep the batteries charged.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K17",
+    diagram: null,
+  },
+  {
+    id: "AF11-8909",
+    q: "(Refer to Figure 18.) Which of the batteries are connected together incorrectly?",
+    a: [
+      "1.",
+      "2.",
+      "3."
+    ],
+    c: 2,
+    exp: "The batteries in 1 are connected correctly in a series circuit. The batteries in 2 are connected correctly in a parallel circuit. The batteries in 3 are connected incorrectly in a parallel circuit. The polarity of the center battery is reversed and it will act as a short circuit across the other two batteries.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.K.K17",
+    diagram: null,
+  },
+];

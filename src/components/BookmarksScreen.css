@@ -1,0 +1,52 @@
+.bookmarks-screen {
+  padding: 16px;
+  padding-bottom: 80px;
+}
+
+.bookmarks-screen__title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.bookmarks-screen__empty {
+  text-align: center;
+  padding: 40px 16px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.bookmarks-screen__section {
+  margin-bottom: 20px;
+}
+
+.bookmarks-screen__section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.bookmarks-screen__item {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bookmarks-screen__qid {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.bookmarks-screen__page {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}

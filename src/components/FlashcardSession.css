@@ -105,6 +105,24 @@
   text-align: center;
 }
 
+.fc-card-bookmark {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 6px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.fc-card-bookmark--active {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
 .fc-session-actions {
   display: flex;
   flex-direction: column;

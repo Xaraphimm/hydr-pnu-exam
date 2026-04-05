@@ -1,27 +1,25 @@
 import { useState } from 'react'
-import { SECTIONS } from '../data/questions.js'
+import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
 import diagrams from '../diagrams/index.js'
 import './FlashcardSession.css'
 
-export default function FlashcardSession({ questions, sectionKey, onFinish, onBack }) {
-  const { recordFlashcard } = useHistory()
+export default function FlashcardSession({ questions, topicId, onFinish, onBack }) {
+  const { recordAnswer, toggleQuestionBookmark, isQuestionBookmarked } = useHistory()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
   const [results, setResults] = useState([])
 
   const q = questions[currentIndex]
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
-  const sectionName = sectionKey
-    ? SECTIONS.find(s => s.key === sectionKey)?.name
-    : 'All Questions'
+  const topicName = TOPICS[topicId]?.name ?? 'All Questions'
 
   const handleFlip = () => {
     if (!flipped) setFlipped(true)
   }
 
   const handleGrade = (gotIt) => {
-    recordFlashcard(q.id, gotIt)
+    recordAnswer(q.id, gotIt)
     const updated = [...results, { question: q, gotIt }]
 
     if (currentIndex < questions.length - 1) {
@@ -36,9 +34,9 @@ export default function FlashcardSession({ questions, sectionKey, onFinish, onBa
   return (
     <div className="fc-session">
       <div className="fc-session-header">
-        <button className="fc-session-back" onClick={onBack}>← Back</button>
+        <button className="fc-session-back" onClick={onBack}>&larr; Back</button>
         <span className="fc-session-progress">Card {currentIndex + 1} / {questions.length}</span>
-        <span className="fc-session-badge">{sectionName}</span>
+        <span className="fc-session-badge">{topicName}</span>
       </div>
 
       <div className="fc-card-container" onClick={handleFlip}>
@@ -55,6 +53,15 @@ export default function FlashcardSession({ questions, sectionKey, onFinish, onBa
           <div className="fc-card-back">
             <div className="fc-card-answer">{q.a[q.c]}</div>
             <div className="fc-card-explanation">{q.exp}</div>
+            <button
+              className={`fc-card-bookmark ${isQuestionBookmarked(q.id) ? 'fc-card-bookmark--active' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation()
+                toggleQuestionBookmark(q.id)
+              }}
+            >
+              {isQuestionBookmarked(q.id) ? '\u{1F516} Bookmarked' : '\u{1F517} Bookmark'}
+            </button>
           </div>
         </div>
       </div>

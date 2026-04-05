@@ -1,0 +1,1360 @@
+export const questions = [
+  {
+    id: "AF05-8327",
+    q: "On all aircraft equipped with retractable landing gear, some means must be provided to",
+    a: [
+      "retract and extend the landing gear if the normal operating mechanism fails.",
+      "extend the landing gear if the normal operating mechanism fails.",
+      "prevent the throttle from being reduced below a safe power setting while the landing gear is retracted."
+    ],
+    c: 1,
+    exp: "All aircraft equipped with retractable landing gear must incorporate some means by which the gear may be extended if the normal operating mechanism fails.",
+    ref: "AC 43.13-1",
+    acs: "AM.II.E.K2",
+    diagram: null,
+  },
+  {
+    id: "AF05-8333",
+    q: "When an air/oil type of landing gear shock strut is used, the initial shock of landing is cushioned by",
+    a: [
+      "compression of the air charge.",
+      "the fluid being forced through a metered opening.",
+      "compression of the fluid."
+    ],
+    c: 1,
+    exp: "The initial landing impact is cushioned in an air-oil shock strut by the fluid being forced from one chamber to another through a metered opening.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K2",
+    diagram: null,
+  },
+  {
+    id: "AF05-8336",
+    q: "The purpose of a sequence valve in a hydraulic retractable landing gear system is to",
+    a: [
+      "prevent heavy landing gear from falling too rapidly upon extension.",
+      "provide a means of disconnecting the normal source of hydraulic power and connecting the emergency source of power.",
+      "ensure operation of the landing gear and gear doors in the proper order."
+    ],
+    c: 2,
+    exp: "A sequence valve is installed in a hydraulic landing gear system to ensure that the landing gear doors are fully open before the landing gear is either retracted or extended.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K2",
+    diagram: null,
+  },
+  {
+    id: "AF05-8344",
+    q: "If the extended longitudinal axis of the main landing gear wheel assemblies intersects aft of the aircraft, the wheels can be termed as having",
+    a: [
+      "toe-out.",
+      "toe-in.",
+      "negative camber."
+    ],
+    c: 0,
+    exp: "If lines drawn through the center of each of the wheels of an aircraft landing gear cross behind the wheels, the landing gear has toe-out. The landing gear will tend to spread out as the aircraft rolls forward.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K2",
+    diagram: null,
+  },
+  {
+    id: "AF05-8373",
+    q: "An electric motor used to raise and lower a landing gear would most likely be a",
+    a: [
+      "shunt field series-wound motor.",
+      "split field shunt-wound motor.",
+      "split field series-wound motor."
+    ],
+    c: 2,
+    exp: "Aircraft landing gear that is retracted and lowered with an electric motor use a series-wound motor because of its high starting torque and a split-field motor to both raise and lower the gear.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K2",
+    diagram: null,
+  },
+  {
+    id: "AF05-8375",
+    q: "Nose gear centering cams are used in many retractable landing gear systems. The primary purpose of the centering device is to",
+    a: [
+      "align the nosewheel prior to touchdown.",
+      "engage the nosewheel steering.",
+      "center the nosewheel before it enters the wheel well."
+    ],
+    c: 2,
+    exp: "Many retractable nose gears use a centering cam to center the nosewheel when all the weight is off the shock strut. The centering cam ensures that the wheel is positioned so it will fit into the wheel well properly.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K2",
+    diagram: null,
+  },
+  {
+    id: "AF05-8308",
+    q: "To prevent a very rapid extension of an oleo shock strut after initial compression resulting from landing impact,",
+    a: [
+      "various types of valves or orifices are used which restrict the reverse fluid flow.",
+      "the metering pin gradually reduces the size of the orifice as the shock strut extends.",
+      "the air is forced through a restricted orifice in the reverse direction."
+    ],
+    c: 0,
+    exp: "Various types of valves and orifices are used inside an oleo strut to prevent a rapid extension of the strut after the initial landing impact has been absorbed.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8329",
+    q: "What is the purpose of the torque links attached to the cylinder and piston of a landing gear oleo strut?",
+    a: [
+      "Limit compression stroke.",
+      "Hold the strut in place.",
+      "Maintain correct wheel alignment."
+    ],
+    c: 2,
+    exp: "The torque links that attach the piston to the cylinder of a landing gear oleo strut maintain the correct wheel alignment.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8335",
+    q: "A sleeve, spacer, or bumper ring is incorporated in a landing gear oleo shock strut to",
+    a: [
+      "limit the extension of the torque arm.",
+      "limit the extension stroke.",
+      "reduce the rebound effect."
+    ],
+    c: 1,
+    exp: "A sleeve, spacer, or bumper ring is incorporated inside an air-oil shock strut to limit its extension stroke.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8340",
+    q: "When servicing an air/oil shock strut with MIL-5606 the strut should be",
+    a: [
+      "collapsed and fluid added at the filler opening.",
+      "fully extended and fluid added at the filler opening.",
+      "partially extended and fluid added at the filler opening."
+    ],
+    c: 0,
+    exp: "To service an air-oil shock strut, bleed all of the air out to collapse the strut, and remove the strut filler valve. Completely fill the collapsed strut with MIL-H-5606 fluid, and exercise the strut by moving the piston into and out of the cylinder to work all of the air out of the filler valve and, with the weight of the aircraft on the wheel, fill the strut with compressed air or nitrogen until the strut extends to the correct height.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8341",
+    q: "Instructions concerning the type of fluid and amount of air pressure to be put in a shock strut are found",
+    a: [
+      "on the airplane data plate.",
+      "in the aircraft operations limitations.",
+      "in the aircraft manufacturer's service manual."
+    ],
+    c: 2,
+    exp: "The type of fluid and the recommended air pressure to be used in an aircraft shock strut is found in the aircraft manufacturer's service manual.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8346",
+    q: "If an aircraft shock strut (air/oil type) bottoms upon initial landing contact, but functions correctly during taxi, the most probable cause is",
+    a: [
+      "low fluid.",
+      "low air charge.",
+      "a restricted metering pin orifice."
+    ],
+    c: 0,
+    exp: "If an aircraft shock absorber bottoms out on initial landing contact but functions properly during taxiing, the fluid supply is probably low but the air charge is proper.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8347",
+    q: "What is the function of a cam incorporated in a nose gear shock strut?",
+    a: [
+      "Provides an internal shimmy damper.",
+      "Straightens the nosewheel.",
+      "Provides steering of aircraft during ground operation."
+    ],
+    c: 1,
+    exp: "Many retractable landing gears use a centering cam to center the nosewheel when all the weight is off the shock strut. The centering cam ensures that the wheel is positioned so it will fit into the wheel well properly when it is retracted.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8348",
+    q: "Extension of an oleo shock strut is measured to determine the",
+    a: [
+      "amount of oil in the strut.",
+      "physical condition of the strut itself.",
+      "proper operating position of the strut."
+    ],
+    c: 2,
+    exp: "The amount of extension of an oleo strut is measured to determine the proper amount of air in the strut. This is undoubtedly what is meant in this question by the proper \"operating position\" of the strut.",
+    ref: "FAA-H-8083-31",
+    acs: null,
+    diagram: null,
+  },
+  {
+    id: "AF05-8350",
+    q: "If a shock strut bottoms after it has been properly serviced, the",
+    a: [
+      "strut should be disassembled and the metering pin orifice plate replaced.",
+      "air pressure should be increased.",
+      "strut should be removed, disassembled, and inspected."
+    ],
+    c: 2,
+    exp: "If a shock strut bottoms after it has been properly serviced with both oil and air, it should be removed from the aircraft, disassembled, and inspected to find the problem.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8354",
+    q: "What should be checked when a shock strut bottoms during a landing?",
+    a: [
+      "Air pressure.",
+      "Packing seals for correct installation.",
+      "Fluid level."
+    ],
+    c: 2,
+    exp: "If a shock strut bottoms during landing, the fluid is probably low. Transfer of the fluid from one chamber to another cushions the impact of landing, whereas the air pressure cushions the shocks produced when the aircraft is taxiing.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8358",
+    q: "The hydraulic packing seals used in a landing gear shock strut are",
+    a: [
+      "generally designed to be compatible with more than one type of fluid.",
+      "kept from direct contact with fluid by teflon or nylon backup rings.",
+      "used only with a specific type of fluid."
+    ],
+    c: 2,
+    exp: "The seals used in a landing gear shock strut are made of a material that is compatible only with the type of fluid that is used in the strut. When replacing the seals, use only the seal having the correct part number and a current cure date.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8368",
+    q: "When servicing an empty shock strut with fluid, the strut should be completely compressed and extended several times to ensure",
+    a: [
+      "the piston rod and wiper are lubricated with hydraulic fluid.",
+      "all excess hydraulic fluid is forced out of the strut.",
+      "proper packing ring seating and removal of air bubbles."
+    ],
+    c: 2,
+    exp: "When a shock strut has been filled with fluid, it should be extended and compressed at least twice to be sure that all the packing rings are properly seated and all the air is worked out of the fluid.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8369",
+    q: "In shock struts, chevron seals are used to",
+    a: [
+      "absorb bottoming effect.",
+      "prevent oil from escaping.",
+      "serve as a bearing surface."
+    ],
+    c: 1,
+    exp: "The chevron seals installed in an oleo shock strut prevent oil from escaping from the strut.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8370",
+    q: "On most aircraft, the oil level of an air and oil shock strut is checked by",
+    a: [
+      "removing the oil filler plug and inserting a gauge.",
+      "measuring the length of the strut extension with a certain air pressure in the strut.",
+      "releasing the air and seeing that the oil is to the level of the filler plug."
+    ],
+    c: 2,
+    exp: "The oil level in an oleo shock strut is checked by releasing the air from the strut and filling the strut with oil to the level of the filler plug.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K3",
+    diagram: null,
+  },
+  {
+    id: "AF05-8328",
+    q: "An automatic damping action occurs at the steering damper if for any reason the flow of high-pressure fluid is removed from the",
+    a: [
+      "outlet of the steering damper.",
+      "inlet of the steering damper.",
+      "replenishing check valve."
+    ],
+    c: 1,
+    exp: "A steering damper is a hydraulically operated device that accomplishes the functions of steering and eliminating shimmying. The steering damper automatically reverts to damping when, for any reason, the flow of high-pressure fluid is removed from its inlet.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K5",
+    diagram: null,
+  },
+  {
+    id: "AF05-8313",
+    q: "What action should be taken whenever maintenance is performed that will affect the landing gear system performance?",
+    a: [
+      "A test flight should be performed to conduct an operational check.",
+      "A technician with an inspection authorization should perform a visual inspection.",
+      "The aircraft should be placed on jacks and a retraction test should be performed."
+    ],
+    c: 2,
+    exp: "Any maintenance done to an aircraft landing gear that could affect its ability to retract and extend should be followed by a retraction test with the aircraft on jacks.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8372",
+    q: "When will a continuous horn provide a warning in the flight deck?",
+    a: [
+      "When the throttle is retarded and gear is not down and locked.",
+      "When the throttle is advanced and gear is down and locked.",
+      "When the throttle is retarded and gear is down and locked."
+    ],
+    c: 0,
+    exp: "A landing gear warning system will cause a warning horn in the flight deck to sound when the throttle is pulled back, as it would be for landing, if the landing gears are not all down and locked.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8951",
+    q: "(Refer to Figure 19.) What is the indication of the red landing gear position light under the following conditions?\nAircraft on jacks.\nLanding gear in transit.\nWarning horn sounding.",
+    a: [
+      "extinguished.",
+      "flashing.",
+      "illuminated."
+    ],
+    c: 0,
+    exp: "When the aircraft is on jacks, the gear safety switch is changed from that in Figure 19. The landing gear is in transit, causing the position of the nose-gear-down switch and the down-limit switch to be changed. The warning horn is sounding. Current is flowing from the 5-amp circuit breaker, through wire #6, the 5-amp circuit breaker to the gear switch in the UP position shown, the gear safety (squat) switch, whose position is changed, through wire 12 to the relay coil. When the relay is energized, current flows through its contacts and wire 14 to the gear motor to retract the landing gear. The landing gear has not yet reached its up-and-locked position, so the up-limit switch is in the position shown. Until the gear reaches its up-and-locked position, there is no power to the red landing gear position light, and the light remains extinguished.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8952",
+    q: "(Refer to Figure 19.) Which repair should be made if the gear switch was placed in UP position and the gear does not retract?",
+    a: [
+      "Replace electrical wire No. 15.",
+      "Replace the down limit switch.",
+      "Replace electrical wire No. 12."
+    ],
+    c: 2,
+    exp: "If the landing gear does not retract when the weight is off the landing gear and the gear switch is placed in the UP position, wire 12 could be faulty and need to be replaced. Current flows from the bus through the 20-amp circuit breaker, through wire 1 to the gear switch in the UP position, through the gear safety (squat) switch whose position is changed, through wire 12 to the relay coil. When the relay is energized, current flows through its contacts and wire 14 to the gear motor to retract the landing gear.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8953",
+    q: "Which of the following conditions is most likely to cause the landing gear warning signal to sound?",
+    a: [
+      "Landing gear locked down and throttle advanced.",
+      "Landing gear locked down and throttle retarded.",
+      "Landing gear not locked down and throttle retarded."
+    ],
+    c: 2,
+    exp: "The landing gear warning horn will sound if the landing gears are not all down and locked, and the throttle is retarded to reduce power for landing.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8954",
+    q: "(Refer to Figure 20.) What will illuminate the amber indicator light?",
+    a: [
+      "Closing the nosewheel gear full retract switch.",
+      "Retarding one throttle and closing the left wheel gear locked down switch.",
+      "Closing the nose, left and right wheel gear full retract switches."
+    ],
+    c: 2,
+    exp: "In order for the amber indicator light to illuminate, all three of the landing gears must be in their up-and-locked position. The full retracted switches for the nosewheel, left wheel, and right wheel must all be closed.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8955",
+    q: "(Refer to Figure 20.) What is the minimum circumstance that will cause the landing gear warning horn to indicate an unsafe condition?",
+    a: [
+      "All gears up and one throttle retarded.",
+      "Any gear up and both throttles retarded.",
+      "Any gear not down and locked, and one throttle retarded."
+    ],
+    c: 2,
+    exp: "The landing gear warning horn (aural warning) will sound anytime either throttle is retarded and any one of the landing gears is not down and locked.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8956",
+    q: "Where is the landing gear safety switch usually located?",
+    a: [
+      "On the main gear shock strut.",
+      "On the landing gear drag brace.",
+      "On the pilot's control pedestal."
+    ],
+    c: 0,
+    exp: "The landing gear safety switch, or squat switch, is usually located on one of the main landing-gear shock struts.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8957",
+    q: "What safety device is actuated by the compression and extension of a landing gear strut?",
+    a: [
+      "Uplock switch.",
+      "Downlock switch.",
+      "Ground safety switch."
+    ],
+    c: 2,
+    exp: "The ground safety switch (squat switch), is actuated by the compression of the landing gear oleo strut. The ground safety switch prevents the landing gear from retracting when the weight of the aircraft is on the landing gear.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8958",
+    q: "Which repair would require a landing gear retraction test?",
+    a: [
+      "Landing gear safety switch.",
+      "Red warning light bulb.",
+      "Gear downlock microswitch."
+    ],
+    c: 2,
+    exp: "The replacement of a landing gear downlock microswitch would require a retraction test in which the airplane is put on jacks and the landing gear is retracted and extended. This type of test is required anytime any change or adjustment is made that could affect the operation of the retracting mechanism.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8959",
+    q: "Landing gear warning systems usually provide which of the following indications?",
+    a: [
+      "Red light for unsafe gear; green light for gear up.",
+      "Green light for gear up and down; red light for unsafe gear.",
+      "Red light for unsafe gear; green light for gear down; no light for gear up."
+    ],
+    c: 2,
+    exp: "Some landing gear systems indicate in the manner shown here. A red light shows an unsafe condition and a green light shows when each gear is down and locked. There is no light to show when the landing gear is up and locked.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8960",
+    q: "In most modern hydraulically actuated landing gear systems, the order of gear and fairing door operation is controlled by",
+    a: [
+      "sequence valves.",
+      "shuttle valves.",
+      "microswitches."
+    ],
+    c: 0,
+    exp: "Hydraulically actuated landing gear systems that have hydraulically actuated wheel-well doors, control the operating sequence of the doors and the landing gear by the use of sequence valves. These valves prevent the landing gear from retracting while the doors are closed.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8961",
+    q: "What landing gear warning device(s) is/are incorporated on retractable landing gear aircraft?",
+    a: [
+      "A visual indicator showing gear position.",
+      "A light which comes on when the gear is fully down and locked.",
+      "A horn or other aural device and a red warning light."
+    ],
+    c: 2,
+    exp: "All retractable-landing-gear aircraft must have some type of device to warn the pilot if the landing gear is not down and locked when the throttles are retarded for landing. All of the devices listed in the alternatives for this question are indicators except the horn or other aural device and a red warning light.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8962",
+    q: "When a landing gear safety switch on a main gear strut closes at liftoff, which system is deactivated?",
+    a: [
+      "Landing gear position system.",
+      "Antiskid system.",
+      "Aural warning system."
+    ],
+    c: 1,
+    exp: "When the landing gear strut indicates that the weight is off the landing gear, the safety switch deactivates the antiskid system. An antiskid system has a provision that prevents the brakes from being applied, regardless of the position of the brake pedal, until weight is on the landing gear.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-9039",
+    q: "An amber light in a gear position indicator system typically indicates what condition?",
+    a: [
+      "At least one gear is in transition.",
+      "The airspeed is too high for selecting gear down.",
+      "All landing gear are down and locked."
+    ],
+    c: 0,
+    exp: "An amber in-transit light is typically used to indicate that the landing gear is in transition. In older aircraft, an amber light may be used to indicate that the gear is up.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K6",
+    diagram: null,
+  },
+  {
+    id: "AF05-8307",
+    q: "In brake service work, the term \"bleeding brakes\" is the process of",
+    a: [
+      "withdrawing air only from the system.",
+      "withdrawing fluid from the system for the purpose of removing air that has entered the system.",
+      "replacing small amounts of fluid in reservoir."
+    ],
+    c: 1,
+    exp: "Bleeding the brakes means removing any fluid from the system that has air trapped in it.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K7",
+    diagram: null,
+  },
+  {
+    id: "AF05-8310",
+    q: "Aside from an external leak in the line, what will cause parking brakes to continually bleed off pressure?",
+    a: [
+      "An internal leak in the master cylinder.",
+      "Insufficient hydraulic fluid in the reservoir.",
+      "Glazed brake linings."
+    ],
+    c: 0,
+    exp: "An internal leak in a brake master cylinder will cause the brakes to creep to the OFF position after the parking brake has been set.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K7",
+    diagram: null,
+  },
+  {
+    id: "AF05-8315",
+    q: "The braking action of a Cleveland disc brake is accomplished by compressing a rotating brake disc between two opposite brake linings. How is equal pressure on both sides of the rotating disc assured?",
+    a: [
+      "By allowing the brake rotor to float to automatically equalize as pressure is applied to the rotor.",
+      "By allowing the caliper to float to automatically equalize as pressure is applied to the rotor.",
+      "By allowing the brake linings to automatically equalize as pressure is applied to the rotor."
+    ],
+    c: 1,
+    exp: "The disc in Cleveland single-disc brakes is rigidly attached to the wheel and rotates between linings that are riveted to the backplate and the pressure plate in the caliper. The caliper is free to float laterally on two anchor bolts that ride in holes in the torque plate. When the brakes are applied, the caliper moves out on the anchor bolts to provide equal pressure on both sides of the rotating disc.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K7",
+    diagram: null,
+  },
+  {
+    id: "AF05-8316",
+    q: "If it is determined that spongy brake action is not caused by air in the brake system, what is the next most likely cause?",
+    a: [
+      "Worn brake lining.",
+      "Internal leakage in the master cylinder.",
+      "Deteriorated flexible hoses."
+    ],
+    c: 2,
+    exp: "Spongy brake action not caused by air in the system may be caused by deteriorated flexible hoses. The hose may expand and as the pressure is built up.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K7",
+    diagram: null,
+  },
+  {
+    id: "AF05-8317",
+    q: "Many brake types can be adapted to operate mechanically or hydraulically. Which type is not adaptable to mechanical operation?",
+    a: [
+      "Single-disc spot type.",
+      "Single-servo type.",
+      "Expander-tube type."
+    ],
+    c: 2,
+    exp: "Expander-tube brakes cannot be adapted for mechanical operation. They depend upon fluid inside the tube for their application.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K7",
+    diagram: null,
+  },
+  {
+    id: "AF05-8318",
+    q: "A brake debooster valve is installed in systems where the high pressure of the hydraulic system (3,000 psi) is used to operate brakes",
+    a: [
+      "that are designed to work with lower pressure.",
+      "that are used in conjunction with an antiskid system.",
+      "that are used on aircraft having high landing speeds."
+    ],
+    c: 0,
+    exp: "Brake deboosters are installed between the power brake control valve and the wheel cylinders of aircraft that are equipped with power brakes that use pressure supplied by the aircraft main hydraulic system. System pressure is too high for smooth brake application, so the debooster decreases the pressure and increases the flow of fluid to the brakes so they will apply smoothly and release quickly.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K7",
+    diagram: null,
+  },
+  {
+    id: "AF05-8320",
+    q: "When bleeding aircraft brakes, one of the indications that the air has been purged from the system is",
+    a: [
+      "partial brake pedal travel.",
+      "full brake pedal travel.",
+      "firm brake pedals."
+    ],
+    c: 2,
+    exp: "Brakes are bled to remove all air from the fluid. When all of the air has been removed, the pedal will have a firm, rather than spongy, feel.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K7",
+    diagram: null,
+  },
+  {
+    id: "AF05-8338",
+    q: "Which statement is true with respect to an aircraft equipped with hydraulically operated multiple-disc type brake assemblies?",
+    a: [
+      "There are no minimum or maximum disc clearance checks required due to the use of self-compensating cylinder assemblies.",
+      "Do not set parking brake when brakes are hot.",
+      "No parking brake provisions are possible for this type of brake assembly."
+    ],
+    c: 1,
+    exp: "Do not set the parking brakes on an aircraft equipped with multiple-disc brakes when the brakes are hot. Setting the parking brake on a hot brake will usually cause the brake discs to warp.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K7",
+    diagram: null,
+  },
+  {
+    id: "AF05-8356",
+    q: "The left brake is dragging excessively on an airplane on which no recent brake service work has been performed. The most probable cause is",
+    a: [
+      "foreign particles stuck in the master cylinder compensating port.",
+      "excessively worn brake linings.",
+      "low fluid supply in the brake system reservoir."
+    ],
+    c: 0,
+    exp: "The compensating port in a brake master cylinder must be open to vent the fluid in the brake line to the reservoir. If the port is plugged with a piece of foreign matter, the brake cannot release when pressure is removed from the pedal. The brake will drag.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K7",
+    diagram: null,
+  },
+  {
+    id: "AF05-8934",
+    q: "An antiskid system is designed to",
+    a: [
+      "solely sense the deceleration rate of every main landing gear wheel.",
+      "release then reapply pressure at a slightly lower value when a skid is detected only.",
+      "sense the deceleration rate of every main landing gear wheel and release then reapply pressure at a slightly lower value when a skid is detected."
+    ],
+    c: 2,
+    exp: "Antiskid generators are mounted in the wheel hubs, and they produce a signal whose frequency is proportional to the wheel rotational speed. This signal is sent into a computer where its rate of frequency change is compared with an allowable rate of change. If the rate is too fast, it signals that a skid is impending.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8935",
+    q: "In a brake antiskid system, when an approaching skid is sensed, an electrical signal is sent to the skid control valve which",
+    a: [
+      "acts as a bypass for the debooster cylinders.",
+      "relieves the hydraulic pressure on the brake.",
+      "equalizes the hydraulic pressure in adjacent brakes."
+    ],
+    c: 1,
+    exp: "If the antiskid computer senses that one wheel is decelerating fast enough to indicate an impending skid, it sends a signal to the skid control valve for that wheel. The skid control valve relieves hydraulic pressure from that brake until the rate of deceleration for its wheel is no longer excessive.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8936",
+    q: "An antiskid system is",
+    a: [
+      "a hydraulic system.",
+      "an electrohydraulic system.",
+      "an electrical system."
+    ],
+    c: 1,
+    exp: "An antiskid system is an electrohydraulic system. It uses an electrical signal to actuate a hydraulic valve in the brake system.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8937",
+    q: "Antiskid braking systems are generally armed by",
+    a: [
+      "the application of brakes.",
+      "a switch in the flight deck.",
+      "the rotation of the wheels above a certain speed."
+    ],
+    c: 1,
+    exp: "A brake antiskid system is armed by placing the arming switch in the ARMED position. This releases the brakes and initiates the locked-wheel protection circuit. The armed antiskid system will not allow the brakes to be applied until the weight of the aircraft is on the wheels and the wheels have reached a rotational speed of more than 15 to 20 mph. This same switch allows the pilot to deactivate the system.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8942",
+    q: "(1) When an airplane is slowed below approximately 20 mph, the antiskid system automatically deactivates to give the pilot full control of the brakes for maneuvering and parking.\n\n(2) An antiskid system consists basically of three components; wheel speed sensors, control box, and control valves.\n\nRegarding the above statements,",
+    a: [
+      "only 1 is true.",
+      "only 2 is true.",
+      "both 1 and 2 are true."
+    ],
+    c: 2,
+    exp: "Statement 1 is true. When all of the wheels are turning at less than 20 mph, the locked-wheel arming circuit becomes inoperative, giving the pilot full braking action for low-speed taxiing and parking.\nStatement 2 is also true. An antiskid system consists basically of three components: the wheel speed sensors, the control box, and the control valves.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8943",
+    q: "In an antiskid system, wheel skid is detected by",
+    a: [
+      "an electrical sensor.",
+      "a discriminator.",
+      "a sudden rise in brake pressure."
+    ],
+    c: 0,
+    exp: "A wheel skid is detected by the electrical wheel-speed sensor in the wheel hub. If the wheel slows down faster than it should, the sensor sends a signal to the control box, and the hydraulic pressure on the brake in that wheel is released.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8944",
+    q: "Which of the following functions does a skid control system perform?",
+    a: [
+      "Normal skid control, normal braking, fail safe protection, locked wheel skid control.",
+      "Normal skid control, fail safe protection, locked wheel skid control, touchdown protection.",
+      "Normal skid control, normal braking, touchdown protection, takeoff protection."
+    ],
+    c: 1,
+    exp: "The skid control system performs four functions: normal skid control, locked wheel skid control, touchdown protection, and fail safe protection.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8945",
+    q: "In the air with the antiskid armed, current cannot flow to the antiskid control box because landing gear",
+    a: [
+      "squat switch is open.",
+      "down and lock switch is open.",
+      "antiskid valves are open."
+    ],
+    c: 0,
+    exp: "An aircraft with an antiskid system cannot land with brakes applied even if the brake pedals are depressed. When the aircraft is airborne, the landing gear squat switch causes the antiskid control box to prevent fluid reaching the brakes.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8946",
+    q: "At what point in the landing operation does normal skid control perform its function?",
+    a: [
+      "When wheel deceleration indicates an impending skid.",
+      "When wheel rotation indicates hydroplaning condition.",
+      "Anytime the wheel is rotating."
+    ],
+    c: 0,
+    exp: "Normal skid control comes into play when any wheel decelerates at a rate that indicates an impending skid. This gives the most effective braking.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8947",
+    q: "(1) An antiskid system is designed to apply the correct amount of force to operate the wheel just below the skid point.\n\n(2) A warning lamp lights in the flight deck when the antiskid system is turned off or if there is a system failure.\n\nRegarding the above statements,",
+    a: [
+      "only 1 is true.",
+      "only 2 is true.",
+      "both 1 and No. 2 are true."
+    ],
+    c: 2,
+    exp: "Statement 1 is true. An antiskid system is designed to apply the correct amount of force to operate the wheel just below the skid point. This gives the most effective braking.\nStatement 2 is also true. A warning lamp lights when the system is turned off or when there is a system failure.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K8",
+    diagram: null,
+  },
+  {
+    id: "AF05-8309",
+    q: "A pilot reports the right brake on an aircraft is spongy when the brake pedal is depressed in a normal manner. The probable cause is",
+    a: [
+      "the hydraulic master cylinder piston is sticking.",
+      "air in the brake hydraulic system.",
+      "the hydraulic master cylinder piston return spring is weak."
+    ],
+    c: 1,
+    exp: "Brakes that have a spongy feel when the pedal is depressed have air in the brake system. Hydraulic fluid is noncompressible and gives the brakes a solid feel, but if there is any air in the system, it will compress and cause the brakes to feel spongy.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K9",
+    diagram: null,
+  },
+  {
+    id: "AF05-8326",
+    q: "Power boost brake systems are used on aircraft that have",
+    a: [
+      "high landing speeds.",
+      "low normal hydraulic system pressure.",
+      "more than one brake assembly per axle."
+    ],
+    c: 0,
+    exp: "As a general rule, power boost brake systems are used on aircraft that are too heavy or land too fast to employ independent brake master cylinder systems, but are too light in weight to require a power brake system.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K9",
+    diagram: null,
+  },
+  {
+    id: "AF05-8331",
+    q: "Aircraft brakes requiring a large volume of fluid to operate the brakes generally",
+    a: [
+      "use independent master cylinder systems.",
+      "do not use brake system accumulators.",
+      "use power brake control valves."
+    ],
+    c: 2,
+    exp: "Aircraft brakes that require a large volume of fluid normally use power brake control valves and fluid supplied by the aircraft's main hydraulic system.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K9",
+    diagram: null,
+  },
+  {
+    id: "AF05-8337",
+    q: "The pressure source for power brakes is",
+    a: [
+      "the main hydraulic system.",
+      "the power brake reservoir.",
+      "a master cylinder."
+    ],
+    c: 0,
+    exp: "The pressure source for aircraft power brakes is the main hydraulic system.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K9",
+    diagram: null,
+  },
+  {
+    id: "AF05-8339",
+    q: "What type of valve is used in the brake actuating line to isolate the emergency brake system from the normal power brake control valve system?",
+    a: [
+      "A bypass valve.",
+      "An orifice check valve.",
+      "A shuttle valve."
+    ],
+    c: 2,
+    exp: "A shuttle valve is used in a brake system to isolate the emergency brake system from the normal power-brake control valve system.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K9",
+    diagram: null,
+  },
+  {
+    id: "AF05-8342",
+    q: "The purpose of a relief valve in a brake system is to",
+    a: [
+      "reduce pressure for brake application.",
+      "prevent the tire from skidding.",
+      "compensate for thermal expansion."
+    ],
+    c: 2,
+    exp: "Some brake systems use a thermal relief valve to relieve pressure built up by thermal expansion of the fluid.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K9",
+    diagram: null,
+  },
+  {
+    id: "AF05-8361",
+    q: "Chines are used on some aircraft nose wheel tires to help",
+    a: [
+      "nose gear extension at higher air speeds.",
+      "reduce the possibility of hydroplaning.",
+      "deflect water away from the fuselage."
+    ],
+    c: 2,
+    exp: "The nosewheel tires on aircraft with turbine engines mounted on the aft fuselage are often equipped with chines, or deflectors, molded into the outer sidewalls. The chines deflect the water away from the fuselage and prevent it from getting into the engines.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K9",
+    diagram: null,
+  },
+  {
+    id: "AF05-8363",
+    q: "The fusible plugs installed in some aircraft wheels will",
+    a: [
+      "indicate tire tread separation.",
+      "prevent overinflation.",
+      "melt at a specified elevated temperature."
+    ],
+    c: 2,
+    exp: "Fusible plugs installed in an aircraft wheel will melt at a specified elevated temperature to relieve the air pressure and deflate the tire rather than allowing the tire to explode.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K9",
+    diagram: null,
+  },
+  {
+    id: "AF05-8371",
+    q: "A pilot reports that the brake pedals have excessive travel. A probable cause is",
+    a: [
+      "weak return springs.",
+      "lack of fluid in the brake system.",
+      "oil or some foreign matter on the brake rotors or linings."
+    ],
+    c: 1,
+    exp: "If there is a lack of fluid in the brake system, the pedals will have to be depressed more than normal to get enough fluid into the wheel cylinders to apply the brakes. Answers A and C have no effect on the amount of pedal travel.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K9",
+    diagram: null,
+  },
+  {
+    id: "AF05-8305",
+    q: "Exposure to and/or storage near which of the following is considered harmful to aircraft tires?",
+    a: [
+      "Helium, fuel, oil, and low humidity.",
+      "Low humidity, helium, and ozone.",
+      "Fuel, oil, ozone, electrical equipment, hydraulic fluid, and solvents."
+    ],
+    c: 2,
+    exp: "Aircraft tires can be damaged if they are exposed to or stored near fuel, oil, ozone, electrical equipment, hydraulic fluid, or solvents.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8311",
+    q: "Why do most aircraft tire manufacturers recommend that the tubes in newly installed tires be first inflated, fully deflated, and then reinflated to the correct pressure?",
+    a: [
+      "To allow the tube to position itself correctly inside the tire.",
+      "To eliminate all the air between the tube and the inside of the tire.",
+      "To test the entire assembly for leaks."
+    ],
+    c: 0,
+    exp: "When a tube-type tire is mounted, the tube should be fully inflated, deflated, and then re-inflated. This procedure allows the tube to position itself inside the tire and to relieve all the stresses in the tube.",
+    ref: "AC 43.13-1",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8314",
+    q: "When working with high pressure, high performance tires, why is it recommended to deflate the tires when removing wheels from the axle?",
+    a: [
+      "To relieve the strain on the wheel retaining nut and axle threads.",
+      "To ensure safety in case of a defective wheel or broken tie bolts.",
+      "To reduce the size of the tire for ease of removal."
+    ],
+    c: 1,
+    exp: "If an aircraft tire is deflated before the axle nut is loosened, the wheel halves will not spread apart in case some of the wheel bolts are damaged or weakened.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8319",
+    q: "A stripe or mark applied to a wheel rim and extending onto the sidewall of a tube-type tire is a",
+    a: [
+      "slippage mark.",
+      "wheel-to-tire balance mark.",
+      "wheel weight reference mark."
+    ],
+    c: 0,
+    exp: "The stripe or mark that extends across the edge of a wheel onto a tube-type tire is a slippage mark that shows whether the tire has slipped on the wheel. If the slippage mark is broken, the tire should be removed from the wheel to inspect the tube for possible damage to the valve.",
+    ref: "AC 43.13-1",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8321",
+    q: "Overinflated aircraft tires may cause damage to the",
+    a: [
+      "brake linings.",
+      "wheel hub.",
+      "wheel flange."
+    ],
+    c: 2,
+    exp: "Overinflated tires may cause damage to the wheel flange on a hard landing.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8322",
+    q: "Debooster valves are used in brake systems primarily to",
+    a: [
+      "ensure rapid application and release of the brakes.",
+      "reduce brake pressure and maintain static pressure.",
+      "reduce the pressure and release the brakes rapidly."
+    ],
+    c: 1,
+    exp: "A debooster valve reduces the applied pressure of the brake by the power brake control valve. When the brake pedal is released, pressure is removed from the inlet port. Then, the piston return spring moves the piston rapidly back to the top of the debooster. The rapid movement of the piston shaft causes a suction in the line to the brake assembly that results in a fast release of the brakes.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8324",
+    q: "On an air valve core stem, what indicates high-pressure type?",
+    a: [
+      "An embossed letter \"NP.\"",
+      "An embossed letter \"HP.\"",
+      "An embossed letter \"H.\""
+    ],
+    c: 2,
+    exp: "The raised, or embossed, H on the stem of an air-valve core denotes that this is a high-pressure valve core used in an air-oil shock strut or in an accumulator, rather than in a tire or a tube.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8330",
+    q: "The removal, installation, and repair of landing gear tires by the holder of a private pilot certificate on an aircraft owned or operated is considered to be",
+    a: [
+      "a violation of the Federal Aviation Regulations.",
+      "a minor repair.",
+      "preventive maintenance."
+    ],
+    c: 2,
+    exp: "According to 14 CFR Part 43, Appendix A, the removal, installation, and repair of landing gear tires on an aircraft that is owned and operated by him or her, is considered to be preventive maintenance.",
+    ref: "14 CFR \u00a743.3, Appendix A",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8343",
+    q: "Aircraft tire pressure should be checked",
+    a: [
+      "using only a push-on stick-type gauge having one-pound increments.",
+      "at least once a week or more often.",
+      "as soon as possible after each flight."
+    ],
+    c: 1,
+    exp: "Aircraft tire pressure should be checked at least once a week, or more often if the aircraft is flown a great deal.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8351",
+    q: "A high-speed aircraft tire with a sound cord body and bead may be recapped",
+    a: [
+      "a maximum of three times.",
+      "only by the tire manufacturer.",
+      "an indefinite number of times."
+    ],
+    c: 2,
+    exp: "Quoting from AC 43.13-1A, Section 332, b, (1), dealing with retreading types VI and VII high-speed tires: \"The wide variations in tire operating environments which may affect total carcass life and serviceability make it inadvisable to prescribe arbitrarily the maximum number of times a high-speed tire should be retreaded. This aspect, therefore, is controlled by a thorough inspection of the carcass before retreading.\"",
+    ref: "AC 43.13-1",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8353",
+    q: "The correct inflation pressure for an aircraft tire can be obtained from",
+    a: [
+      "tire manufacturer's specifications.",
+      "the aircraft service manual.",
+      "the information stamped on the aircraft wheel."
+    ],
+    c: 1,
+    exp: "The aircraft service manual gives the proper inflation pressure for an aircraft tire. The pressure recommended by the aircraft manufacturer is to be used, rather than the pressure specified by the tire manufacturer.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8360",
+    q: "A close inspection of a fusible plug reveals the core has experienced some deformation. What is the appropriate maintenance procedure?",
+    a: [
+      "Replace all the fusible plugs.",
+      "Replace the affected fusible plugs.",
+      "Replace with new wheel assembly."
+    ],
+    c: 0,
+    exp: "Fusible plugs or thermal plugs must be inspected visually. These threaded plugs have a core that melts at a lower temperature than the outer part of the plug. This is to release air from the tire should the temperature rise to a dangerous level. A close inspection should reveal whether any core has experienced deformation that might be due to high temperature. If detected, all thermal plugs in the wheel should be replaced with new plugs.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8362",
+    q: "The best safeguards against heat buildup in aircraft tires are",
+    a: [
+      "proper tire inflation, minimum braking, and ground rolls into the wind.",
+      "short ground rolls, slow taxi speeds, minimum braking, and proper tire inflation.",
+      "minimum braking, proper tire inflation, and long ground rolls."
+    ],
+    c: 1,
+    exp: "The best way to safeguard against a buildup of heat in an aircraft tire is short ground rolls, slow taxi speeds, and the minimum use of brakes. Above all, proper tire inflation pressure must be maintained.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8364",
+    q: "What action, if any, should be taken when there is a difference of more than 5 pounds of air pressure in tires mounted as duals?",
+    a: [
+      "Replace both tires.",
+      "Correct the discrepancy and enter in the aircraft records.",
+      "Replace the tire with the lowest pressure."
+    ],
+    c: 1,
+    exp: "If there is a difference of more than 5 psi pressure between tires mounted as duals on an aircraft, the discrepancy should be corrected and a note made of this in the aircraft records so the condition of these tires can be watched carefully.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8365",
+    q: "How long should you wait after a flight before checking tire pressure?",
+    a: [
+      "At least 2 hours (3 hours in hot weather).",
+      "At least 3 hours (4 hours in hot weather).",
+      "At least 4 hours (5 hours in hot weather)."
+    ],
+    c: 0,
+    exp: "Wait at least two hours--three hours in hot weather--after a flight, before checking the tire pressure.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8365-1",
+    q: "What is the minimum amount of time to wait for tires to cool before checking tire pressure?",
+    a: [
+      "3 hours.",
+      "2 hours.",
+      "1 hour."
+    ],
+    c: 0,
+    exp: "When checking tire pressure, allow three hours to elapse after a typical landing to ensure the tire has cooled to ambient temperature.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8366",
+    q: "Excessive wear in the shoulder area of an aircraft tire is an indication of",
+    a: [
+      "overinflation.",
+      "excessive toe-in.",
+      "underinflation."
+    ],
+    c: 2,
+    exp: "Underinflation will cause the shoulders of a tire to wear more than the center of the tread.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8367",
+    q: "Excessive wear in the center of the tread of an aircraft tire is an indication of",
+    a: [
+      "misalignment.",
+      "underinflation.",
+      "overinflation."
+    ],
+    c: 2,
+    exp: "Overinflation will cause the center of the tire tread to wear more than the shoulders.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K10",
+    diagram: null,
+  },
+  {
+    id: "AF05-8312",
+    q: "The metering pins in oleo shock struts serve to",
+    a: [
+      "lock the struts in the DOWN position.",
+      "retard the flow of oil as the struts are compressed.",
+      "meter the proper amount of air in the struts."
+    ],
+    c: 1,
+    exp: "The metering pin in an oleo shock strut retards the flow of oil as the strut is compressed. This retarded flow causes a more even absorption of shock.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K11",
+    diagram: null,
+  },
+  {
+    id: "AF05-8323",
+    q: "The repair for an out-of-tolerance toe-in condition of main landing gear wheels determined not to be the result of bent or twisted components consists of",
+    a: [
+      "shimming the axle in the oleo trunnion.",
+      "inserting, removing, or changing the location of washers or spacers at the center pivotal point of the scissors torque links.",
+      "placing shims or spacers behind the bearing of the out-of-tolerance wheel or wheels."
+    ],
+    c: 1,
+    exp: "Toe-in on an aircraft equipped with an oleo landing gear may be adjusted by inserting, removing, or changing washers or spacers at the center pivot point of the scissors torque links.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K11",
+    diagram: null,
+  },
+  {
+    id: "AF05-8325",
+    q: "The primary purpose for balancing aircraft wheel assemblies is to",
+    a: [
+      "prevent heavy spots and reduce vibration.",
+      "distribute the aircraft weight properly.",
+      "reduce excessive wear and turbulence."
+    ],
+    c: 0,
+    exp: "Aircraft tires and wheels are balanced to prevent localized heavy spots and to reduce vibrations. If there is a heavy spot, it will hit the ground first and get the most wear.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K11",
+    diagram: null,
+  },
+  {
+    id: "AF05-8384",
+    q: "(Refer to Figure 10.) The trunnion nut on an aircraft landing gear requires a torque of 320 inch-pounds. To reach the nut, a 2-inch straight adapter must be used on an 18-inch torque wrench. How many foot-pounds will be indicated on the torque wrench when the required torque of the nut is reached?",
+    a: [
+      "24.",
+      "28.8.",
+      "22."
+    ],
+    c: 0,
+    exp: "To solve this problem, use the formula:\nTw = (Ta x L) / (L + A)\n= (320 x 18) / (18 + 2)\n= 288 inch-pounds\n288 inch-pounds is divided by 12 to get 24 foot-pounds.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K11",
+    diagram: null,
+  },
+  {
+    id: "AF05-8385",
+    q: "A special bolt in a landing gear attachment requires a torque value of 440 inch-pounds. How many foot-pounds are required?",
+    a: [
+      "36.8.",
+      "38.",
+      "36.6."
+    ],
+    c: 2,
+    exp: "Inch-pounds can be converted into foot-pounds by dividing by 12. 440 inch-pounds is 36.6 foot-pounds.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K11",
+    diagram: null,
+  },
+  {
+    id: "AF05-8306",
+    q: "What would be the effect if the piston return spring broke in a brake master cylinder?",
+    a: [
+      "The brakes would become spongy.",
+      "The brake travel would become excessive.",
+      "The brakes would drag."
+    ],
+    c: 2,
+    exp: "If the piston return spring in a brake master cylinder were to break, the brakes would not release properly and they would drag.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+  {
+    id: "AF05-8332",
+    q: "What is one effect a restricted compensator port of a master cylinder will have on a brake system?",
+    a: [
+      "The brakes will operate normally.",
+      "The reservoir will be filled by reverse flow.",
+      "The restriction will cause slow release of the brakes."
+    ],
+    c: 2,
+    exp: "It is possible for a restricted compensator port in a brake master cylinder to cause slow release of the brakes. With the port open when the brakes are released, there is an open passage between the master cylinder and the reservoir. But if the compensator port is clogged, some fluid can be trapped in the brake line, keeping the brake partially applied.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+  {
+    id: "AF05-8334",
+    q: "Internal leakage in a brake master cylinder unit can cause",
+    a: [
+      "fading brakes.",
+      "slow release of brakes.",
+      "the pedal to slowly creep down while pedal pressure is applied."
+    ],
+    c: 2,
+    exp: "Internal leakage in the master cylinder of an aircraft brake system will cause the pedal to slowly creep down while pedal pressure is applied.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+  {
+    id: "AF05-8345",
+    q: "What is the purpose of a compensating port or valve in a brake master cylinder of an independent brake system?",
+    a: [
+      "Permits the fluid to flow toward or away from the reservoir as temperature changes.",
+      "Assists in the master cylinder piston return.",
+      "Prevents fluid from flowing back to the reservoir."
+    ],
+    c: 0,
+    exp: "A compensating port in a brake master cylinder is a passageway open between the reservoir and the master cylinder when the brake is completely released. Fluid can flow from the reservoir into the master cylinder and from the master cylinder back into the reservoir as it expands or contracts because of temperature changes.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+  {
+    id: "AF05-8349",
+    q: "Debooster cylinders are used in brake systems primarily to",
+    a: [
+      "reduce brake pressure and maintain static pressure.",
+      "relieve excessive fluid and ensure a positive release.",
+      "reduce the pressure to the brake and increase the volume of fluid flow."
+    ],
+    c: 2,
+    exp: "Debooster cylinders are used in brake systems to reduce the pressure applied to the brake and to increase the volume of fluid flowing to the brake. Brake deboosters are used only with brakes that have power brake control valves and get their fluid from the main aircraft hydraulic power system.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+  {
+    id: "AF05-8352",
+    q: "If an airplane equipped with master cylinders and single-disc brakes has excessive brake pedal travel, but the brakes are hard and effective, the probable cause is",
+    a: [
+      "the master cylinder one-way cup is leaking.",
+      "worn brake linings.",
+      "worn brake disc causing excessive clearance between the notches on the perimeter of the disc and the splines or keys on the wheel."
+    ],
+    c: 1,
+    exp: "Badly worn brake linings can cause excessive brake pedal travel, but the brakes will be hard and effective once the pressure is built up.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+  {
+    id: "AF05-8355",
+    q: "How is it determined in a master cylinder brake system that all of the air has been purged from the system?",
+    a: [
+      "By operating a hydraulic unit and watching the system pressure gauge for smooth, full scale deflection.",
+      "By depressing the brake and noting that the brake is firm and not spongy.",
+      "By measuring the amount of fluid return to the master cylinder upon brake release."
+    ],
+    c: 1,
+    exp: "If all the air has been purged from a master-cylinder brake system, the brake pedal will feel firm rather than spongy.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+  {
+    id: "AF05-8357",
+    q: "If a brake debooster is used in a hydraulic brake system, its position in the system will be",
+    a: [
+      "between the pressure manifold of the main hydraulic system and the power brake control valve.",
+      "between the brake control valve and the brake actuating cylinder.",
+      "in the brake pressure line between the brake pedal and the brake accumulator."
+    ],
+    c: 1,
+    exp: "A brake debooster is located in the brake system between the power brake control valve and the brake actuating cylinder. The debooster lowers the pressure of the fluid supplied by the power-brake control valve to the actuator.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+  {
+    id: "AF05-8359",
+    q: "Lockout deboosters are primarily pressure reducing valves that",
+    a: [
+      "allow full debooster piston travel without fluid from the high pressure side entering the low pressure chamber.",
+      "cannot allow full debooster piston travel without fluid from the high pressure side entering the low pressure chamber.",
+      "must be bled separately after brake bleeding has been completed."
+    ],
+    c: 0,
+    exp: "A lockout debooster is different from an ordinary debooster as it also serves as a hydraulic fuse. It will lock out the system after a given amount of fluid passes through it. In an ordinary debooster, when fluid is lost, the piston moves to the bottom of its stroke and the riser unseats the ball check valve, and fluid from the power control valve passes through the piston shaft to replace the lost fluid. In a lockout debooster, when fluid is lost, the piston moves to the bottom of its stroke, but the riser unseats the ball check valve, but the spring-loaded lockout valve prevents fluid entering the lower chamber until the reset handle is lifted.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+  {
+    id: "AF05-8374",
+    q: "When installing a chevron-type seal in an aircraft hydraulic cylinder, the open side of the seal should face",
+    a: [
+      "opposite the direction of fluid pressure.",
+      "up or forward when the unit is installed in a horizontal position.",
+      "the direction of fluid pressure."
+    ],
+    c: 2,
+    exp: "A chevron seal is installed in a hydraulic component in such a way that the open sides of the seal face in the direction of the fluid pressure. When the seal is properly installed, the hydraulic pressure will force the seal tightly against the cylinder walls.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.E.K12",
+    diagram: null,
+  },
+];

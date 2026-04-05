@@ -1,95 +1,188 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { updateConfidence as calcConfidence } from './utils/mastery.js';
+import { migrateLocalStorage } from './utils/migration.js';
 
-const HistoryContext = createContext()
+const HistoryContext = createContext();
 
-const ATTEMPTS_KEY = 'hydr-pnu-attempts'
-const QSTATS_KEY = 'hydr-pnu-qstats'
+const CONFIDENCE_KEY = 'phnx-confidence';
+const ATTEMPTS_KEY = 'phnx-attempts';
+const BOOKMARKS_KEY = 'phnx-bookmarks';
+const NOTES_KEY = 'phnx-notes';
 
 function loadJSON(key, fallback) {
   try {
-    const raw = localStorage.getItem(key)
-    return raw ? JSON.parse(raw) : fallback
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
   } catch {
-    return fallback
+    return fallback;
   }
 }
 
 export function HistoryProvider({ children }) {
-  const [attempts, setAttempts] = useState(() => loadJSON(ATTEMPTS_KEY, []))
-  const [questionStats, setQuestionStats] = useState(() => loadJSON(QSTATS_KEY, {}))
+  useEffect(() => {
+    migrateLocalStorage();
+  }, []);
 
-  const saveAttempt = useCallback(({ mode, section, questions, answers, startTime, endTime, sectionScores }) => {
-    const score = questions.reduce((acc, q) => acc + (answers[q.id] === q.c ? 1 : 0), 0)
-    const elapsed = Math.floor((endTime - startTime) / 1000)
-    const missedQuestionIds = questions.filter(q => answers[q.id] !== q.c).map(q => q.id)
+  const [confidence, setConfidence] = useState(() => loadJSON(CONFIDENCE_KEY, {}));
+  const [attempts, setAttempts] = useState(() => loadJSON(ATTEMPTS_KEY, []));
+  const [bookmarks, setBookmarks] = useState(() =>
+    loadJSON(BOOKMARKS_KEY, { questions: [], pdfPages: [] })
+  );
+  const [notes, setNotes] = useState(() => loadJSON(NOTES_KEY, {}));
 
-    const attempt = {
-      id: crypto.randomUUID(),
-      date: Date.now(),
-      mode,
-      section: section ?? null,
-      score,
-      total: questions.length,
-      elapsed,
-      sectionScores,
-      missedQuestionIds,
-    }
+  const recordAnswer = useCallback(
+    (questionId, correct) => {
+      setConfidence((prev) => {
+        const next = {
+          ...prev,
+          [questionId]: calcConfidence(prev[questionId] || null, correct),
+        };
+        localStorage.setItem(CONFIDENCE_KEY, JSON.stringify(next));
+        return next;
+      });
+    },
+    []
+  );
 
-    setAttempts(prev => {
-      const next = [attempt, ...prev]
-      localStorage.setItem(ATTEMPTS_KEY, JSON.stringify(next))
-      return next
-    })
+  const saveAttempt = useCallback(
+    ({ topicId, mode, version, seed, questions: qs, answers, startTime, endTime }) => {
+      const score = qs.reduce(
+        (acc, q) => acc + (answers[q.id] === q.c ? 1 : 0),
+        0
+      );
+      const missed = qs
+        .filter((q) => answers[q.id] !== q.c)
+        .map((q) => q.id);
 
-    setQuestionStats(prev => {
-      const next = { ...prev }
-      questions.forEach(q => {
-        const existing = next[q.id] || { timesAnswered: 0, timesCorrect: 0 }
-        if (answers[q.id] !== undefined) {
-          next[q.id] = {
-            timesAnswered: existing.timesAnswered + 1,
-            timesCorrect: existing.timesCorrect + (answers[q.id] === q.c ? 1 : 0),
-          }
-        }
-      })
-      localStorage.setItem(QSTATS_KEY, JSON.stringify(next))
-      return next
-    })
+      // Compute per-subtopic breakdown from question ID prefix (AF01 -> AF-01)
+      const topicBreakdown = {};
+      for (const q of qs) {
+        const prefix = q.id.split('-')[0];
+        const topicKey = prefix.replace(/([A-Z]+)(\d+)/, '$1-$2');
+        if (!topicBreakdown[topicKey]) topicBreakdown[topicKey] = { correct: 0, total: 0 };
+        topicBreakdown[topicKey].total++;
+        if (answers[q.id] === q.c) topicBreakdown[topicKey].correct++;
+      }
 
-    return attempt
-  }, [])
+      const attempt = {
+        id: crypto.randomUUID(),
+        topicId,
+        mode,
+        version: version ?? null,
+        seed: seed ?? null,
+        score,
+        total: qs.length,
+        time: Math.round((endTime - startTime) / 1000),
+        missed,
+        topicBreakdown,
+        date: Date.now(),
+      };
+
+      setAttempts((prev) => {
+        const next = [attempt, ...prev];
+        localStorage.setItem(ATTEMPTS_KEY, JSON.stringify(next));
+        return next;
+      });
+
+      return attempt;
+    },
+    []
+  );
+
+  const toggleQuestionBookmark = useCallback(
+    (questionId) => {
+      setBookmarks((prev) => {
+        const qs = prev.questions.includes(questionId)
+          ? prev.questions.filter((id) => id !== questionId)
+          : [...prev.questions, questionId];
+        const next = { ...prev, questions: qs };
+        localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(next));
+        return next;
+      });
+    },
+    []
+  );
+
+  const togglePdfBookmark = useCallback(
+    (topicId, page) => {
+      setBookmarks((prev) => {
+        const exists = prev.pdfPages.some(
+          (p) => p.topicId === topicId && p.page === page
+        );
+        const pages = exists
+          ? prev.pdfPages.filter(
+              (p) => !(p.topicId === topicId && p.page === page)
+            )
+          : [...prev.pdfPages, { topicId, page }];
+        const next = { ...prev, pdfPages: pages };
+        localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(next));
+        return next;
+      });
+    },
+    []
+  );
+
+  const isQuestionBookmarked = useCallback(
+    (questionId) => bookmarks.questions.includes(questionId),
+    [bookmarks.questions]
+  );
+
+  const getNote = useCallback(
+    (topicId) => notes[topicId] || '',
+    [notes]
+  );
+
+  const saveNote = useCallback(
+    (topicId, text) => {
+      setNotes((prev) => {
+        const next = { ...prev, [topicId]: text };
+        localStorage.setItem(NOTES_KEY, JSON.stringify(next));
+        return next;
+      });
+    },
+    []
+  );
+
+  const getTopicAttempts = useCallback(
+    (topicId) => attempts.filter((a) => a.topicId === topicId),
+    [attempts]
+  );
 
   const clearHistory = useCallback(() => {
-    localStorage.removeItem(ATTEMPTS_KEY)
-    localStorage.removeItem(QSTATS_KEY)
-    setAttempts([])
-    setQuestionStats({})
-  }, [])
-
-  const recordFlashcard = useCallback((questionId, gotIt) => {
-    setQuestionStats(prev => {
-      const existing = prev[questionId] || { timesAnswered: 0, timesCorrect: 0 }
-      const next = {
-        ...prev,
-        [questionId]: {
-          timesAnswered: existing.timesAnswered + 1,
-          timesCorrect: existing.timesCorrect + (gotIt ? 1 : 0),
-        },
-      }
-      localStorage.setItem(QSTATS_KEY, JSON.stringify(next))
-      return next
-    })
-  }, [])
+    setConfidence({});
+    setAttempts([]);
+    setBookmarks({ questions: [], pdfPages: [] });
+    setNotes({});
+    localStorage.removeItem(CONFIDENCE_KEY);
+    localStorage.removeItem(ATTEMPTS_KEY);
+    localStorage.removeItem(BOOKMARKS_KEY);
+    localStorage.removeItem(NOTES_KEY);
+  }, []);
 
   return (
-    <HistoryContext.Provider value={{ attempts, questionStats, saveAttempt, clearHistory, recordFlashcard }}>
+    <HistoryContext.Provider
+      value={{
+        confidence,
+        attempts,
+        bookmarks,
+        recordAnswer,
+        saveAttempt,
+        toggleQuestionBookmark,
+        togglePdfBookmark,
+        isQuestionBookmarked,
+        getNote,
+        saveNote,
+        getTopicAttempts,
+        clearHistory,
+      }}
+    >
       {children}
     </HistoryContext.Provider>
-  )
+  );
 }
 
 export function useHistory() {
-  const ctx = useContext(HistoryContext)
-  if (!ctx) throw new Error('useHistory must be used within a HistoryProvider')
-  return ctx
+  const ctx = useContext(HistoryContext);
+  if (!ctx) throw new Error('useHistory must be used within HistoryProvider');
+  return ctx;
 }
