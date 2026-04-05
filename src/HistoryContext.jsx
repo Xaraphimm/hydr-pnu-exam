@@ -45,7 +45,7 @@ export function HistoryProvider({ children }) {
   );
 
   const saveAttempt = useCallback(
-    ({ topicId, mode, questions: qs, answers, startTime, endTime }) => {
+    ({ topicId, mode, version, seed, questions: qs, answers, startTime, endTime }) => {
       const score = qs.reduce(
         (acc, q) => acc + (answers[q.id] === q.c ? 1 : 0),
         0
@@ -54,14 +54,27 @@ export function HistoryProvider({ children }) {
         .filter((q) => answers[q.id] !== q.c)
         .map((q) => q.id);
 
+      // Compute per-subtopic breakdown from question ID prefix (AF01 -> AF-01)
+      const topicBreakdown = {};
+      for (const q of qs) {
+        const prefix = q.id.split('-')[0];
+        const topicKey = prefix.replace(/([A-Z]+)(\d+)/, '$1-$2');
+        if (!topicBreakdown[topicKey]) topicBreakdown[topicKey] = { correct: 0, total: 0 };
+        topicBreakdown[topicKey].total++;
+        if (answers[q.id] === q.c) topicBreakdown[topicKey].correct++;
+      }
+
       const attempt = {
         id: crypto.randomUUID(),
         topicId,
         mode,
+        version: version ?? null,
+        seed: seed ?? null,
         score,
         total: qs.length,
         time: Math.round((endTime - startTime) / 1000),
         missed,
+        topicBreakdown,
         date: Date.now(),
       };
 
