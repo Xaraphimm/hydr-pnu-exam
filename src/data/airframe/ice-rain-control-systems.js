@@ -1,0 +1,399 @@
+export const questions = [
+  // ASA page 128
+  {
+    id: "AF12-8992",
+    q: "Which of the following is the best means to use when removing wet snow from an aircraft?",
+    a: [
+      "A brush or a squeegee.",
+      "Hot air.",
+      "Warm water."
+    ],
+    c: 0,
+    exp: "Wet snow deposits should be removed from an aircraft with a brush or squeegee.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K1",
+    diagram: null,
+  },
+  {
+    id: "AF12-8994",
+    q: "What icing condition may occur when there is no visible moisture present?",
+    a: [
+      "Injector ice.",
+      "Inlet ice.",
+      "Carburetor ice."
+    ],
+    c: 2,
+    exp: "Carburetor ice can form when the outside air temperature is well above freezing and when there is no visible moisture present. Much of the temperature drop that causes carburetor ice comes from the evaporation of the fuel.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K1",
+    diagram: null,
+  },
+  {
+    id: "AF12-8970",
+    q: "Which of the following are found in a laminated integral electrically heated windshield system?",
+    a: [
+      "Autotransformer, heat control relay, heat control toggle switch, 115V DC power supply, and indicating light.",
+      "Heat control relay, heat control toggle switch, 24V DC power supply, and indicating light.",
+      "Autotransformer, head control relay, heat control toggle switch, and indicating light."
+    ],
+    c: 2,
+    exp: "An aircraft windshield that has an integral heater laminated into the panel uses a 115-volt AC power supply, an autotransformer, a heat-control toggle switch, a heat control relay and indicating lights, but no DC power supply.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  // ASA page 129
+  {
+    id: "AF12-8976",
+    q: "Some aircraft are protected against airframe icing by heating the leading edges of the airfoils and intake ducts. When is this type of anti-ice system usually operated during flight?",
+    a: [
+      "Continuously while the aircraft is in flight.",
+      "In symmetric cycles during icing conditions to remove ice as it accumulates.",
+      "Whenever icing conditions are first encountered or expected to occur."
+    ],
+    c: 2,
+    exp: "An anti-icing system is operated in flight when icing conditions are first encountered or when they are expected to occur. The leading edge of the wing is kept warm by a continuous supply of heated air. When the system is designed to deice the leading edge, much hotter air is supplied to the inside of the wing, but for shorter periods of time and in a cyclic sequence. A deicer system allows the ice to accumulate and then breaks it off.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  {
+    id: "AF12-8977",
+    q: "Which of the following indications occur during a normal operational check of a pneumatic deicer system?",
+    a: [
+      "Relatively steady readings on the pressure gauge and fluctuating readings on the vacuum gauge.",
+      "Fluctuating readings on the pressure gauge and relatively steady readings on the vacuum gauge.",
+      "Pressure and vacuum gauges will fluctuate as the deicer boots inflate and deflate."
+    ],
+    c: 1,
+    exp: "A pneumatic deicer system is operating normally when the pressure gauge fluctuates as the various tubes inflate, and the vacuum gauge shows a relatively steady reading as all of the tubes are held deflated.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  {
+    id: "AF12-8978",
+    q: "What method is usually employed to control the temperature of an anti-icing system using surface combustion heaters?",
+    a: [
+      "Thermo-cycling switches.",
+      "Thermostats in the flight deck.",
+      "Heater fuel shutoff valves."
+    ],
+    c: 0,
+    exp: "Thermo-cycling switches control the temperature of an anti-icing system that uses combustion heaters. These switches shut off the fuel to the heater when the temperature is high enough.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  {
+    id: "AF12-8981",
+    q: "Where are the heating elements located on most aircraft with electrically heated windshields?",
+    a: [
+      "Laminated in the glass.",
+      "Attached to the glass.",
+      "Inside the windshield frame."
+    ],
+    c: 0,
+    exp: "The thermistor-type heat sensors in an electrically heated windshield are laminated into the glass panels.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  {
+    id: "AF12-8982",
+    q: "Two possible sources of heat for the operation of a wing thermal anti-icing system are",
+    a: [
+      "first stage of the aircycle turbine and turbo compressor.",
+      "compressor bleed air and aircraft electrical system.",
+      "combustion heater and exhaust gases."
+    ],
+    c: 1,
+    exp: "Wing thermal anti-icing systems usually use heated bleed air from the turbine-engine compressor, but electrically heated elements are also used in some installations.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  {
+    id: "AF12-8983",
+    q: "What maintains normal windshield temperature control in an electrically heated windshield system?",
+    a: [
+      "Thermal overheat switches.",
+      "Thermistors.",
+      "Manually-controlled rheostat."
+    ],
+    c: 1,
+    exp: "Thermistors (a special form of electrical resistor whose resistance is a function of its temperature) are used to control the amount of current used in an electrically heated windshield.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  {
+    id: "AF12-8988",
+    q: "What system component aids in the prevention of carburetor icing?",
+    a: [
+      "Alcohol injection nozzle.",
+      "Bleed air valve.",
+      "Air diverter butterfly."
+    ],
+    c: 0,
+    exp: "Carburetor icing can be minimized by spraying isopropyl alcohol into the throat of the carburetor and by using heated induction air.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  // ASA page 130
+  {
+    id: "AF12-8993",
+    q: "What are three methods of anti-icing aircraft windshields?",
+    a: [
+      "An electric heating element in the windshield, a heated air circulating system, and windshield wipers and anti-icing fluid.",
+      "A blanket-type heating system, an electric heating element in the windshield, and a ribbon-type heating system.",
+      "An electric heating element in the windshield, a heated air circulating system, and a hot water system."
+    ],
+    c: 0,
+    exp: "Some aircraft prevent ice formation on the windshield by using a double-panel windshield with warm air blown through the space between the panels. Others use windshield wipers with anti-icing fluid sprayed on. Most modern airplanes use an electrical heating element in the windshield.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  {
+    id: "AF12-8972",
+    q: "What controls the inflation sequence in a pneumatic deicer boot system?",
+    a: [
+      "Shuttle valve.",
+      "Vacuum pump.",
+      "Distributor valve."
+    ],
+    c: 2,
+    exp: "A distributor valve controls the inflation sequence in a pneumatic deicer boot system.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  {
+    id: "AF12-8973",
+    q: "What is the source of pressure for inflating deicer boots on reciprocating engine aircraft?",
+    a: [
+      "Vane-type pump.",
+      "Gear-type pump.",
+      "Piston-type pump."
+    ],
+    c: 0,
+    exp: "Normally the air pump used on a reciprocating engine for the inflation of deicer boots is a vane-type pump.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  {
+    id: "AF12-8974",
+    q: "Which of the following regulates the vacuum of the air pump to hold the deicing boots deflated when the pneumatic deicing system is off?",
+    a: [
+      "Distributor valve.",
+      "Pressure regulator.",
+      "Suction relief valve."
+    ],
+    c: 2,
+    exp: "A suction-relief valve regulates the vacuum supplied by the air pump to hold the deicer boots deflated when the pneumatic deicing system is off.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  {
+    id: "AF12-8979",
+    q: "What is the purpose of the distributor valve in a deicing system utilizing deicer boots?",
+    a: [
+      "To equalize the air pressure to the left and right wings.",
+      "To sequence the deicer boots inflations symmetrically.",
+      "To distribute anti-icing fluid to the deicer boots."
+    ],
+    c: 1,
+    exp: "The distributor valve in a deicer system sequences the deicer boot inflation and deflation cycle so the ice will be removed symmetrically from the aircraft.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  {
+    id: "AF12-8995",
+    q: "What should be used to melt the ice in a turbine engine if the compressor is immobile because of ice?",
+    a: [
+      "Deicing fluid.",
+      "Anti-icing fluid.",
+      "Hot air."
+    ],
+    c: 2,
+    exp: "Ice should be melted from the inside of a turbine engine by flowing warm air through the engine until all of the rotating parts move freely.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  {
+    id: "AF12-8996",
+    q: "What is used as a temperature-sensing element in an electrically heated windshield?",
+    a: [
+      "Thermocouple.",
+      "Thermistor.",
+      "Thermometer."
+    ],
+    c: 1,
+    exp: "Thermistors (a special form of electrical resistor whose resistance is a function of its temperature) are used as temperature sensors in an electrically heated windshield.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K3",
+    diagram: null,
+  },
+  {
+    id: "AF12-8969",
+    q: "Prior to installation of a pneumatic surface-bonded type deicer boots, on the leading edge of the wing, you should",
+    a: [
+      "remove all paint from the area to be covered by the deicer boot.",
+      "clean the surface with MEK and apply adhesive to the back of the deicer boot and leading edge of the wing.",
+      "rough the surface with a mild abrasive."
+    ],
+    c: 0,
+    exp: "When installing a surface-bonded deicer boot on an aircraft wing, remove all the paint from the area to which the boot is to be bonded. The metal must be perfectly clean and the bonding material must be applied in strict accordance with the instructions furnished by the maker of the deicer boots.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  // ASA page 131
+  {
+    id: "AF12-8980",
+    q: "What is the purpose of the oil separator in the pneumatic deicing system?",
+    a: [
+      "To protect the deicer boots from oil deterioration.",
+      "To remove oil from air exhausted from the deicer boots.",
+      "To prevent an accumulation of oil in the vacuum system."
+    ],
+    c: 0,
+    exp: "The oil separator in a pneumatic deicing system is located in the exhaust of a wet-type vacuum pump. Oil from the engine is used to lubricate and seal the pump. After passing through the pump, this oil is discharged with the exhaust air. The oil separator removes the oil from the air before it reaches the deicer boots, helps prevent their deterioration and returns it to the engine crankcase.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  {
+    id: "AF12-8985",
+    q: "Which of the following connects vacuum to the deicer boots when the system is not in operation, to hold the boots tightly against the leading edges in flight?",
+    a: [
+      "Vacuum relief valve.",
+      "Ejector.",
+      "Distributor valve."
+    ],
+    c: 2,
+    exp: "A distributor valve in the deicer system directs vacuum to the deicer boots to hold them tightly against the leading edges in flight when they are not needed.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  {
+    id: "AF12-8986",
+    q: "How do deicer boots help remove ice accumulations?",
+    a: [
+      "By preventing the formation of ice.",
+      "By breaking up ice formations.",
+      "By allowing only a thin layer of ice to build up."
+    ],
+    c: 1,
+    exp: "Deicer boots inflate and deflate to break up ice that has formed on the leading edges of the wing and the tail surfaces.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  {
+    id: "AF12-8987",
+    q: "Why are the tubes in deicer boots alternately inflated?",
+    a: [
+      "Alternate inflation of deicer boot tubes keeps disturbance of the airflow to a minimum.",
+      "Alternate inflation of deicer boot tubes does not disturb airflow.",
+      "Alternate inflation of deicer boot tubes relieves the load on the air pump."
+    ],
+    c: 0,
+    exp: "Pneumatic deicer boots are inflated alternately to keep the disturbance of the air over the airfoil to a minimum.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  {
+    id: "AF12-8991",
+    q: "What mixture may be used as a deicing fluid to remove frost from an aircraft surface?",
+    a: [
+      "Ethylene glycol and isopropyl alcohol.",
+      "Methyl ethyl ketone and ethylene glycol.",
+      "Naphtha and isopropyl alcohol."
+    ],
+    c: 0,
+    exp: "Frost may be removed from an aircraft by spraying it with a deicing fluid which normally contains ethylene glycol and isopropyl alcohol.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K4",
+    diagram: null,
+  },
+  {
+    id: "AF12-8990",
+    q: "What is the principle characteristic of a windshield pneumatic rain removal system?",
+    a: [
+      "An air blast spreads a liquid rain repellant evenly over the windshield that prevents raindrops from clinging to the glass surface.",
+      "An air blast forms a barrier that prevents raindrops from striking the windshield surface.",
+      "A pneumatic rain removal system is simply a mechanical windshield wiper system that is powered by pneumatic system pressure."
+    ],
+    c: 1,
+    exp: "A windshield pneumatic rain removal system blows the rain from the windshield with a blast of compressor bleed air. A blast of high-velocity air, directed against the outside surface of the windshield, forms a barrier that keeps raindrops from hitting the surface of the windshield.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K5",
+    diagram: null,
+  },
+  {
+    id: "AF12-8971",
+    q: "What is one check for proper operation of a pitot-static tube heater after replacement?",
+    a: [
+      "Ammeter reading.",
+      "Voltmeter reading.",
+      "Continuity check of system."
+    ],
+    c: 0,
+    exp: "A visual inspection should naturally be made of all of the connections. A check of the ammeter reading when the pitot-static tube heater is operating is a final check of the proper installation of the heater.",
+    ref: "AC 43.13-1B",
+    acs: "AM.II.L.K6",
+    diagram: null,
+  },
+  {
+    id: "AF12-8975",
+    q: "What may be used to clean deicer boots?",
+    a: [
+      "Unleaded gasoline or Jet A fuel.",
+      "Naphtha.",
+      "Soap and water."
+    ],
+    c: 2,
+    exp: "Since deicer boots are normally made of rubber, they should be cleaned with mild soap and water.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K6",
+    diagram: null,
+  },
+  // ASA page 132 (last ice/rain questions)
+  {
+    id: "AF12-8984",
+    q: "Arcing in an electrically heated windshield panel usually indicates a breakdown in the",
+    a: [
+      "temperature-sensing elements.",
+      "autotransformers.",
+      "conductive coating."
+    ],
+    c: 2,
+    exp: "Arcing inside an electrically heated windshield panel usually indicates a breakdown of the conductive coating through which the current passes.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K6",
+    diagram: null,
+  },
+  {
+    id: "AF12-8989",
+    q: "Why should a chemical rain repellant not be used on a dry windshield?",
+    a: [
+      "It will etch the glass.",
+      "It will restrict visibility.",
+      "It will cause glass crazing."
+    ],
+    c: 1,
+    exp: "If a syrupy, chemical rain repellant is sprayed on the windshield of an airplane without a heavy rain striking it, it will smear and restrict visibility through the windshield.",
+    ref: "FAA-H-8083-31",
+    acs: "AM.II.L.K7",
+    diagram: null,
+  },
+];

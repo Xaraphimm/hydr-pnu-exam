@@ -6,6 +6,11 @@ const topicFiles = {
   'AF-03': () => import('../../src/data/airframe/flight-controls.js'),
   'AF-04': () => import('../../src/data/airframe/airframe-inspection.js'),
   'AF-05': () => import('../../src/data/airframe/landing-gear-systems.js'),
+  'AF-11': () => import('../../src/data/airframe/aircraft-electrical-systems.js'),
+  'AF-12': () => import('../../src/data/airframe/ice-rain-control-systems.js'),
+  'AF-13': () => import('../../src/data/airframe/airframe-fire-protection.js'),
+  'AF-14': () => import('../../src/data/airframe/rotorcraft-fundamentals.js'),
+  'AF-15': () => import('../../src/data/airframe/water-waste-systems.js'),
 };
 
 const topicPrefixes = {
@@ -14,9 +19,14 @@ const topicPrefixes = {
   'AF-03': 'AF03',
   'AF-04': 'AF04',
   'AF-05': 'AF05',
+  'AF-11': 'AF11',
+  'AF-12': 'AF12',
+  'AF-13': 'AF13',
+  'AF-14': 'AF14',
+  'AF-15': 'AF15',
 };
 
-describe('Airframe question data (AF-01 to AF-05)', () => {
+describe('Airframe question data', () => {
   for (const [topicId, loader] of Object.entries(topicFiles)) {
     describe(topicId, () => {
       let questions;
@@ -53,4 +63,15 @@ describe('Airframe question data (AF-01 to AF-05)', () => {
       });
     });
   }
+});
+
+describe('Cross-topic validation', () => {
+  it('has no duplicate question IDs across all topics', async () => {
+    const allIds = [];
+    for (const loader of Object.values(topicFiles)) {
+      const mod = await loader();
+      allIds.push(...mod.questions.map((q) => q.id));
+    }
+    expect(new Set(allIds).size).toBe(allIds.length);
+  });
 });
