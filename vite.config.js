@@ -6,11 +6,13 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'prompt',
+      registerType: 'autoUpdate',
       includeAssets: ['icon-192.svg', 'icon-512.svg'],
       manifest: false,
       workbox: {
+        clientsClaim: true,
         globPatterns: ['**/*.{js,css,html,svg,jpeg,png,woff2}'],
+        skipWaiting: true,
       },
     }),
   ],
