@@ -157,6 +157,13 @@
   text-overflow: ellipsis;
 }
 
+.topic-card__meta {
+  display: block;
+  margin-top: 1px;
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+}
+
 .topic-card__pct {
   font-size: 13px;
   font-weight: 700;

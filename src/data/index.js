@@ -20,6 +20,26 @@ const questionLoaders = {
   'PP-07': () => import('./powerplant/engine-lubrication-systems.js'),
 };
 
+export const QUESTION_COUNTS = {
+  'AF-01': 130,
+  'AF-02': 96,
+  'AF-03': 61,
+  'AF-04': 13,
+  'AF-05': 97,
+  'AF-06': 121,
+  'AF-07': 88,
+  'AF-08': 67,
+  'AF-09': 69,
+  'AF-10': 110,
+  'AF-11': 134,
+  'AF-12': 28,
+  'AF-13': 32,
+  'AF-14': 16,
+  'AF-15': 2,
+  'AF-PRACTICE': 1000,
+  'PP-07': 100,
+};
+
 const questionCache = {};
 
 export async function loadQuestions(topicId) {
@@ -42,6 +62,10 @@ export async function loadAllQuestions() {
 export function getCachedQuestionIds(topicId) {
   const qs = questionCache[topicId];
   return qs ? qs.map((q) => q.id) : [];
+}
+
+export function getQuestionCount(topicId) {
+  return QUESTION_COUNTS[topicId] ?? 0;
 }
 
 export function hasQuestionData(topicId) {

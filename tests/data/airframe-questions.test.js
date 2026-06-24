@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest';
+import { getQuestionCount, hasQuestionData } from '../../src/data/index.js';
 
 const topicFiles = {
   'AF-01': () => import('../../src/data/airframe/metallic-structures.js'),
@@ -49,6 +50,8 @@ describe('Airframe question data', () => {
       it('exports a non-empty questions array', () => {
         expect(Array.isArray(questions)).toBe(true);
         expect(questions.length).toBeGreaterThan(0);
+        expect(hasQuestionData(topicId)).toBe(true);
+        expect(getQuestionCount(topicId)).toBe(questions.length);
       });
 
       it('every question has required fields', () => {
