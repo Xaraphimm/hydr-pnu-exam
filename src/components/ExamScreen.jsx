@@ -20,12 +20,11 @@ export default function ExamScreen({
 }) {
   const { recordAnswer, toggleQuestionBookmark, isQuestionBookmarked } = useHistory()
   const [currentIndex, setCurrentIndex] = useState(initialIndex ?? 0)
-  const [showFeedback, setShowFeedback] = useState(false)
   const [elapsed, setElapsed] = useState(0)
   const topRef = useRef(null)
 
   const q = questions[currentIndex]
-  const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
+
   const score = questions.reduce((acc, question) => acc + (answers[question.id] === question.c ? 1 : 0), 0)
   const topicName = TOPICS[topicId]?.name || (topicId === 'airframe' ? 'Airframe' : '')
   const headerLabel = sessionLabel || `${topicName}${mode === 'weak' ? ' — WEAK AREAS' : ''}`
@@ -41,9 +40,18 @@ export default function ExamScreen({
     return () => clearInterval(t)
   }, [startTime])
 
-  useEffect(() => {
-    setShowFeedback(answers[q.id] !== undefined)
-  }, [currentIndex, q.id, answers])
+  if (!q) {
+    return (
+      <div className="exam exam-empty">
+        <h1>No questions available</h1>
+        <p>This practice session could not be started because no matching questions were found.</p>
+        <button className="exam-end" onClick={onFinish}>Return to Results</button>
+      </div>
+    )
+  }
+
+  const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
+  const showFeedback = answers[q.id] !== undefined
 
   const formatTime = (s) => {
     const h = Math.floor(s / 3600).toString().padStart(2, '0')
@@ -56,7 +64,6 @@ export default function ExamScreen({
     if (answers[q.id] !== undefined) return
     onAnswer(q.id, answerIndex)
     recordAnswer(q.id, answerIndex === q.c)
-    setShowFeedback(true)
   }
 
   const goTo = (idx) => {

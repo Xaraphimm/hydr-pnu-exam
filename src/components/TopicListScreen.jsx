@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { TOPICS, CATEGORIES, getCachedQuestionIds } from '../data/index.js';
+import { TOPICS, CATEGORIES, getCachedQuestionIds, getQuestionCount, hasQuestionData } from '../data/index.js';
 import { useHistory } from '../HistoryContext.jsx';
 import { getTopicMastery, getTopicCounts } from '../utils/mastery.js';
 import ReadinessRing from './ReadinessRing.jsx';
@@ -14,10 +14,13 @@ export default function TopicListScreen({ onSelectTopic, onStartExam, onStartAcs
     const stats = {};
     for (const [id] of Object.entries(TOPICS)) {
       const qIds = getCachedQuestionIds(id);
+      const questionCount = getQuestionCount(id);
       stats[id] = {
         mastery: getTopicMastery(qIds, confidence),
-        counts: getTopicCounts(qIds, confidence),
-        questionCount: qIds.length,
+        counts: qIds.length > 0
+          ? getTopicCounts(qIds, confidence)
+          : { mastered: 0, learning: 0, new: questionCount },
+        questionCount,
       };
     }
     return stats;
@@ -93,7 +96,15 @@ export default function TopicListScreen({ onSelectTopic, onStartExam, onStartAcs
             const topic = TOPICS[topicId];
             const stats = topicStats[topicId];
             return (
-              <TopicCard key={topicId} topic={topic} mastery={stats.mastery} counts={stats.counts} onClick={() => onSelectTopic(topicId)} />
+              <TopicCard
+                key={topicId}
+                topic={topic}
+                mastery={stats.mastery}
+                counts={stats.counts}
+                questionCount={stats.questionCount}
+                hasQuestionData={hasQuestionData(topicId)}
+                onClick={() => onSelectTopic(topicId)}
+              />
             );
           })}
         </div>

@@ -30,7 +30,10 @@ export default function PdfViewer({ topicId, pdfFile, onBack }) {
           <span>Study</span>
         </div>
         <div className="pdf-viewer__error">
-          <p>No handbook chapter available for this topic.</p>
+          <p>Chapter PDF is not available yet.</p>
+          <p className="pdf-viewer__error-detail">
+            Practice questions remain available when this topic has a question bank.
+          </p>
         </div>
       </div>
     );
@@ -44,7 +47,10 @@ export default function PdfViewer({ topicId, pdfFile, onBack }) {
           <span>Study</span>
         </div>
         <div className="pdf-viewer__error">
-          <p>Could not load chapter PDF.</p>
+          <p>Chapter PDF could not be loaded.</p>
+          <p className="pdf-viewer__error-detail">
+            The study file may not be packaged in this deployment yet. You can continue using practice questions and flashcards.
+          </p>
           <p className="pdf-viewer__error-detail">{error}</p>
         </div>
       </div>

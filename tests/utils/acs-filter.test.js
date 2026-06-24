@@ -40,6 +40,7 @@ describe('getMatchingAcsQuestions', () => {
     'AF-PRACTICE': [
       q('PRACTICE-1', 'AM.II.F.K1'),
       q('AF01-1', 'AM.II.F.K1'),
+      { ...q('PRACTICE-DUP', 'AM.II.F.K1'), q: 'AF01-1 question' },
       q('PRACTICE-2', 'AM.II.FA.K1'),
     ],
   };
@@ -63,6 +64,13 @@ describe('getMatchingAcsQuestions', () => {
     const matches = getMatchingAcsQuestions(questionsByTopic, ['AM.II.F.K1']);
 
     expect(matches.map((question) => question.id)).toEqual(['AF01-1', 'PRACTICE-1']);
+  });
+
+  it('de-duplicates overlap by question stem across source banks', () => {
+    const matches = getMatchingAcsQuestions(questionsByTopic, ['AM.II.F.K1']);
+    const stems = matches.map((question) => question.q.toLowerCase());
+
+    expect(stems).toEqual(['af01-1 question', 'practice-1 question']);
   });
 });
 

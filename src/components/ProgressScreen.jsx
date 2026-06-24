@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { TOPICS, CATEGORIES, getCachedQuestionIds } from '../data/index.js';
+import { TOPICS, CATEGORIES, getCachedQuestionIds, getQuestionCount } from '../data/index.js';
 import { useHistory } from '../HistoryContext.jsx';
 import { getTopicMastery, getTopicCounts, getMasteryColor } from '../utils/mastery.js';
 import ProgressBarMulti from './ProgressBarMulti.jsx';
@@ -13,10 +13,13 @@ export default function ProgressScreen() {
     const stats = {};
     for (const [id] of Object.entries(TOPICS)) {
       const qIds = getCachedQuestionIds(id);
+      const questionCount = getQuestionCount(id);
       stats[id] = {
         mastery: getTopicMastery(qIds, confidence),
-        counts: getTopicCounts(qIds, confidence),
-        questionCount: qIds.length,
+        counts: qIds.length > 0
+          ? getTopicCounts(qIds, confidence)
+          : { mastered: 0, learning: 0, new: questionCount },
+        questionCount,
       };
     }
     return stats;

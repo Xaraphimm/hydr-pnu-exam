@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { seededRandom, seededShuffle, getAcsDistribution, generateExam } from '../../src/utils/exam-generator.js';
+import {
+  generateExam,
+  getAcsDistribution,
+  normalizeQuestionStem,
+  seededRandom,
+  seededShuffle,
+} from '../../src/utils/exam-generator.js';
 
 describe('seededRandom', () => {
   it('produces deterministic output for the same seed', () => {
@@ -46,6 +52,12 @@ describe('seededShuffle', () => {
     const arr = [1, 2, 3, 4, 5];
     const result = seededShuffle(arr, 7);
     expect(result.sort()).toEqual([1, 2, 3, 4, 5]);
+  });
+});
+
+describe('normalizeQuestionStem', () => {
+  it('normalizes question text for duplicate detection', () => {
+    expect(normalizeQuestionStem({ q: '  What   is Lift? \n' })).toBe('what is lift?');
   });
 });
 
@@ -117,5 +129,24 @@ describe('generateExam', () => {
     const exam = generateExam(1, mockQuestionsByTopic, 20);
     const topicPrefixes = new Set(exam.map((q) => q.id.split('-')[0]));
     expect(topicPrefixes.size).toBe(3);
+  });
+
+  it('does not include duplicate stems when banks overlap', () => {
+    const overlappingQuestionsByTopic = {
+      'AF-01': [
+        { id: 'AF01-1', q: 'Shared stem', a: ['A', 'B', 'C'], c: 0, exp: 'e', ref: 'r', acs: 'AM.II.A.K1' },
+        { id: 'AF01-2', q: 'Unique one', a: ['A', 'B', 'C'], c: 0, exp: 'e', ref: 'r', acs: 'AM.II.A.K1' },
+      ],
+      'AF-PRACTICE': [
+        { id: 'AF-1', q: ' shared   stem ', a: ['A', 'B', 'C'], c: 1, exp: 'e', ref: 'r', acs: 'AM.II.A.K1' },
+        { id: 'AF-2', q: 'Unique two', a: ['A', 'B', 'C'], c: 0, exp: 'e', ref: 'r', acs: 'AM.II.A.K1' },
+      ],
+    };
+
+    const exam = generateExam(5, overlappingQuestionsByTopic, 3);
+    const stems = exam.map(normalizeQuestionStem);
+
+    expect(exam).toHaveLength(3);
+    expect(new Set(stems).size).toBe(stems.length);
   });
 });

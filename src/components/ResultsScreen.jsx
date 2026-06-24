@@ -73,13 +73,17 @@ export default function ResultsScreen({
     if (navigator.share) {
       try {
         await navigator.share({ text })
-      } catch {}
+      } catch {
+        setShareLabel('SHARE')
+      }
     } else {
       try {
         await navigator.clipboard.writeText(text)
         setShareLabel('COPIED!')
         setTimeout(() => setShareLabel('SHARE'), 2000)
-      } catch {}
+      } catch {
+        setShareLabel('SHARE')
+      }
     }
   }
 

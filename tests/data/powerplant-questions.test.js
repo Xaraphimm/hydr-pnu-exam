@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { questions } from '../../src/data/powerplant/engine-lubrication-systems.js';
-import { hasQuestionData, loadQuestions } from '../../src/data/index.js';
+import { getQuestionCount, hasQuestionData, loadQuestions } from '../../src/data/index.js';
 
 describe('PP-07 Engine Lubrication Systems questions', () => {
   it('exports exactly 100 questions', () => {
@@ -41,6 +41,7 @@ describe('PP-07 Engine Lubrication Systems questions', () => {
 
   it('is wired into the question loader', async () => {
     expect(hasQuestionData('PP-07')).toBe(true);
+    expect(getQuestionCount('PP-07')).toBe(100);
     await expect(loadQuestions('PP-07')).resolves.toHaveLength(100);
   });
 });

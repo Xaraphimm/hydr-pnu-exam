@@ -26,6 +26,30 @@ export function seededShuffle(arr, seed) {
   return a;
 }
 
+export function normalizeQuestionStem(question) {
+  return String(question?.q ?? '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function addUniqueQuestions({ selected, seenStems, candidates, count }) {
+  let added = 0;
+
+  for (const question of candidates) {
+    const stem = normalizeQuestionStem(question);
+    if (!stem || seenStems.has(stem)) continue;
+
+    seenStems.add(stem);
+    selected.push(question);
+    added++;
+
+    if (added >= count) break;
+  }
+
+  return added;
+}
+
 /**
  * Calculate ACS-weighted question distribution.
  * @param {Object} questionsByTopic - { topicId: questionArray[] }
@@ -85,13 +109,30 @@ export function generateExam(seed, questionsByTopic, totalQuestions) {
   const rng = seededRandom(seed);
   const dist = getAcsDistribution(questionsByTopic, totalQuestions);
   const selected = [];
+  const seenStems = new Set();
 
   for (const [topicId, count] of Object.entries(dist)) {
     const pool = questionsByTopic[topicId];
     const shuffled = seededShuffle(pool, rng);
-    selected.push(...shuffled.slice(0, count));
+    addUniqueQuestions({
+      selected,
+      seenStems,
+      candidates: shuffled,
+      count,
+    });
+  }
+
+  const shortfall = totalQuestions - selected.length;
+  if (shortfall > 0) {
+    const allQuestions = Object.values(questionsByTopic).flat();
+    addUniqueQuestions({
+      selected,
+      seenStems,
+      candidates: seededShuffle(allQuestions, rng),
+      count: shortfall,
+    });
   }
 
   // Final shuffle so topics are interleaved
-  return seededShuffle(selected, rng);
+  return seededShuffle(selected, rng).slice(0, totalQuestions);
 }

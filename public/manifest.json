@@ -1,7 +1,7 @@
 {
   "name": "PHNX A&P Exam Prep",
   "short_name": "A&P Prep",
-  "description": "FAA A&P Practice Exam for Hydraulics & Pneumatics",
+  "description": "FAA Aviation Mechanic Airframe and Powerplant practice, ACS review, and progress tracking.",
   "start_url": "/hydr-pnu-exam/",
   "scope": "/hydr-pnu-exam/",
   "display": "standalone",

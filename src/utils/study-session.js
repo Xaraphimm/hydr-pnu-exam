@@ -1,4 +1,20 @@
 import { shuffle } from './shuffle.js';
+import { normalizeQuestionStem } from './exam-generator.js';
+
+function uniqueByQuestionStem(questions) {
+  const seenStems = new Set();
+  const uniqueQuestions = [];
+
+  for (const question of questions) {
+    const stem = normalizeQuestionStem(question);
+    if (!stem || seenStems.has(stem)) continue;
+
+    seenStems.add(stem);
+    uniqueQuestions.push(question);
+  }
+
+  return uniqueQuestions;
+}
 
 export async function buildCategoryStudyQuestions({
   topicIds,
@@ -11,5 +27,5 @@ export async function buildCategoryStudyQuestions({
     questions.push(...await loadQuestions(topicId));
   }
 
-  return shuffleQuestions(questions);
+  return shuffleQuestions(uniqueByQuestionStem(questions));
 }
