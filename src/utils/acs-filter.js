@@ -1,4 +1,4 @@
-import { seededShuffle } from './exam-generator.js';
+import { normalizeQuestionStem, seededShuffle } from './exam-generator.js';
 
 const ACS_SEPARATOR_PATTERN = /[\s,;]+/;
 
@@ -33,14 +33,18 @@ export function getMatchingAcsQuestions(questionsByTopic, codes) {
   if (parsedCodes.length === 0) return [];
 
   const seenQuestionIds = new Set();
+  const seenQuestionStems = new Set();
   const matches = [];
 
   for (const questions of Object.values(questionsByTopic ?? {})) {
     for (const question of questions ?? []) {
       if (!parsedCodes.some((code) => questionMatchesCode(question.acs, code))) continue;
       if (seenQuestionIds.has(question.id)) continue;
+      const stem = normalizeQuestionStem(question);
+      if (seenQuestionStems.has(stem)) continue;
 
       seenQuestionIds.add(question.id);
+      seenQuestionStems.add(stem);
       matches.push(question);
     }
   }
