@@ -1,6 +1,18 @@
 import { useMemo, useState } from 'react';
-import { getMatchingAcsQuestions, parseAcsCodes } from '../utils/acs-filter.js';
+import {
+  getMatchingAcsQuestions,
+  parseAcsCodes,
+  summarizeAcsEntries,
+} from '../utils/acs-filter.js';
 import './AcsPracticeScreen.css';
+
+function sectionLabel(section) {
+  if (!section) return null;
+  const parts = [];
+  if (section.areaTitle) parts.push(section.areaTitle);
+  if (section.subjectTitle) parts.push(section.subjectTitle);
+  return parts.join(' > ');
+}
 
 export default function AcsPracticeScreen({
   questionsByTopic,
@@ -14,6 +26,10 @@ export default function AcsPracticeScreen({
   const codes = useMemo(() => parseAcsCodes(input), [input]);
   const matches = useMemo(
     () => getMatchingAcsQuestions(questionsByTopic, codes),
+    [questionsByTopic, codes],
+  );
+  const entries = useMemo(
+    () => summarizeAcsEntries(questionsByTopic, codes),
     [questionsByTopic, codes],
   );
 
@@ -76,9 +92,55 @@ export default function AcsPracticeScreen({
         )}
       </div>
 
+      {hasCodes && (
+        <div className="acs-practice__sections">
+          <h2 className="acs-practice__sections-title">Section mapping</h2>
+          <ul className="acs-practice__sections-list">
+            {entries.map((entry) => {
+              const label = sectionLabel(entry.section);
+              let statusClass = 'acs-practice__section--ok';
+              let statusText;
+
+              if (!entry.recognized) {
+                statusClass = 'acs-practice__section--unknown';
+                statusText = 'Not a valid ACS code';
+              } else if (isLoading) {
+                statusText = 'Checking questions...';
+              } else if (entry.matchCount > 0) {
+                statusText = `${entry.matchCount} question${entry.matchCount === 1 ? '' : 's'}`;
+              } else {
+                statusClass = 'acs-practice__section--empty';
+                statusText = 'No questions yet';
+              }
+
+              return (
+                <li key={entry.code} className={`acs-practice__section ${statusClass}`}>
+                  <div className="acs-practice__section-main">
+                    <span className="acs-practice__section-code">{entry.code}</span>
+                    <span className="acs-practice__section-status">{statusText}</span>
+                  </div>
+                  {entry.recognized && (
+                    <div className="acs-practice__section-meta">
+                      <span className="acs-practice__section-path">
+                        {label}
+                        {entry.section.topicId ? ` (${entry.section.topicId})` : ''}
+                      </span>
+                      {entry.section.element?.text && (
+                        <span className="acs-practice__section-text">{entry.section.element.text}</span>
+                      )}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+
       {hasCodes && !isLoading && matchCount === 0 && (
         <div className="acs-practice__empty">
-          No questions match those ACS codes. Try a full code like <strong>AM.II.F.K1</strong> or a prefix like <strong>AM.II.F</strong>.
+          None of those ACS codes have questions yet. Enter a code from a section
+          that has questions, like <strong>AM.II.F.K1</strong>, or a prefix like <strong>AM.II.F</strong>.
         </div>
       )}
 
