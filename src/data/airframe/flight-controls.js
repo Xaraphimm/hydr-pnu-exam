@@ -399,7 +399,7 @@ export const questions = [
       "up and the elevator will move down.",
       "down and the elevator will move up."
     ],
-    c: 0,
+    c: 2,
     exp: "When the control stick of a properly rigged airplane is moved rearward and to the left, the right aileron will move down and the elevators will move up. When the controls move in this direction, the airplane will bank to the left and the nose will rotate upward.",
     ref: "FAA-H-8083-31",
     acs: "AM.II.C.K10",
@@ -413,7 +413,7 @@ export const questions = [
       "down and the elevator will move up.",
       "down and the elevator will move down."
     ],
-    c: 0,
+    c: 2,
     exp: "When the control stick of a properly rigged airplane is moved forward and to the right, the left aileron will move down and the elevators will move down. When the controls move in this direction, the airplane will bank to the right and the nose will rotate downward.",
     ref: "FAA-H-8083-31",
     acs: "AM.II.C.K10",

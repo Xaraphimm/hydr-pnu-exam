@@ -192,7 +192,7 @@ export const questions = [
     c: 2,
     exp: "The amount of extension of an oleo strut is measured to determine the proper amount of air in the strut. This is undoubtedly what is meant in this question by the proper \"operating position\" of the strut.",
     ref: "FAA-H-8083-31",
-    acs: null,
+    acs: "AM.II.E.K3",
     diagram: null,
   },
   {
