@@ -3,6 +3,8 @@ import {
   buildAcsTargetedExam,
   getMatchingAcsQuestions,
   parseAcsCodes,
+  resolveAcsCode,
+  summarizeAcsEntries,
 } from '../../src/utils/acs-filter.js';
 
 const q = (id, acs) => ({
@@ -71,6 +73,54 @@ describe('getMatchingAcsQuestions', () => {
     const stems = matches.map((question) => question.q.toLowerCase());
 
     expect(stems).toEqual(['af01-1 question', 'practice-1 question']);
+  });
+});
+
+describe('resolveAcsCode (re-exported)', () => {
+  it('maps a real ACS code to its section', () => {
+    const result = resolveAcsCode('AM.II.E.K2');
+    expect(result.topicId).toBe('AF-05');
+    expect(result.subjectTitle).toBe('Landing Gear Systems');
+  });
+
+  it('returns null for an unrecognized code', () => {
+    expect(resolveAcsCode('AM.ZZ.Q.K9')).toBeNull();
+  });
+});
+
+describe('summarizeAcsEntries', () => {
+  const questionsByTopic = {
+    'AF-05': [q('AF05-1', 'AM.II.E.K2'), q('AF05-2', 'AM.II.E.K2')],
+  };
+
+  it('reports recognized codes with matching question counts', () => {
+    const [entry] = summarizeAcsEntries(questionsByTopic, 'am.ii.e.k2');
+    expect(entry.code).toBe('AM.II.E.K2');
+    expect(entry.recognized).toBe(true);
+    expect(entry.matchCount).toBe(2);
+    expect(entry.section.topicId).toBe('AF-05');
+  });
+
+  it('recognizes valid codes that have no questions yet', () => {
+    const [entry] = summarizeAcsEntries(questionsByTopic, 'AM.I.A.K1');
+    expect(entry.recognized).toBe(true);
+    expect(entry.matchCount).toBe(0);
+    expect(entry.section.areaTitle).toBe('General');
+    expect(entry.section.topicId).toBeNull();
+  });
+
+  it('flags unrecognized codes', () => {
+    const [entry] = summarizeAcsEntries(questionsByTopic, 'AM.ZZ.Q.K9');
+    expect(entry.recognized).toBe(false);
+    expect(entry.section).toBeNull();
+    expect(entry.matchCount).toBe(0);
+  });
+
+  it('counts prefix matches across topics', () => {
+    const [entry] = summarizeAcsEntries(questionsByTopic, 'AM.II.E');
+    expect(entry.recognized).toBe(true);
+    expect(entry.matchCount).toBe(2);
+    expect(entry.section.kind).toBe('subject');
   });
 });
 
