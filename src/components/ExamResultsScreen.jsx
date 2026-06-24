@@ -14,6 +14,7 @@ export default function ExamResultsScreen({
   mode,
   version,
   seed,
+  context,
   onRetake,
   onStudyMissed,
   onHome,
@@ -60,6 +61,7 @@ export default function ExamResultsScreen({
       mode,
       version,
       seed,
+      context,
       questions,
       answers,
       startTime,
@@ -73,8 +75,11 @@ export default function ExamResultsScreen({
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const missed = questions.filter((q) => answers[q.id] !== q.c);
-  const versionLabel = version === 'random' ? 'Random' : `Version ${version}`;
-  const modeLabel = mode === 'study' ? 'Study' : 'Test';
+  const isAcsMode = mode === 'acs' || context?.type === 'acs';
+  const versionLabel = isAcsMode
+    ? `ACS: ${context?.codes?.join(', ') || 'Targeted'}`
+    : version === 'random' ? 'Random' : `Version ${version}`;
+  const modeLabel = isAcsMode ? 'Targeted Practice' : mode === 'study' ? 'Study' : 'Test';
 
   const getBarColor = (correct, total) => {
     const p = (correct / total) * 100;
@@ -86,6 +91,12 @@ export default function ExamResultsScreen({
   return (
     <div className="exam-results">
       <div className="exam-results__meta">{versionLabel} &middot; {modeLabel}</div>
+      {isAcsMode && context && (
+        <div className="exam-results__context">
+          {context.totalMatches} matching question{context.totalMatches === 1 ? '' : 's'}
+          {context.isCapped ? ' found; session capped to exam length.' : ' found; all matches were included.'}
+        </div>
+      )}
 
       <div className={`exam-results__ring ${passed ? 'exam-results__ring--pass' : 'exam-results__ring--fail'}`}>
         <span className="exam-results__pct">{pct}%</span>

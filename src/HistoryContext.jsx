@@ -45,7 +45,7 @@ export function HistoryProvider({ children }) {
   );
 
   const saveAttempt = useCallback(
-    ({ topicId, mode, version, seed, questions: qs, answers, startTime, endTime }) => {
+    ({ topicId, mode, version, seed, context, questions: qs, answers, startTime, endTime }) => {
       const score = qs.reduce(
         (acc, q) => acc + (answers[q.id] === q.c ? 1 : 0),
         0
@@ -70,6 +70,7 @@ export function HistoryProvider({ children }) {
         mode,
         version: version ?? null,
         seed: seed ?? null,
+        context: context ?? null,
         score,
         total: qs.length,
         time: Math.round((endTime - startTime) / 1000),

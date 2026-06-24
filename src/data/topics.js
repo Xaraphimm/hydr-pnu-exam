@@ -14,6 +14,7 @@ export const TOPICS = {
   'AF-13': { id: 'AF-13', name: 'Airframe Fire Protection Systems', subtitle: 'Detection, extinguishing, fire zones', category: 'airframe', pdfFile: '/pdfs/airframe/airframe-fire-protection.pdf', asaPages: [132, 135] },
   'AF-14': { id: 'AF-14', name: 'Rotorcraft Fundamentals', subtitle: 'Rotor systems, autorotation, vibration', category: 'airframe', pdfFile: '/pdfs/airframe/rotorcraft-fundamentals.pdf', asaPages: [136, 137] },
   'AF-15': { id: 'AF-15', name: 'Water & Waste Systems', subtitle: 'Potable water, lavatory, waste disposal', category: 'airframe', pdfFile: null, asaPages: [138, 138] },
+  'AF-PRACTICE': { id: 'AF-PRACTICE', name: 'Airframe FAA Exam Practice Test', subtitle: 'Mixed practice questions from all airframe topics', category: 'airframe', pdfFile: null, asaPages: [1, 138] },
 
   'PP-01': { id: 'PP-01', name: 'Reciprocating Engines', subtitle: 'Cylinders, valves, crankshafts, timing', category: 'powerplant', pdfFile: '/pdfs/powerplant/reciprocating-engines.pdf', asaPages: [1, 17] },
   'PP-02': { id: 'PP-02', name: 'Turbine Engines', subtitle: 'Turbojets, turbofans, turboshafts', category: 'powerplant', pdfFile: '/pdfs/powerplant/turbine-engines.pdf', asaPages: [18, 34] },
@@ -37,7 +38,7 @@ export const CATEGORIES = {
     examQuestions: 100,
     timeHours: 2,
     passingScore: 70,
-    topics: ['AF-01','AF-02','AF-03','AF-04','AF-05','AF-06','AF-07','AF-08','AF-09','AF-10','AF-11','AF-12','AF-13','AF-14','AF-15'],
+    topics: ['AF-01','AF-02','AF-03','AF-04','AF-05','AF-06','AF-07','AF-08','AF-09','AF-10','AF-11','AF-12','AF-13','AF-14','AF-15','AF-PRACTICE'],
   },
   powerplant: {
     name: 'Powerplant',

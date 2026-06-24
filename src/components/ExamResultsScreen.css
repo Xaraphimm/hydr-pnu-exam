@@ -17,6 +17,14 @@
   margin-bottom: 20px;
 }
 
+.exam-results__context {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  margin: -12px 0 20px;
+}
+
 /* ── Score ring ─────────────────────────────────────────────── */
 .exam-results__ring {
   display: flex;

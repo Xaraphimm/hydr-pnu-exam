@@ -1,11 +1,16 @@
 const CIRCUMFERENCE = 2 * Math.PI * 15.5;
 
-export default function ReadinessRing({ percentage, mastered, total }) {
+export default function ReadinessRing({ percentage, mastered, total, onClick }) {
   const dashArray = (percentage / 100) * CIRCUMFERENCE;
   const remainder = CIRCUMFERENCE - dashArray;
 
   return (
-    <div className="readiness-ring">
+    <button
+      type="button"
+      className="readiness-ring"
+      onClick={onClick}
+      aria-label={`Start all-Airframe study session. ${mastered} of ${total} questions mastered.`}
+    >
       <div className="readiness-ring__circle">
         <svg viewBox="0 0 36 36" style={{ width: 72, height: 72, transform: 'rotate(-90deg)' }}>
           <circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--color-bar-track)" strokeWidth="3" />
@@ -17,7 +22,8 @@ export default function ReadinessRing({ percentage, mastered, total }) {
         <span className="readiness-ring__label">Exam Readiness</span>
         <span className="readiness-ring__detail">{mastered} of {total} questions mastered</span>
         <span className="readiness-ring__threshold">70% needed to pass</span>
+        <span className="readiness-ring__action">Tap to study all Airframe questions</span>
       </div>
-    </div>
+    </button>
   );
 }

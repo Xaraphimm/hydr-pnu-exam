@@ -16,6 +16,7 @@ export default function ExamScreen({
   initialIndex,
   mode,
   topicId,
+  sessionLabel,
 }) {
   const { recordAnswer, toggleQuestionBookmark, isQuestionBookmarked } = useHistory()
   const [currentIndex, setCurrentIndex] = useState(initialIndex ?? 0)
@@ -26,7 +27,8 @@ export default function ExamScreen({
   const q = questions[currentIndex]
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const score = questions.reduce((acc, question) => acc + (answers[question.id] === question.c ? 1 : 0), 0)
-  const topicName = TOPICS[topicId]?.name
+  const topicName = TOPICS[topicId]?.name || (topicId === 'airframe' ? 'Airframe' : '')
+  const headerLabel = sessionLabel || `${topicName}${mode === 'weak' ? ' — WEAK AREAS' : ''}`
 
   const getQuestionTopic = (question) => {
     const prefix = question.id.split('-')[0];
@@ -78,7 +80,7 @@ export default function ExamScreen({
     <div ref={topRef} className="exam">
       <div className="exam-header">
         <span className="exam-study-badge">
-          {topicName}{mode === 'weak' ? ' — WEAK AREAS' : ''}
+          {headerLabel}
         </span>
         <span className="exam-progress">Q {currentIndex + 1} / {questions.length}</span>
         <span className="exam-score">{score} correct</span>
