@@ -81,6 +81,39 @@
   line-height: 1.5;
 }
 
+.acs-practice__sections {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.acs-practice__section {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.acs-practice__section-code {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.acs-practice__section-name {
+  color: var(--color-text-secondary);
+}
+
+.acs-practice__section-name--unknown {
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
 .acs-practice__summary {
   display: flex;
   flex-direction: column;

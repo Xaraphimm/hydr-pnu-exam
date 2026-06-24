@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { getMatchingAcsQuestions, parseAcsCodes } from '../utils/acs-filter.js';
+import { getAcsSectionInfo } from '../utils/acs-sections.js';
 import './AcsPracticeScreen.css';
 
 export default function AcsPracticeScreen({
@@ -50,6 +51,26 @@ export default function AcsPracticeScreen({
         <p className="acs-practice__hint">
           Separate multiple entries with commas, spaces, semicolons, or new lines.
         </p>
+
+        {hasCodes && (
+          <ul className="acs-practice__sections">
+            {codes.map((code) => {
+              const info = getAcsSectionInfo(code);
+              return (
+                <li key={code} className="acs-practice__section">
+                  <span className="acs-practice__section-code">{code}</span>
+                  <span
+                    className={`acs-practice__section-name${
+                      info ? '' : ' acs-practice__section-name--unknown'
+                    }`}
+                  >
+                    {info ? info.sectionName : 'Section not recognized'}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
 
       <div className="acs-practice__summary">

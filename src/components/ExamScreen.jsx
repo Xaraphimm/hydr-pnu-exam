@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { TOPICS } from '../data/index.js'
+import { getAcsSectionInfo } from '../utils/acs-sections.js'
 import { useHistory } from '../HistoryContext.jsx'
 import diagrams from '../diagrams/index.js'
 import QuestionNav from './QuestionNav.jsx'
@@ -52,6 +53,11 @@ export default function ExamScreen({
 
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const showFeedback = answers[q.id] !== undefined
+  const acsInfo = getAcsSectionInfo(q.acs)
+  const unitLabel = getQuestionTopic(q) || acsInfo?.sectionName || ''
+  const acsTitle = acsInfo
+    ? `${acsInfo.areaName} \u2022 ${acsInfo.sectionName}`
+    : 'ACS code'
 
   const formatTime = (s) => {
     const h = Math.floor(s / 3600).toString().padStart(2, '0')
@@ -104,7 +110,10 @@ export default function ExamScreen({
       <div className="exam-card">
         <div className="exam-card-top">
           <span className="exam-card-meta">
-            <span className="exam-topic-label">{getQuestionTopic(q)}</span>
+            {unitLabel && <span className="exam-topic-label">{unitLabel}</span>}
+            {q.acs && (
+              <span className="exam-acs-badge" title={acsTitle}>{q.acs}</span>
+            )}
             <span className="exam-qid">#{q.id}</span>
           </span>
           <div className="exam-card-actions">

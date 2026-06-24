@@ -247,13 +247,25 @@
 
 .exam-card-meta {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 6px 8px;
 }
 
 .exam-topic-label {
   font-size: 0.6875rem;
   color: var(--color-text-tertiary, #666);
+}
+
+.exam-acs-badge {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--color-accent, #E8651A);
+  background: var(--color-accent-muted, rgba(232, 101, 26, 0.12));
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-variant-numeric: tabular-nums;
 }
 
 .exam-nav {
