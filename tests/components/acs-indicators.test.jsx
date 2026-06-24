@@ -40,7 +40,7 @@ describe('ACS section indicators', () => {
         <ExamScreen
           questions={[
             {
-              id: 'AF06-1',
+              id: 'AF-8988',
               q: 'Hydraulic question',
               a: ['A', 'B', 'C'],
               c: 0,

@@ -1,21 +1,24 @@
 import { useMemo, useState } from 'react';
 import { getMatchingAcsQuestions, parseAcsCodes } from '../utils/acs-filter.js';
+import { getAcsSectionSummaries } from '../utils/acs-section.js';
 import './AcsPracticeScreen.css';
 
 export default function AcsPracticeScreen({
   questionsByTopic,
   maxQuestions,
   isLoading,
+  initialInput = '',
   onBack,
   onStart,
 }) {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(initialInput);
 
   const codes = useMemo(() => parseAcsCodes(input), [input]);
   const matches = useMemo(
     () => getMatchingAcsQuestions(questionsByTopic, codes),
     [questionsByTopic, codes],
   );
+  const sectionSummaries = useMemo(() => getAcsSectionSummaries(codes), [codes]);
 
   const hasCodes = codes.length > 0;
   const matchCount = matches.length;
@@ -57,6 +60,19 @@ export default function AcsPracticeScreen({
           <span>Entered codes</span>
           <strong>{hasCodes ? codes.join(', ') : 'None yet'}</strong>
         </div>
+        {sectionSummaries.length > 0 && (
+          <div className="acs-practice__summary-row acs-practice__summary-row--sections">
+            <span>{sectionSummaries.length === 1 ? 'Related section' : 'Related sections'}</span>
+            <div className="acs-practice__section-list">
+              {sectionSummaries.map((section) => (
+                <span className="acs-practice__section-chip" key={section.code}>
+                  <span className="acs-practice__section-code">{section.code}</span>
+                  <span>{section.name}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="acs-practice__summary-row">
           <span>Matching questions</span>
           <strong>{isLoading ? 'Loading...' : matchCount}</strong>

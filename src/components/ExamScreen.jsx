@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
+import { getAcsSectionLabel } from '../utils/acs-section.js'
 import diagrams from '../diagrams/index.js'
 import QuestionNav from './QuestionNav.jsx'
 import './ExamScreen.css'
@@ -28,6 +29,7 @@ export default function ExamScreen({
   const score = questions.reduce((acc, question) => acc + (answers[question.id] === question.c ? 1 : 0), 0)
   const topicName = TOPICS[topicId]?.name || (topicId === 'airframe' ? 'Airframe' : '')
   const headerLabel = sessionLabel || `${topicName}${mode === 'weak' ? ' — WEAK AREAS' : ''}`
+  const acsSectionLabel = getAcsSectionLabel(q?.acs)
 
   const getQuestionTopic = (question) => {
     const prefix = question.id.split('-')[0];
@@ -104,7 +106,13 @@ export default function ExamScreen({
       <div className="exam-card">
         <div className="exam-card-top">
           <span className="exam-card-meta">
-            <span className="exam-topic-label">{getQuestionTopic(q)}</span>
+            <span className="exam-topic-label">{acsSectionLabel || getQuestionTopic(q)}</span>
+            {q.acs && (
+              <span className="exam-acs-chip" title={acsSectionLabel ? `ACS unit: ${acsSectionLabel}` : 'ACS code'}>
+                <span className="exam-acs-chip__code">{q.acs}</span>
+                {acsSectionLabel && <span className="exam-acs-chip__unit">{acsSectionLabel}</span>}
+              </span>
+            )}
             <span className="exam-qid">#{q.id}</span>
           </span>
           <div className="exam-card-actions">
