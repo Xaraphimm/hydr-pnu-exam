@@ -17,6 +17,7 @@ const questionLoaders = {
   'AF-14': () => import('./airframe/rotorcraft-fundamentals.js'),
   'AF-15': () => import('./airframe/water-waste-systems.js'),
   'AF-PRACTICE': () => import('./airframe/airframe-faa-practice-test.js'),
+  'PP-07': () => import('./powerplant/engine-lubrication-systems.js'),
 };
 
 const questionCache = {};
