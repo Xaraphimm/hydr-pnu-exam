@@ -1,6 +1,9 @@
 import { normalizeQuestionStem, seededShuffle } from './exam-generator.js';
+import { resolveAcsCode } from '../data/acs-codes.js';
 
 const ACS_SEPARATOR_PATTERN = /[\s,;]+/;
+
+export { resolveAcsCode };
 
 export function normalizeAcsCode(code) {
   return String(code ?? '').trim().toUpperCase();
@@ -50,6 +53,32 @@ export function getMatchingAcsQuestions(questionsByTopic, codes) {
   }
 
   return matches;
+}
+
+function countMatchingQuestions(questionsByTopic, code) {
+  let count = 0;
+  for (const questions of Object.values(questionsByTopic ?? {})) {
+    for (const question of questions ?? []) {
+      if (questionMatchesCode(question.acs, code)) count += 1;
+    }
+  }
+  return count;
+}
+
+// Builds a per-entry breakdown so the UI can show which section every entered
+// code maps to, even when no question currently carries that code.
+export function summarizeAcsEntries(questionsByTopic, input) {
+  const codes = Array.isArray(input) ? input.map(normalizeAcsCode).filter(Boolean) : parseAcsCodes(input);
+
+  return codes.map((code) => {
+    const section = resolveAcsCode(code);
+    return {
+      code,
+      recognized: section !== null,
+      section,
+      matchCount: countMatchingQuestions(questionsByTopic, code),
+    };
+  });
 }
 
 export function buildAcsTargetedExam({ questionsByTopic, input, seed, maxQuestions }) {
