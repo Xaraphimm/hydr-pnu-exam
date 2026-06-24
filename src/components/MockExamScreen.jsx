@@ -80,6 +80,16 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
   }
 
   const q = questions[currentIndex]
+  if (!q) {
+    return (
+      <div className="mock mock-empty">
+        <h1>No questions available</h1>
+        <p>This timed exam could not be started because no questions were loaded.</p>
+        <button className="mock-finish" onClick={() => onFinish({})}>Return</button>
+      </div>
+    )
+  }
+
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const answeredCount = Object.keys(answers).length
   const progressPct = (answeredCount / questions.length) * 100

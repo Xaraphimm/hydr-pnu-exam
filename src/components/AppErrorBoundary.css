@@ -1,0 +1,58 @@
+.app-error {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.app-error__card {
+  width: min(100%, 520px);
+  padding: 28px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 16px;
+  background: var(--color-bg-card);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+}
+
+.app-error__eyebrow {
+  margin: 0 0 8px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.app-error__title {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.app-error__message {
+  margin: 0 0 20px;
+  color: var(--color-text-secondary);
+}
+
+.app-error__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.app-error__actions button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.app-error__actions button:first-child {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: #fff;
+}

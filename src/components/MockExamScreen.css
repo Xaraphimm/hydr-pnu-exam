@@ -2,6 +2,17 @@
   padding-bottom: 32px;
 }
 
+.mock-empty {
+  padding: 24px 16px 88px;
+  text-align: center;
+}
+
+.mock-empty p {
+  margin: 8px auto 20px;
+  max-width: 520px;
+  color: var(--color-text-secondary);
+}
+
 .mock-header {
   display: flex;
   justify-content: space-between;

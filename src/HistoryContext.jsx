@@ -1,6 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { updateConfidence as calcConfidence } from './utils/mastery.js';
 import { migrateLocalStorage } from './utils/migration.js';
+import { createId, readStorage, removeStorage, writeStorage } from './utils/storage.js';
 
 const HistoryContext = createContext();
 
@@ -11,7 +13,7 @@ const NOTES_KEY = 'phnx-notes';
 
 function loadJSON(key, fallback) {
   try {
-    const raw = localStorage.getItem(key);
+    const raw = readStorage(key);
     return raw ? JSON.parse(raw) : fallback;
   } catch {
     return fallback;
@@ -37,7 +39,7 @@ export function HistoryProvider({ children }) {
           ...prev,
           [questionId]: calcConfidence(prev[questionId] || null, correct),
         };
-        localStorage.setItem(CONFIDENCE_KEY, JSON.stringify(next));
+        writeStorage(CONFIDENCE_KEY, JSON.stringify(next));
         return next;
       });
     },
@@ -65,7 +67,7 @@ export function HistoryProvider({ children }) {
       }
 
       const attempt = {
-        id: crypto.randomUUID(),
+        id: createId('attempt'),
         topicId,
         mode,
         version: version ?? null,
@@ -81,7 +83,7 @@ export function HistoryProvider({ children }) {
 
       setAttempts((prev) => {
         const next = [attempt, ...prev];
-        localStorage.setItem(ATTEMPTS_KEY, JSON.stringify(next));
+        writeStorage(ATTEMPTS_KEY, JSON.stringify(next));
         return next;
       });
 
@@ -97,7 +99,7 @@ export function HistoryProvider({ children }) {
           ? prev.questions.filter((id) => id !== questionId)
           : [...prev.questions, questionId];
         const next = { ...prev, questions: qs };
-        localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(next));
+        writeStorage(BOOKMARKS_KEY, JSON.stringify(next));
         return next;
       });
     },
@@ -116,7 +118,7 @@ export function HistoryProvider({ children }) {
             )
           : [...prev.pdfPages, { topicId, page }];
         const next = { ...prev, pdfPages: pages };
-        localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(next));
+        writeStorage(BOOKMARKS_KEY, JSON.stringify(next));
         return next;
       });
     },
@@ -137,7 +139,7 @@ export function HistoryProvider({ children }) {
     (topicId, text) => {
       setNotes((prev) => {
         const next = { ...prev, [topicId]: text };
-        localStorage.setItem(NOTES_KEY, JSON.stringify(next));
+        writeStorage(NOTES_KEY, JSON.stringify(next));
         return next;
       });
     },
@@ -154,10 +156,10 @@ export function HistoryProvider({ children }) {
     setAttempts([]);
     setBookmarks({ questions: [], pdfPages: [] });
     setNotes({});
-    localStorage.removeItem(CONFIDENCE_KEY);
-    localStorage.removeItem(ATTEMPTS_KEY);
-    localStorage.removeItem(BOOKMARKS_KEY);
-    localStorage.removeItem(NOTES_KEY);
+    removeStorage(CONFIDENCE_KEY);
+    removeStorage(ATTEMPTS_KEY);
+    removeStorage(BOOKMARKS_KEY);
+    removeStorage(NOTES_KEY);
   }, []);
 
   return (

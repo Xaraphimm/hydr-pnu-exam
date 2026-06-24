@@ -3,6 +3,10 @@ import { useHistory } from '../HistoryContext.jsx';
 import { TOPICS, CATEGORIES } from '../data/index.js';
 import './ExamSelectionScreen.css';
 
+function createExamSeed(version) {
+  return version === 'random' ? Date.now() : version;
+}
+
 export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
   const [activeTab, setActiveTab] = useState('study');
   const { attempts } = useHistory();
@@ -27,7 +31,7 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
   }, [attempts, activeTab, topicId, isFullCategory]);
 
   const handleSelect = (version) => {
-    const seed = version === 'random' ? Date.now() : version;
+    const seed = createExamSeed(version);
     onSelectExam({
       mode: activeTab,
       version,

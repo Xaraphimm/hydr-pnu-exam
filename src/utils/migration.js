@@ -1,14 +1,16 @@
+import { readStorage, removeStorage, writeStorage } from './storage.js';
+
 export function migrateLocalStorage() {
   const oldStatsKey = 'hydr-pnu-qstats';
   const oldAttemptsKey = 'hydr-pnu-attempts';
   const newConfidenceKey = 'phnx-confidence';
   const newAttemptsKey = 'phnx-attempts';
 
-  if (localStorage.getItem(newConfidenceKey) || localStorage.getItem(newAttemptsKey)) {
+  if (readStorage(newConfidenceKey) || readStorage(newAttemptsKey)) {
     return;
   }
 
-  const oldStats = safeParseJSON(localStorage.getItem(oldStatsKey), null);
+  const oldStats = safeParseJSON(readStorage(oldStatsKey), null);
   if (oldStats) {
     const confidence = {};
     for (const [oldId, stats] of Object.entries(oldStats)) {
@@ -26,10 +28,10 @@ export function migrateLocalStorage() {
         lastSeen: new Date().toISOString().slice(0, 10),
       };
     }
-    localStorage.setItem(newConfidenceKey, JSON.stringify(confidence));
+    writeStorage(newConfidenceKey, JSON.stringify(confidence));
   }
 
-  const oldAttempts = safeParseJSON(localStorage.getItem(oldAttemptsKey), null);
+  const oldAttempts = safeParseJSON(readStorage(oldAttemptsKey), null);
   if (oldAttempts) {
     const newAttempts = oldAttempts.map((a) => ({
       id: a.id,
@@ -41,11 +43,11 @@ export function migrateLocalStorage() {
       missed: (a.missedQuestionIds || []).map((id) => `AF06-${id}`),
       date: a.date,
     }));
-    localStorage.setItem(newAttemptsKey, JSON.stringify(newAttempts));
+    writeStorage(newAttemptsKey, JSON.stringify(newAttempts));
   }
 
-  localStorage.removeItem(oldStatsKey);
-  localStorage.removeItem(oldAttemptsKey);
+  removeStorage(oldStatsKey);
+  removeStorage(oldAttemptsKey);
 }
 
 function safeParseJSON(str, fallback) {
