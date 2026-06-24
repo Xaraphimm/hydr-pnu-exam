@@ -3,7 +3,7 @@ import { normalizeQuestionStem, seededShuffle } from './exam-generator.js';
 const ACS_SEPARATOR_PATTERN = /[\s,;]+/;
 
 export function normalizeAcsCode(code) {
-  return String(code ?? '').trim().toUpperCase();
+  return String(code ?? '').trim().toUpperCase().replace(/\.+$/, '');
 }
 
 export function parseAcsCodes(input) {

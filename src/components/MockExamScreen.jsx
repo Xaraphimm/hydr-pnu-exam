@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { TOPICS } from '../data/index.js'
+import { getAcsSectionLabel } from '../utils/acs-section.js'
 import diagrams from '../diagrams/index.js'
 import './MockExamScreen.css'
 
@@ -93,6 +94,7 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const answeredCount = Object.keys(answers).length
   const progressPct = (answeredCount / questions.length) * 100
+  const acsSectionLabel = getAcsSectionLabel(q.acs)
 
   return (
     <div ref={topRef} className="mock">
@@ -112,7 +114,15 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
 
       <div className="mock-card">
         <div className="mock-card-top">
-          <span className="mock-qnum">Q {currentIndex + 1}</span>
+          <span className="mock-card-meta">
+            <span className="mock-qnum">Q {currentIndex + 1}</span>
+            {q.acs && (
+              <span className="mock-acs-chip" title={acsSectionLabel ? `ACS unit: ${acsSectionLabel}` : 'ACS code'}>
+                <span className="mock-acs-chip__code">{q.acs}</span>
+                {acsSectionLabel && <span className="mock-acs-chip__unit">{acsSectionLabel}</span>}
+              </span>
+            )}
+          </span>
           <button
             className={`mock-flag ${flagged.has(q.id) ? 'mock-flag--active' : ''}`}
             onClick={() => toggleFlag(q.id)}
