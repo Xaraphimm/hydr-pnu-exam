@@ -54,6 +54,8 @@ export default function ExamScreen({
 
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const showFeedback = answers[q.id] !== undefined
+  const questionTopicLabel = getQuestionTopic(q)
+  const displayTopicLabel = questionTopicLabel && questionTopicLabel !== acsSectionLabel ? questionTopicLabel : ''
 
   const formatTime = (s) => {
     const h = Math.floor(s / 3600).toString().padStart(2, '0')
@@ -106,7 +108,7 @@ export default function ExamScreen({
       <div className="exam-card">
         <div className="exam-card-top">
           <span className="exam-card-meta">
-            <span className="exam-topic-label">{acsSectionLabel || getQuestionTopic(q)}</span>
+            {displayTopicLabel && <span className="exam-topic-label">{displayTopicLabel}</span>}
             {q.acs && (
               <span className="exam-acs-chip" title={acsSectionLabel ? `ACS unit: ${acsSectionLabel}` : 'ACS code'}>
                 <span className="exam-acs-chip__code">{q.acs}</span>
