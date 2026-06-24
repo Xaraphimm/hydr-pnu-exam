@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
 import diagrams from '../diagrams/index.js'
+import { getAcsSection } from '../utils/acs-sections.js'
 import QuestionNav from './QuestionNav.jsx'
 import './ExamScreen.css'
 
@@ -52,6 +53,7 @@ export default function ExamScreen({
 
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const showFeedback = answers[q.id] !== undefined
+  const acsSection = getAcsSection(q.acs)
 
   const formatTime = (s) => {
     const h = Math.floor(s / 3600).toString().padStart(2, '0')
@@ -105,6 +107,12 @@ export default function ExamScreen({
         <div className="exam-card-top">
           <span className="exam-card-meta">
             <span className="exam-topic-label">{getQuestionTopic(q)}</span>
+            {q.acs && (
+              <span className="exam-acs-chip" title={acsSection ? `${q.acs} — ${acsSection.name}` : q.acs}>
+                <span className="exam-acs-chip__code">{q.acs}</span>
+                {acsSection && <span className="exam-acs-chip__section">{acsSection.name}</span>}
+              </span>
+            )}
             <span className="exam-qid">#{q.id}</span>
           </span>
           <div className="exam-card-actions">

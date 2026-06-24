@@ -81,6 +81,51 @@
   line-height: 1.5;
 }
 
+.acs-practice__sections {
+  margin-top: 10px;
+}
+
+.acs-practice__sections-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-text-tertiary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.acs-practice__section-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.acs-practice__section-chip {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  max-width: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 999px;
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.acs-practice__section-code {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.acs-practice__section-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .acs-practice__summary {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { getMatchingAcsQuestions, parseAcsCodes } from '../utils/acs-filter.js';
+import { getAcsCodeSections } from '../utils/acs-sections.js';
 import './AcsPracticeScreen.css';
 
 export default function AcsPracticeScreen({
@@ -12,6 +13,7 @@ export default function AcsPracticeScreen({
   const [input, setInput] = useState('');
 
   const codes = useMemo(() => parseAcsCodes(input), [input]);
+  const codeSections = useMemo(() => getAcsCodeSections(codes), [codes]);
   const matches = useMemo(
     () => getMatchingAcsQuestions(questionsByTopic, codes),
     [questionsByTopic, codes],
@@ -50,6 +52,21 @@ export default function AcsPracticeScreen({
         <p className="acs-practice__hint">
           Separate multiple entries with commas, spaces, semicolons, or new lines.
         </p>
+        {codeSections.length > 0 && (
+          <div className="acs-practice__sections" aria-live="polite">
+            <span className="acs-practice__sections-label">Sections</span>
+            <div className="acs-practice__section-chips">
+              {codeSections.map(({ code, section }) => (
+                <span key={code} className="acs-practice__section-chip">
+                  <span className="acs-practice__section-code">{code}</span>
+                  <span className="acs-practice__section-name">
+                    {section ? section.name : 'Unknown ACS section'}
+                  </span>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="acs-practice__summary">
