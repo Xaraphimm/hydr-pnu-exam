@@ -24,6 +24,10 @@ describe('parseAcsCodes', () => {
     ]);
   });
 
+  it('normalizes trailing periods from ACS prefixes while typing', () => {
+    expect(parseAcsCodes('AM.II.F.')).toEqual(['AM.II.F']);
+  });
+
   it('returns an empty list for input without meaningful codes', () => {
     expect(parseAcsCodes(' , ; \n\t ')).toEqual([]);
   });
@@ -47,6 +51,16 @@ describe('getMatchingAcsQuestions', () => {
 
   it('matches full ACS codes and prefixes against normalized question ACS values', () => {
     const matches = getMatchingAcsQuestions(questionsByTopic, ['am.ii.f']);
+
+    expect(matches.map((question) => question.id)).toEqual([
+      'AF01-1',
+      'AF01-2',
+      'PRACTICE-1',
+    ]);
+  });
+
+  it('matches ACS prefixes that include a trailing period during entry', () => {
+    const matches = getMatchingAcsQuestions(questionsByTopic, 'AM.II.F.');
 
     expect(matches.map((question) => question.id)).toEqual([
       'AF01-1',
