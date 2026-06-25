@@ -7,6 +7,7 @@ import { Screen } from './Screen.jsx'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
 export default function FlashcardSession({ questions, topicId, onFinish, onBack }) {
   const { recordAnswer, toggleQuestionBookmark, isQuestionBookmarked } = useHistory()
@@ -46,12 +47,20 @@ export default function FlashcardSession({ questions, topicId, onFinish, onBack 
         <Badge variant="secondary" className="max-w-[40%] truncate">{topicName}</Badge>
       </div>
 
-      <button
-        type="button"
+      <div
+        role="button"
+        tabIndex={flipped ? -1 : 0}
         onClick={handleFlip}
-        className="block w-full cursor-pointer text-left focus-visible:outline-none"
+        onKeyDown={(e) => {
+          if (!flipped && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault()
+            handleFlip()
+          }
+        }}
+        aria-label={flipped ? undefined : 'Reveal answer'}
+        className="block w-full rounded-xl focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
       >
-        <Card className="min-h-[18rem] justify-center gap-4 p-6 text-center">
+        <Card className={cn('min-h-[18rem] justify-center gap-4 p-6 text-center', !flipped && 'cursor-pointer')}>
           {!flipped ? (
             <>
               <p className="text-lg leading-relaxed font-medium">{q.q}</p>
@@ -68,27 +77,18 @@ export default function FlashcardSession({ questions, topicId, onFinish, onBack 
               <div className="text-sm leading-relaxed text-muted-foreground">{q.exp}</div>
               <div className="flex justify-center">
                 <Button
-                  asChild
                   variant="outline"
                   size="sm"
+                  onClick={() => toggleQuestionBookmark(q.id)}
                 >
-                  <span
-                    role="button"
-                    tabIndex={0}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      toggleQuestionBookmark(q.id)
-                    }}
-                  >
-                    {bookmarked ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}
-                    {bookmarked ? 'Bookmarked' : 'Bookmark'}
-                  </span>
+                  {bookmarked ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}
+                  {bookmarked ? 'Bookmarked' : 'Bookmark'}
                 </Button>
               </div>
             </>
           )}
         </Card>
-      </button>
+      </div>
 
       {flipped && (
         <div className="mt-4 grid grid-cols-2 gap-3">
