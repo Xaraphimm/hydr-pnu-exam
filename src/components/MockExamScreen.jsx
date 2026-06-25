@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { Flag, ArrowLeft, ArrowRight } from 'lucide-react'
 import { TOPICS } from '../data/index.js'
 import diagrams from '../diagrams/index.js'
-import './MockExamScreen.css'
+import { Screen } from './Screen.jsx'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 export default function MockExamScreen({ questions, topicId, onFinish }) {
   const totalSeconds = Math.round((questions.length / 100) * 120 * 60)
@@ -53,7 +57,6 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
     }
   }, [])
 
-  // Auto-finish when timer hits 0
   useEffect(() => {
     if (remaining === 0) {
       onFinish(answers)
@@ -72,7 +75,6 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
     const updated = { ...answers, [q.id]: answerIndex }
     setAnswers(updated)
 
-    // Auto-advance to next question
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1)
       topRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -82,104 +84,120 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
   const q = questions[currentIndex]
   if (!q) {
     return (
-      <div className="mock mock-empty">
-        <h1>No questions available</h1>
-        <p>This timed exam could not be started because no questions were loaded.</p>
-        <button className="mock-finish" onClick={() => onFinish({})}>Return</button>
-      </div>
+      <Screen>
+        <Card className="items-center gap-3 p-8 text-center">
+          <h1 className="text-lg font-semibold">No questions available</h1>
+          <p className="text-sm text-muted-foreground">
+            This timed exam could not be started because no questions were loaded.
+          </p>
+          <Button onClick={() => onFinish({})}>Return</Button>
+        </Card>
+      </Screen>
     )
   }
 
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const answeredCount = Object.keys(answers).length
   const progressPct = (answeredCount / questions.length) * 100
+  const isFlagged = flagged.has(q.id)
 
   return (
-    <div ref={topRef} className="mock">
-      <div className="mock-header">
-        <span className="mock-topic">{topicName}</span>
-        <span className={`mock-timer ${remaining <= 60 ? 'mock-timer--warning' : ''}`}>
-          {formatTime(remaining)}
-        </span>
-        <span className="mock-progress">
-          {answeredCount} / {questions.length}
-        </span>
-      </div>
-
-      <div className="mock-progress-bar">
-        <div className="mock-progress-fill" style={{ width: `${progressPct}%` }} />
-      </div>
-
-      <div className="mock-card">
-        <div className="mock-card-top">
-          <span className="mock-qnum">Q {currentIndex + 1}</span>
-          <button
-            className={`mock-flag ${flagged.has(q.id) ? 'mock-flag--active' : ''}`}
-            onClick={() => toggleFlag(q.id)}
+    <Screen>
+      <div ref={topRef} className="scroll-mt-4">
+        <div className="mb-3 flex items-center justify-between gap-3 text-sm">
+          <span className="min-w-0 truncate font-medium">{topicName}</span>
+          <span
+            className={cn(
+              'rounded-md px-2 py-1 font-mono font-semibold tabular-nums',
+              remaining <= 60 ? 'bg-destructive/15 text-destructive' : 'bg-muted text-foreground',
+            )}
           >
-            {flagged.has(q.id) ? '\u2605' : '\u2606'}
-          </button>
+            {formatTime(remaining)}
+          </span>
+          <span className="text-muted-foreground tabular-nums">{answeredCount} / {questions.length}</span>
         </div>
 
-        <p className="mock-question">{q.q}</p>
+        <div className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+          <div className="h-full rounded-full bg-primary transition-[width]" style={{ width: `${progressPct}%` }} />
+        </div>
 
-        {DiagramComponent && (
-          <div className="mock-diagram">
-            <DiagramComponent />
+        <Card className="gap-4 p-4 sm:p-5">
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs font-medium text-muted-foreground tabular-nums">Q {currentIndex + 1}</span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => toggleFlag(q.id)}
+              aria-label="Flag for review"
+              className={cn(isFlagged && 'text-primary')}
+            >
+              <Flag className={cn('size-5', isFlagged && 'fill-primary')} />
+            </Button>
           </div>
-        )}
 
-        <div className="mock-answers">
-          {q.a.map((opt, i) => {
-            const isSelected = answers[q.id] === i
-            let cls = 'mock-answer'
-            if (isSelected) cls += ' mock-answer--selected'
+          <p className="text-base leading-relaxed font-medium">{q.q}</p>
 
-            return (
-              <button
-                key={i}
-                className={cls}
-                onClick={() => selectAnswer(i)}
-                disabled={answers[q.id] !== undefined}
-              >
-                <span className="mock-answer-letter">{String.fromCharCode(65 + i)}</span>
-                <span className="mock-answer-text">{opt}</span>
-              </button>
-            )
-          })}
+          {DiagramComponent && (
+            <div className="overflow-x-auto rounded-lg border bg-muted/40 p-3">
+              <DiagramComponent />
+            </div>
+          )}
+
+          <div className="grid gap-2.5">
+            {q.a.map((opt, i) => {
+              const isSelected = answers[q.id] === i
+              return (
+                <button
+                  key={i}
+                  onClick={() => selectAnswer(i)}
+                  disabled={answers[q.id] !== undefined}
+                  className={cn(
+                    'flex w-full items-center gap-3 rounded-lg border bg-card p-3 text-left transition-colors',
+                    answers[q.id] === undefined && 'cursor-pointer hover:bg-accent/50',
+                    isSelected && 'border-primary bg-primary/10',
+                  )}
+                >
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-md border text-sm font-semibold">
+                    {String.fromCharCode(65 + i)}
+                  </span>
+                  <span className="text-sm">{opt}</span>
+                </button>
+              )
+            })}
+          </div>
+        </Card>
+
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <Button
+            variant="outline"
+            onClick={() => {
+              if (currentIndex > 0) {
+                setCurrentIndex(currentIndex - 1)
+                topRef.current?.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            disabled={currentIndex === 0}
+          >
+            <ArrowLeft /> Prev
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              if (currentIndex < questions.length - 1) {
+                setCurrentIndex(currentIndex + 1)
+                topRef.current?.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            disabled={currentIndex === questions.length - 1}
+          >
+            Next <ArrowRight />
+          </Button>
         </div>
-      </div>
 
-      <div className="mock-nav">
-        <button
-          className="mock-nav-prev"
-          onClick={() => {
-            if (currentIndex > 0) {
-              setCurrentIndex(currentIndex - 1)
-              topRef.current?.scrollIntoView({ behavior: 'smooth' })
-            }
-          }}
-          disabled={currentIndex === 0}
-        >
-          &larr; PREV
-        </button>
-        <button
-          className="mock-nav-next"
-          onClick={() => {
-            if (currentIndex < questions.length - 1) {
-              setCurrentIndex(currentIndex + 1)
-              topRef.current?.scrollIntoView({ behavior: 'smooth' })
-            }
-          }}
-          disabled={currentIndex === questions.length - 1}
-        >
-          NEXT &rarr;
-        </button>
+        <Button className="mt-4 w-full" onClick={handleFinish}>
+          Finish Exam
+        </Button>
       </div>
-
-      <button className="mock-finish" onClick={handleFinish}>
-        Finish Exam
-      </button>
-    </div>
+    </Screen>
   )
 }
