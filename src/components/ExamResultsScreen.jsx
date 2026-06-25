@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { TOPICS } from '../data/index.js';
 import { useHistory } from '../HistoryContext.jsx';
+import { summarizeMissedAcsAreas } from '../utils/acs-analysis.js';
 import './ExamResultsScreen.css';
 
 export default function ExamResultsScreen({
@@ -15,14 +16,18 @@ export default function ExamResultsScreen({
   version,
   seed,
   context,
+  readOnly = false,
   onRetake,
   onStudyMissed,
+  onRetakeMissed,
+  onStartAcsReview,
   onHome,
 }) {
   const { saveAttempt, recordAnswer } = useHistory();
   const savedRef = useRef(false);
   const [expandedQ, setExpandedQ] = useState(null);
   const [showAllTopics, setShowAllTopics] = useState(false);
+  const [reviewFilter, setReviewFilter] = useState('all');
 
   const score = questions.reduce((acc, q) => acc + (answers[q.id] === q.c ? 1 : 0), 0);
   const pct = Math.round((score / questions.length) * 100);
@@ -54,7 +59,7 @@ export default function ExamResultsScreen({
   const hiddenCount = topicEntries.length - 5;
 
   useEffect(() => {
-    if (savedRef.current) return;
+    if (readOnly || savedRef.current) return;
     savedRef.current = true;
     saveAttempt({
       topicId: topicId === 'airframe' ? 'airframe' : topicId,
@@ -64,6 +69,7 @@ export default function ExamResultsScreen({
       context,
       questions,
       answers,
+      flagged,
       startTime,
       endTime,
     });
@@ -72,12 +78,16 @@ export default function ExamResultsScreen({
         recordAnswer(q.id, answers[q.id] === q.c);
       });
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [readOnly]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const missed = questions.filter((q) => answers[q.id] !== q.c);
+  const missedAcsGroups = summarizeMissedAcsAreas(questions, answers);
+  const reviewQuestions = reviewFilter === 'incorrect' ? missed : questions;
   const isAcsMode = mode === 'acs' || context?.type === 'acs';
+  const isCustomMode = context?.type === 'custom';
   const versionLabel = isAcsMode
     ? `ACS: ${context?.codes?.join(', ') || 'Targeted'}`
+    : isCustomMode ? 'Custom Test'
     : version === 'random' ? 'Random' : `Version ${version}`;
   const modeLabel = isAcsMode ? 'Targeted Practice' : mode === 'study' ? 'Study' : 'Test';
 
@@ -95,6 +105,12 @@ export default function ExamResultsScreen({
         <div className="exam-results__context">
           {context.totalMatches} matching question{context.totalMatches === 1 ? '' : 's'}
           {context.isCapped ? ' found; session capped to exam length.' : ' found; all matches were included.'}
+        </div>
+      )}
+      {isCustomMode && context && (
+        <div className="exam-results__context">
+          {context.count} requested from {context.topicIds.length} topic{context.topicIds.length === 1 ? '' : 's'}
+          {context.timed ? '; timed exam mode.' : '; study mode.'}
         </div>
       )}
 
@@ -149,10 +165,48 @@ export default function ExamResultsScreen({
         </div>
       )}
 
+      {missedAcsGroups.length > 0 && (
+        <div className="exam-results__acs-report">
+          <h3 className="exam-results__section-title">Study These ACS Areas</h3>
+          <p className="exam-results__acs-hint">
+            Use these missed ACS sections like an AKTR study list.
+          </p>
+          {missedAcsGroups.slice(0, 6).map((group) => (
+            <div key={group.subject} className="exam-results__acs-row">
+              <div className="exam-results__acs-main">
+                <span className="exam-results__acs-code">{group.subject}</span>
+                <span className="exam-results__acs-title">
+                  {group.areaTitle} &gt; {group.subjectTitle}
+                  {group.topicId ? ` (${group.topicId})` : ''}
+                </span>
+              </div>
+              <div className="exam-results__acs-side">
+                <span className="exam-results__acs-count">
+                  {group.missedCount} missed
+                </span>
+                {onStartAcsReview && (
+                  <button
+                    className="exam-results__acs-practice"
+                    onClick={() => onStartAcsReview(group.subject)}
+                  >
+                    Practice
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="exam-results__actions">
         {missed.length > 0 && (
           <button className="exam-results__action exam-results__action--primary" onClick={() => onStudyMissed(missed)}>
             Study Missed as Flashcards
+          </button>
+        )}
+        {missed.length > 0 && onRetakeMissed && (
+          <button className="exam-results__action exam-results__action--primary" onClick={() => onRetakeMissed(missed)}>
+            Retake Missed Questions
           </button>
         )}
         <button className="exam-results__action exam-results__action--secondary" onClick={onRetake}>
@@ -161,9 +215,23 @@ export default function ExamResultsScreen({
       </div>
 
       <div className="exam-results__review">
-        <h3 className="exam-results__section-title">Question Review</h3>
+        <div className="exam-results__review-head">
+          <h3 className="exam-results__section-title">Question Review</h3>
+          {missed.length > 0 && (
+            <button
+              className="exam-results__review-toggle"
+              onClick={() => {
+                setExpandedQ(null);
+                setReviewFilter((value) => value === 'all' ? 'incorrect' : 'all');
+              }}
+            >
+              {reviewFilter === 'all' ? 'Incorrect Only' : 'Show All'}
+            </button>
+          )}
+        </div>
         <p className="exam-results__review-hint">Tap to expand explanation</p>
-        {questions.map((q, i) => {
+        {reviewQuestions.map((q, i) => {
+          const originalIndex = questions.findIndex((question) => question.id === q.id);
           const isCorrect = answers[q.id] === q.c;
           const isExpanded = expandedQ === i;
           return (
@@ -175,7 +243,7 @@ export default function ExamResultsScreen({
                 <span className={`exam-results__q-text ${!isCorrect ? 'exam-results__q-text--wrong' : ''}`}>
                   {q.q.length > 80 ? q.q.slice(0, 80) + '...' : q.q}
                 </span>
-                <span className="exam-results__q-num">Q{i + 1}</span>
+                <span className="exam-results__q-num">Q{originalIndex + 1}</span>
               </div>
               {isExpanded && (
                 <div className="exam-results__q-detail">

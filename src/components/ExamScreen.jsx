@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
 import diagrams from '../diagrams/index.js'
+import { getFigureCategory, getQuestionFigure } from '../utils/question-figures.js'
+import FigureViewer from './FigureViewer.jsx'
 import QuestionNav from './QuestionNav.jsx'
 import './ExamScreen.css'
 
@@ -51,6 +53,7 @@ export default function ExamScreen({
   }
 
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
+  const figure = getQuestionFigure(q, getFigureCategory(q, TOPICS[topicId]?.category ?? topicId ?? 'airframe'))
   const showFeedback = answers[q.id] !== undefined
 
   const formatTime = (s) => {
@@ -132,6 +135,7 @@ export default function ExamScreen({
             <DiagramComponent />
           </div>
         )}
+        <FigureViewer figure={figure} />
 
         <div className="exam-answers">
           {q.a.map((opt, i) => {

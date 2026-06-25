@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
-import { TOPICS, CATEGORIES, getCachedQuestionIds, getQuestionCount } from '../data/index.js';
+import { useEffect, useMemo, useState } from 'react';
+import { TOPICS, CATEGORIES, getCachedQuestionIds, getQuestionCount, loadAllQuestions } from '../data/index.js';
 import { useHistory } from '../HistoryContext.jsx';
+import { summarizeWeakAcsAreas } from '../utils/acs-analysis.js';
 import { getTopicMastery, getTopicCounts, getMasteryColor } from '../utils/mastery.js';
 import ProgressBarMulti from './ProgressBarMulti.jsx';
 import TrendChart from './TrendChart.jsx';
@@ -8,6 +9,17 @@ import './ProgressScreen.css';
 
 export default function ProgressScreen() {
   const { confidence, attempts, clearHistory } = useHistory();
+  const [questionsByTopic, setQuestionsByTopic] = useState({});
+
+  useEffect(() => {
+    let active = true;
+    loadAllQuestions().then((loaded) => {
+      if (active) setQuestionsByTopic(loaded);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const topicStats = useMemo(() => {
     const stats = {};
@@ -33,6 +45,11 @@ export default function ProgressScreen() {
     return `${Math.floor(mins / 60)}h ${mins % 60}m`;
   }, [attempts]);
 
+  const weakAcsAreas = useMemo(
+    () => summarizeWeakAcsAreas(questionsByTopic, confidence).slice(0, 8),
+    [questionsByTopic, confidence],
+  );
+
   const handleClear = () => {
     if (confirm('Clear all progress data? This cannot be undone.')) {
       clearHistory();
@@ -56,6 +73,29 @@ export default function ProgressScreen() {
       {attempts.length > 0 && (
         <div className="progress-screen__chart">
           <TrendChart attempts={attempts} />
+        </div>
+      )}
+
+      {weakAcsAreas.length > 0 && (
+        <div className="progress-screen__acs">
+          <h3 className="progress-screen__section-title">Weak ACS Areas</h3>
+          <p className="progress-screen__acs-hint">
+            Sections with practiced questions still at confidence level 1-2.
+          </p>
+          {weakAcsAreas.map((area) => (
+            <div key={area.subject} className="progress-screen__acs-row">
+              <div>
+                <div className="progress-screen__acs-code">{area.subject}</div>
+                <div className="progress-screen__acs-title">
+                  {area.areaTitle} &gt; {area.subjectTitle}
+                  {area.topicId ? ` (${area.topicId})` : ''}
+                </div>
+              </div>
+              <span className="progress-screen__acs-count">
+                {area.weakCount}/{area.totalCount}
+              </span>
+            </div>
+          ))}
         </div>
       )}
 

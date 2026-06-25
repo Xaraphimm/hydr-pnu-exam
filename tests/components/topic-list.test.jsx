@@ -10,6 +10,8 @@ function renderTopicList() {
         onSelectTopic={vi.fn()}
         onStartExam={vi.fn()}
         onStartAcsPractice={vi.fn()}
+        onStartCustomExam={vi.fn()}
+        onViewCategoryHistory={vi.fn()}
         onStartReadinessStudy={vi.fn()}
       />
     </HistoryProvider>,
@@ -22,6 +24,8 @@ describe('TopicListScreen', () => {
 
     expect(screen.getByText('PHNX FOUNDRIES')).toBeInTheDocument();
     expect(screen.getByText('Full Airframe Exam')).toBeInTheDocument();
+    expect(screen.getByText('Available Powerplant Exam')).toBeInTheDocument();
+    expect(screen.getAllByText('Custom Test Builder')).toHaveLength(2);
     expect(screen.getByText('Metallic Structures')).toBeInTheDocument();
     expect(screen.getByText('130 questions')).toBeInTheDocument();
     expect(screen.getByText('Reciprocating Engines')).toBeInTheDocument();

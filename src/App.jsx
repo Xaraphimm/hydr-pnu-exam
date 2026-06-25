@@ -7,7 +7,6 @@ import TopicListScreen from './components/TopicListScreen.jsx'
 import SubtopicScreen from './components/SubtopicScreen.jsx'
 import ExamScreen from './components/ExamScreen.jsx'
 import AcsPracticeScreen from './components/AcsPracticeScreen.jsx'
-import ResultsScreen from './components/ResultsScreen.jsx'
 import HistoryScreen from './components/HistoryScreen.jsx'
 import FlashcardSession from './components/FlashcardSession.jsx'
 import FlashcardComplete from './components/FlashcardComplete.jsx'
@@ -18,8 +17,10 @@ import MockExamScreen from './components/MockExamScreen.jsx'
 import PdfViewer from './components/PdfViewer.jsx'
 import ExamSelectionScreen from './components/ExamSelectionScreen.jsx'
 import ExamResultsScreen from './components/ExamResultsScreen.jsx'
+import CustomExamScreen from './components/CustomExamScreen.jsx'
 import { generateExam, seededShuffle } from './utils/exam-generator.js'
 import { buildAcsTargetedExam } from './utils/acs-filter.js'
+import { buildCustomExam } from './utils/custom-exam.js'
 import { loadQuestions, TOPICS, CATEGORIES } from './data/index.js'
 import { shuffle } from './utils/shuffle.js'
 import { buildCategoryStudyQuestions } from './utils/study-session.js'
@@ -50,6 +51,9 @@ export default function App() {
   const [examMode, setExamMode] = useState(null)
   const [acsQuestionsByTopic, setAcsQuestionsByTopic] = useState(null)
   const [acsSession, setAcsSession] = useState(null)
+  const [customSession, setCustomSession] = useState(null)
+  const [replayContext, setReplayContext] = useState(null)
+  const [resultsReadOnly, setResultsReadOnly] = useState(false)
 
   // Flashcard state
   const [fcQuestions, setFcQuestions] = useState([])
@@ -60,6 +64,25 @@ export default function App() {
   const openExamSelection = (scopeTopicId) => {
     setActiveTopicId(scopeTopicId)
     setScreen('exam-select')
+  }
+
+  const openCustomExam = () => {
+    setActiveTopicId('custom')
+    setScreen('custom-exam')
+  }
+
+  const openCategoryHistory = (categoryId) => {
+    setActiveTopicId(categoryId)
+    setScreen('history')
+  }
+
+  const loadCategoryQuestionPools = async (categoryId) => {
+    const questionsByTopic = {}
+    for (const tid of CATEGORIES[categoryId].topics) {
+      const topicQs = await loadQuestions(tid)
+      if (topicQs.length > 0) questionsByTopic[tid] = topicQs
+    }
+    return questionsByTopic
   }
 
   const loadAcsQuestionPools = async () => {
@@ -98,23 +121,26 @@ export default function App() {
     setExamVersion('readiness')
     setExamSeed(null)
     setAcsSession(null)
+    setCustomSession(null)
+    setReplayContext(null)
+    setResultsReadOnly(false)
     setScreen('test')
   }
 
-  const handleExamSelect = async ({ mode, version, seed, topicId: scopeId, isFullCategory }) => {
+  const handleExamSelect = async ({ mode, version, seed, topicId: scopeId, categoryId, isFullCategory }) => {
     setExamMode(mode)
     setExamVersion(version)
     setExamSeed(seed)
     setAcsSession(null)
+    setCustomSession(null)
+    setReplayContext(null)
+    setResultsReadOnly(false)
 
     let qs
     if (isFullCategory) {
-      const questionsByTopic = {}
-      for (const tid of CATEGORIES.airframe.topics) {
-        const topicQs = await loadQuestions(tid)
-        if (topicQs.length > 0) questionsByTopic[tid] = topicQs
-      }
-      qs = generateExam(seed, questionsByTopic, 100)
+      const selectedCategory = categoryId || scopeId || 'airframe'
+      const questionsByTopic = await loadCategoryQuestionPools(selectedCategory)
+      qs = generateExam(seed, questionsByTopic, CATEGORIES[selectedCategory].examQuestions)
     } else {
       const topicQs = await loadQuestions(scopeId)
       qs = seededShuffle(topicQs, seed)
@@ -126,7 +152,7 @@ export default function App() {
     setStartTime(Date.now())
     setEndTime(null)
     setReviewIndex(null)
-    setActiveTopicId(isFullCategory ? 'airframe' : scopeId)
+    setActiveTopicId(isFullCategory ? (categoryId || scopeId) : scopeId)
 
     if (mode === 'study') {
       setMode('all')
@@ -135,6 +161,33 @@ export default function App() {
       setMode('mock')
       setScreen('mock')
     }
+  }
+
+  const handleCustomExamStart = async ({ categoryId, topicIds, count, timed, seed }) => {
+    const questionsByTopic = {}
+    for (const topicId of topicIds) {
+      const topicQs = await loadQuestions(topicId)
+      if (topicQs.length > 0) questionsByTopic[topicId] = topicQs
+    }
+    const session = buildCustomExam({ questionsByTopic, topicIds, count, seed })
+    if (session.questions.length === 0) return
+
+    setExamQuestions(session.questions)
+    setAnswers({})
+    setFlagged(new Set())
+    setStartTime(Date.now())
+    setEndTime(null)
+    setReviewIndex(null)
+    setActiveTopicId(categoryId)
+    setMode('custom')
+    setExamMode(timed ? 'test' : 'study')
+    setExamVersion('custom')
+    setExamSeed(seed)
+    setAcsSession(null)
+    setCustomSession({ categoryId, topicIds, count, timed, seed })
+    setReplayContext(null)
+    setResultsReadOnly(false)
+    setScreen(timed ? 'mock' : 'test')
   }
 
   const handleAcsPracticeStart = async ({ input, seed = Date.now() }) => {
@@ -149,6 +202,8 @@ export default function App() {
     if (session.questions.length === 0) return
 
     setAcsSession({ ...session, input, seed })
+    setCustomSession(null)
+    setReplayContext(null)
     setExamQuestions(session.questions)
     setAnswers({})
     setFlagged(new Set())
@@ -160,6 +215,7 @@ export default function App() {
     setExamMode('acs')
     setExamVersion('acs-targeted')
     setExamSeed(seed)
+    setResultsReadOnly(false)
     setScreen('test')
   }
 
@@ -167,6 +223,28 @@ export default function App() {
     setFcQuestions(shuffle(missedQuestions))
     setFcResults([])
     setScreen('flashcards')
+  }
+
+  const handleStartAcsReviewFromResults = (code) => {
+    handleAcsPracticeStart({ input: code, seed: Date.now() })
+  }
+
+  const handleRetakeMissedFromResults = (missedQuestions) => {
+    setExamQuestions(shuffle(missedQuestions))
+    setAnswers({})
+    setFlagged(new Set())
+    setStartTime(Date.now())
+    setEndTime(null)
+    setReviewIndex(null)
+    setMode('missed')
+    setExamMode('study')
+    setExamVersion('missed')
+    setExamSeed(Date.now())
+    setAcsSession(null)
+    setCustomSession(null)
+    setReplayContext(null)
+    setResultsReadOnly(false)
+    setScreen('test')
   }
 
   const handleRetakeFromResults = () => {
@@ -178,12 +256,21 @@ export default function App() {
       return
     }
 
+    if (examVersion === 'custom' && customSession) {
+      handleCustomExamStart({
+        ...customSession,
+        seed: Date.now(),
+      })
+      return
+    }
+
     handleExamSelect({
       mode: examMode,
       version: examVersion,
       seed: examVersion === 'random' ? Date.now() : examSeed,
       topicId: activeTopicId,
-      isFullCategory: activeTopicId === 'airframe',
+      categoryId: activeTopicId in CATEGORIES ? activeTopicId : null,
+      isFullCategory: activeTopicId in CATEGORIES,
     })
   }
 
@@ -221,15 +308,30 @@ export default function App() {
     setEndTime(null)
     setReviewIndex(null)
     setMode(testMode)
+    setExamMode(testMode)
+    setExamVersion('topic')
+    setExamSeed(Date.now())
+    setAcsSession(null)
+    setCustomSession(null)
+    setReplayContext(null)
+    setResultsReadOnly(false)
     setScreen('test')
   }
 
   const startMockExam = () => {
     setExamQuestions(shuffle([...topicQuestions]))
     setAnswers({})
+    setFlagged(new Set())
     setStartTime(Date.now())
     setEndTime(null)
     setMode('mock')
+    setExamMode('mock')
+    setExamVersion('topic')
+    setExamSeed(Date.now())
+    setAcsSession(null)
+    setCustomSession(null)
+    setReplayContext(null)
+    setResultsReadOnly(false)
     setScreen('mock')
   }
 
@@ -240,8 +342,50 @@ export default function App() {
   }
 
   const finishExam = () => {
+    setResultsReadOnly(false)
     setEndTime(Date.now())
     setScreen('exam-results')
+  }
+
+  const handleReviewAttempt = (attempt) => {
+    if (!attempt?.questions || !attempt?.answers) return
+    const end = Date.now()
+    setExamQuestions(attempt.questions)
+    setAnswers(attempt.answers)
+    setFlagged(new Set(attempt.flagged ?? []))
+    setStartTime(end - (attempt.time || 0) * 1000)
+    setEndTime(end)
+    setReviewIndex(null)
+    setMode(attempt.mode)
+    setExamMode(attempt.mode)
+    setExamVersion(attempt.version)
+    setExamSeed(attempt.seed)
+    setAcsSession(null)
+    setCustomSession(null)
+    setReplayContext(attempt.context ?? null)
+    setResultsReadOnly(true)
+    setScreen('exam-results')
+  }
+
+  const handleOpenQuestion = (topicId, question) => {
+    setTab('home')
+    setExamQuestions([question])
+    setTopicQuestions([question])
+    setAnswers({})
+    setFlagged(new Set())
+    setStartTime(Date.now())
+    setEndTime(null)
+    setReviewIndex(null)
+    setActiveTopicId(topicId)
+    setMode('all')
+    setExamMode('study')
+    setExamVersion('single-question')
+    setExamSeed(null)
+    setAcsSession(null)
+    setCustomSession(null)
+    setReplayContext(null)
+    setResultsReadOnly(false)
+    setScreen('test')
   }
 
   const studyMissedCards = (missed) => {
@@ -277,6 +421,8 @@ export default function App() {
             onSelectTopic={selectTopic}
             onStartExam={openExamSelection}
             onStartAcsPractice={openAcsPractice}
+            onStartCustomExam={openCustomExam}
+            onViewCategoryHistory={openCategoryHistory}
             onStartReadinessStudy={startReadinessStudy}
           />
         )}
@@ -324,27 +470,12 @@ export default function App() {
           <MockExamScreen
             questions={examQuestions}
             topicId={activeTopicId}
-            onFinish={(mockAnswers) => {
+            onFinish={(mockAnswers, mockFlagged = new Set()) => {
               setAnswers(mockAnswers)
+              setFlagged(mockFlagged)
               setEndTime(Date.now())
+              setResultsReadOnly(false)
               setScreen('exam-results')
-            }}
-          />
-        )}
-
-        {tab === 'home' && screen === 'results' && (
-          <ResultsScreen
-            questions={examQuestions}
-            answers={answers}
-            startTime={startTime}
-            endTime={endTime}
-            topicId={activeTopicId}
-            mode={mode}
-            onRetake={() => startTest(mode)}
-            onHome={goToSubtopic}
-            onGoToQuestion={(idx) => {
-              setReviewIndex(idx)
-              setScreen('test')
             }}
           />
         )}
@@ -373,6 +504,7 @@ export default function App() {
           <HistoryScreen
             topicId={activeTopicId}
             onHome={goToSubtopic}
+            onReviewAttempt={handleReviewAttempt}
           />
         )}
 
@@ -398,7 +530,14 @@ export default function App() {
           <ExamSelectionScreen
             topicId={activeTopicId}
             onSelectExam={handleExamSelect}
-            onBack={() => activeTopicId === 'airframe' ? goToTopicList() : goToSubtopic()}
+            onBack={() => activeTopicId in CATEGORIES ? goToTopicList() : goToSubtopic()}
+          />
+        )}
+
+        {tab === 'home' && screen === 'custom-exam' && (
+          <CustomExamScreen
+            onBack={goToTopicList}
+            onStart={handleCustomExamStart}
           />
         )}
 
@@ -421,16 +560,29 @@ export default function App() {
                     totalMatches: acsSession.totalMatches,
                     isCapped: acsSession.isCapped,
                   }
+                : resultsReadOnly && replayContext
+                  ? replayContext
+                : examVersion === 'custom' && customSession
+                  ? {
+                      type: 'custom',
+                      categoryId: customSession.categoryId,
+                      topicIds: customSession.topicIds,
+                      count: customSession.count,
+                      timed: customSession.timed,
+                    }
                 : null
             }
+            readOnly={resultsReadOnly}
             onRetake={handleRetakeFromResults}
             onStudyMissed={handleStudyMissedFromResults}
-            onHome={activeTopicId === 'airframe' ? goToTopicList : goToSubtopic}
+            onRetakeMissed={handleRetakeMissedFromResults}
+            onStartAcsReview={handleStartAcsReviewFromResults}
+            onHome={activeTopicId in CATEGORIES ? goToTopicList : goToSubtopic}
           />
         )}
 
-        {tab === 'search' && <SearchScreen />}
-        {tab === 'bookmarks' && <BookmarksScreen />}
+        {tab === 'search' && <SearchScreen onOpenQuestion={handleOpenQuestion} />}
+        {tab === 'bookmarks' && <BookmarksScreen onOpenQuestion={handleOpenQuestion} />}
         {tab === 'progress' && <ProgressScreen />}
 
         <TabBar activeTab={tab} onTabChange={handleTabChange} />

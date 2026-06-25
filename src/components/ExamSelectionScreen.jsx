@@ -11,13 +11,14 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
   const [activeTab, setActiveTab] = useState('study');
   const { attempts } = useHistory();
 
-  // topicId is null or 'airframe' for full-category, or 'AF-01' etc for per-subtopic
-  const isFullCategory = !topicId || topicId === 'airframe';
-  const title = isFullCategory ? 'Airframe Knowledge Exam' : TOPICS[topicId]?.name;
+  const isFullCategory = !topicId || topicId in CATEGORIES;
+  const categoryId = isFullCategory ? (topicId || 'airframe') : null;
+  const category = categoryId ? CATEGORIES[categoryId] : null;
+  const title = isFullCategory ? `${category.name} Knowledge Exam` : TOPICS[topicId]?.name;
 
   const bestScores = useMemo(() => {
     const scores = {};
-    const filterTopicId = isFullCategory ? 'airframe' : topicId;
+    const filterTopicId = isFullCategory ? categoryId : topicId;
     for (const a of attempts) {
       if (a.topicId !== filterTopicId) continue;
       if (a.mode !== activeTab) continue;
@@ -28,7 +29,7 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
       }
     }
     return scores;
-  }, [attempts, activeTab, topicId, isFullCategory]);
+  }, [attempts, activeTab, topicId, isFullCategory, categoryId]);
 
   const handleSelect = (version) => {
     const seed = createExamSeed(version);
@@ -36,7 +37,8 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
       mode: activeTab,
       version,
       seed,
-      topicId: isFullCategory ? 'airframe' : topicId,
+      topicId: isFullCategory ? categoryId : topicId,
+      categoryId,
       isFullCategory,
     });
   };
@@ -64,7 +66,7 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
       </div>
 
       <p className="exam-select__subtitle">
-        Select a version — each draws {isFullCategory ? '100' : 'all'} questions
+        Select a version — each draws {isFullCategory ? category.examQuestions : 'all'} questions
         {isFullCategory ? ' weighted by ACS topics' : ''}
       </p>
 
@@ -86,8 +88,8 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
       </div>
 
       <div className="exam-select__info">
-        <span>{isFullCategory ? '100 questions' : 'All questions'}</span>
-        <span>{isFullCategory ? '2 hr time limit' : 'No time limit'}</span>
+        <span>{isFullCategory ? `${category.examQuestions} questions` : 'All questions'}</span>
+        <span>{isFullCategory ? `${category.timeHours} hr time limit` : 'No time limit'}</span>
         <span>70% to pass</span>
       </div>
     </div>

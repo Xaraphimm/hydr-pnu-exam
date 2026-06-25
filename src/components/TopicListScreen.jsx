@@ -7,7 +7,14 @@ import TopicCard from './TopicCard.jsx';
 import './TopicListScreen.css';
 import logo from '../assets/phnx-logo.jpeg';
 
-export default function TopicListScreen({ onSelectTopic, onStartExam, onStartAcsPractice, onStartReadinessStudy }) {
+export default function TopicListScreen({
+  onSelectTopic,
+  onStartExam,
+  onStartAcsPractice,
+  onStartCustomExam,
+  onViewCategoryHistory,
+  onStartReadinessStudy,
+}) {
   const { confidence } = useHistory();
 
   const topicStats = useMemo(() => {
@@ -72,16 +79,21 @@ export default function TopicListScreen({ onSelectTopic, onStartExam, onStartAcs
             </div>
             <span className="topic-list__cat-ready">{categoryReadiness(catKey)}% ready</span>
           </div>
-          {catKey === 'airframe' && (
-            <div className="topic-list__exam-actions">
-              <button className="topic-list__exam-card" onClick={() => onStartExam('airframe')}>
-                <span className="topic-list__exam-icon">&#128221;</span>
-                <div>
-                  <span className="topic-list__exam-name">Full Airframe Exam</span>
-                  <span className="topic-list__exam-desc">100 questions &middot; 2 hrs &middot; All topics</span>
-                </div>
-                <span className="topic-list__exam-arrow">&rsaquo;</span>
-              </button>
+          <button className="topic-list__cat-history" onClick={() => onViewCategoryHistory(catKey)}>
+            View {cat.name} History
+          </button>
+          <div className="topic-list__exam-actions">
+            <button className="topic-list__exam-card" onClick={() => onStartExam(catKey)}>
+              <span className="topic-list__exam-icon">&#128221;</span>
+              <div>
+                <span className="topic-list__exam-name">
+                  {cat.topics.every((topicId) => hasQuestionData(topicId)) ? 'Full' : 'Available'} {cat.name} Exam
+                </span>
+                <span className="topic-list__exam-desc">{cat.examQuestions} questions &middot; {cat.timeHours} hrs &middot; Loaded question banks</span>
+              </div>
+              <span className="topic-list__exam-arrow">&rsaquo;</span>
+            </button>
+            {catKey === 'airframe' && (
               <button className="topic-list__exam-card topic-list__exam-card--acs" onClick={onStartAcsPractice}>
                 <span className="topic-list__exam-icon">ACS</span>
                 <div>
@@ -90,8 +102,16 @@ export default function TopicListScreen({ onSelectTopic, onStartExam, onStartAcs
                 </div>
                 <span className="topic-list__exam-arrow">&rsaquo;</span>
               </button>
-            </div>
-          )}
+            )}
+            <button className="topic-list__exam-card" onClick={onStartCustomExam}>
+              <span className="topic-list__exam-icon">SET</span>
+              <div>
+                <span className="topic-list__exam-name">Custom Test Builder</span>
+                <span className="topic-list__exam-desc">Choose topics, count, and timed or study mode</span>
+              </div>
+              <span className="topic-list__exam-arrow">&rsaquo;</span>
+            </button>
+          </div>
           {cat.topics.map((topicId) => {
             const topic = TOPICS[topicId];
             const stats = topicStats[topicId];

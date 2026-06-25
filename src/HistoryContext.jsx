@@ -47,7 +47,7 @@ export function HistoryProvider({ children }) {
   );
 
   const saveAttempt = useCallback(
-    ({ topicId, mode, version, seed, context, questions: qs, answers, startTime, endTime }) => {
+    ({ topicId, mode, version, seed, context, questions: qs, answers, flagged, startTime, endTime }) => {
       const score = qs.reduce(
         (acc, q) => acc + (answers[q.id] === q.c ? 1 : 0),
         0
@@ -78,6 +78,9 @@ export function HistoryProvider({ children }) {
         time: Math.round((endTime - startTime) / 1000),
         missed,
         topicBreakdown,
+        answers,
+        flagged: flagged ? [...flagged] : [],
+        questions: qs,
         date: Date.now(),
       };
 
