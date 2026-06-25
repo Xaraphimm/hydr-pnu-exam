@@ -26,6 +26,7 @@ import { buildCategoryStudyQuestions } from './utils/study-session.js'
 import './styles/reset.css'
 import './styles/theme.css'
 import './styles/global.css'
+import './styles/index.css'
 
 export default function App() {
   const { confidence } = useHistory()
