@@ -12,6 +12,7 @@
     "deploy": "gh-pages -d dist",
     "test": "vitest run",
     "test:watch": "vitest",
+    "visual-check": "node scripts/visual-check.mjs",
     "split-pdfs": "node scripts/split-pdfs.mjs"
   },
   "dependencies": {
@@ -55,6 +56,7 @@
     "globals": "^17.4.0",
     "jsdom": "^29.0.1",
     "pdf-lib": "^1.17.1",
+    "playwright": "^1.61.1",
     "vite": "^8.0.1",
     "vite-plugin-pwa": "^1.2.0",
     "vitest": "^4.1.2"
