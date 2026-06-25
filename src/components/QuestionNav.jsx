@@ -1,27 +1,34 @@
-import './QuestionNav.css'
+import { cn } from '@/lib/utils'
 
 export default function QuestionNav({ questions, answers, currentIndex, flagged, onGoTo }) {
   return (
-    <details className="qnav">
-      <summary className="qnav-summary">
+    <details className="group mt-4 rounded-lg border bg-card shadow-sm">
+      <summary className="cursor-pointer list-none px-4 py-3 text-sm font-medium select-none">
         Question Navigator {flagged.size > 0 && `(${flagged.size} flagged)`}
       </summary>
-      <div className="qnav-grid">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(2.25rem,1fr))] gap-1.5 border-t p-3">
         {questions.map((q, i) => {
           const isAnswered = answers[q.id] !== undefined
           const isCorrect = answers[q.id] === q.c
           const isCurrent = i === currentIndex
           const isFlagged = flagged.has(q.id)
 
-          let cls = 'qnav-cell'
-          if (isCurrent) cls += ' qnav-cell--current'
-          else if (isAnswered && isCorrect) cls += ' qnav-cell--correct'
-          else if (isAnswered && !isCorrect) cls += ' qnav-cell--incorrect'
-          if (isFlagged) cls += ' qnav-cell--flagged'
-
           return (
-            <button key={i} className={cls} onClick={() => onGoTo(i)}>
+            <button
+              key={i}
+              onClick={() => onGoTo(i)}
+              className={cn(
+                'relative flex h-9 cursor-pointer items-center justify-center rounded-md border text-xs font-medium tabular-nums transition-colors',
+                isCurrent && 'border-primary ring-2 ring-primary/40',
+                !isCurrent && isAnswered && isCorrect && 'border-transparent bg-success text-success-foreground',
+                !isCurrent && isAnswered && !isCorrect && 'border-transparent bg-destructive text-destructive-foreground',
+                !isCurrent && !isAnswered && 'bg-muted text-muted-foreground hover:bg-accent',
+              )}
+            >
               {i + 1}
+              {isFlagged && (
+                <span className="absolute -top-1 -right-1 size-2 rounded-full bg-primary" />
+              )}
             </button>
           )
         })}

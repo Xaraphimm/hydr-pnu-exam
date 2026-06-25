@@ -1,7 +1,11 @@
 import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
 import TrendChart from './TrendChart.jsx'
-import './HistoryScreen.css'
+import { Screen, PageHeader } from './Screen.jsx'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
 export default function HistoryScreen({ topicId, onHome }) {
   const { getTopicAttempts, clearHistory } = useHistory()
@@ -45,68 +49,62 @@ export default function HistoryScreen({ topicId, onHome }) {
     }
   }
 
+  const stats = [
+    ['Attempts', totalAttempts],
+    ['Best Score', bestPct !== null ? `${bestPct}%` : '\u2014'],
+    ['Average', avgPct !== null ? `${avgPct}%` : '\u2014'],
+    ['Study Time', formatTime(totalTime)],
+  ]
+
   return (
-    <div className="history">
-      <div className="history-header">
-        <button className="history-back" onClick={onHome}>&larr; Back</button>
-        <h2 className="history-title">{topicName}</h2>
+    <Screen>
+      <PageHeader title={topicName} onBack={onHome} />
+
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        {stats.map(([label, value]) => (
+          <Card key={label} className="items-center gap-0.5 p-3">
+            <span className="text-xl font-bold tabular-nums">{value}</span>
+            <span className="text-xs text-muted-foreground">{label}</span>
+          </Card>
+        ))}
       </div>
 
-      <div className="history-card">
-        <div className="history-stats">
-          <div className="history-stat">
-            <span className="history-stat-value">{totalAttempts}</span>
-            <span className="history-stat-label">Attempts</span>
-          </div>
-          <div className="history-stat">
-            <span className="history-stat-value">{bestPct !== null ? `${bestPct}%` : '\u2014'}</span>
-            <span className="history-stat-label">Best Score</span>
-          </div>
-          <div className="history-stat">
-            <span className="history-stat-value">{avgPct !== null ? `${avgPct}%` : '\u2014'}</span>
-            <span className="history-stat-label">Average</span>
-          </div>
-          <div className="history-stat">
-            <span className="history-stat-value">{formatTime(totalTime)}</span>
-            <span className="history-stat-label">Study Time</span>
-          </div>
-        </div>
+      <div className="mt-4">
+        <TrendChart attempts={attempts} />
       </div>
 
-      <TrendChart attempts={attempts} />
-
-      <div className="history-card">
-        <span className="history-card-label">ALL ATTEMPTS</span>
-        <div className="history-list">
+      <div className="mt-4">
+        <span className="mb-2 block text-xs font-semibold tracking-wider text-muted-foreground">ALL ATTEMPTS</span>
+        <div className="grid gap-2.5">
           {attempts.length === 0 && (
-            <div className="history-empty">No attempts yet for this topic.</div>
+            <Card className="p-4 text-sm text-muted-foreground">No attempts yet for this topic.</Card>
           )}
           {attempts.map(a => {
             const pct = Math.round((a.score / a.total) * 100)
             const passed = pct >= 70
             return (
-              <div key={a.id} className="history-item">
-                <div className="history-item-top">
-                  <span className="history-item-date">{formatDate(a.date)}</span>
-                  <span className={`history-item-mode history-item-mode--${a.mode}`}>{getModeLabel(a)}</span>
+              <Card key={a.id} className="gap-2 p-3.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-muted-foreground">{formatDate(a.date)}</span>
+                  <Badge variant="muted">{getModeLabel(a)}</Badge>
                 </div>
-                <div className="history-item-bottom">
-                  <span className={`history-item-score ${passed ? 'history-item-score--pass' : 'history-item-score--fail'}`}>
+                <div className="flex items-baseline gap-2">
+                  <span className={cn('text-lg font-bold tabular-nums', passed ? 'text-success' : 'text-destructive')}>
                     {pct}%
                   </span>
-                  <span className="history-item-detail">
+                  <span className="text-sm text-muted-foreground">
                     {a.score}/{a.total} in {formatTime(a.time || 0)}
                   </span>
                 </div>
-              </div>
+              </Card>
             )
           })}
         </div>
       </div>
 
-      <button className="history-clear" onClick={handleClear}>
+      <Button variant="outline" className="mt-5 w-full text-destructive hover:text-destructive" onClick={handleClear}>
         Clear All History
-      </button>
-    </div>
+      </Button>
+    </Screen>
   )
 }

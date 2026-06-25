@@ -4,7 +4,13 @@ import {
   parseAcsCodes,
   summarizeAcsEntries,
 } from '../utils/acs-filter.js';
-import './AcsPracticeScreen.css';
+import { Screen, PageHeader } from './Screen.jsx';
+import { Card } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 
 function sectionLabel(section) {
   if (!section) return null;
@@ -40,93 +46,84 @@ export default function AcsPracticeScreen({
   const canStart = hasCodes && matchCount > 0 && !isLoading;
 
   return (
-    <div className="acs-practice">
-      <div className="acs-practice__header">
-        <button className="acs-practice__back" onClick={onBack}>&larr;</button>
-        <div>
-          <h1 className="acs-practice__title">ACS Targeted Practice</h1>
-          <p className="acs-practice__subtitle">
-            Build an Airframe practice session from the ACS codes you want to brush up on.
-          </p>
-        </div>
-      </div>
+    <Screen>
+      <PageHeader
+        title="ACS Targeted Practice"
+        subtitle="Build an Airframe practice session from ACS codes"
+        onBack={onBack}
+      />
 
-      <div className="acs-practice__card">
-        <label className="acs-practice__label" htmlFor="acs-codes">
-          Enter ACS codes or prefixes
-        </label>
-        <textarea
+      <Card className="gap-2 p-4">
+        <Label htmlFor="acs-codes">Enter ACS codes or prefixes</Label>
+        <Textarea
           id="acs-codes"
-          className="acs-practice__input"
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="AM.II.F.K1, AM.II.F"
           rows={5}
         />
-        <p className="acs-practice__hint">
+        <p className="text-xs text-muted-foreground">
           Separate multiple entries with commas, spaces, semicolons, or new lines.
         </p>
-      </div>
+      </Card>
 
-      <div className="acs-practice__summary">
-        <div className="acs-practice__summary-row">
-          <span>Entered codes</span>
-          <strong>{hasCodes ? codes.join(', ') : 'None yet'}</strong>
-        </div>
-        <div className="acs-practice__summary-row">
-          <span>Matching questions</span>
-          <strong>{isLoading ? 'Loading...' : matchCount}</strong>
-        </div>
-        <div className="acs-practice__summary-row">
-          <span>Session size</span>
-          <strong>
-            {isLoading || !hasCodes ? '-' : `${sessionCount} question${sessionCount === 1 ? '' : 's'}`}
-          </strong>
-        </div>
+      <Card className="mt-4 gap-0 p-0 py-1">
+        {[
+          ['Entered codes', hasCodes ? codes.join(', ') : 'None yet'],
+          ['Matching questions', isLoading ? 'Loading...' : matchCount],
+          ['Session size', isLoading || !hasCodes ? '-' : `${sessionCount} question${sessionCount === 1 ? '' : 's'}`],
+        ].map(([label, value]) => (
+          <div key={label} className="flex items-center justify-between gap-3 border-b px-4 py-2.5 text-sm last:border-b-0">
+            <span className="text-muted-foreground">{label}</span>
+            <strong className="min-w-0 truncate text-right font-medium">{value}</strong>
+          </div>
+        ))}
         {hasCodes && matchCount > 0 && (
-          <p className="acs-practice__cap-note">
+          <p className="px-4 py-2.5 text-xs text-muted-foreground">
             {isCapped
               ? `This session will be capped to the ${maxQuestions}-question Airframe exam amount.`
               : `Fewer than ${maxQuestions} matches were found, so this session will use all matching questions.`}
           </p>
         )}
-      </div>
+      </Card>
 
       {hasCodes && (
-        <div className="acs-practice__sections">
-          <h2 className="acs-practice__sections-title">Section mapping</h2>
-          <ul className="acs-practice__sections-list">
+        <div className="mt-4">
+          <h2 className="mb-2 text-xs font-semibold tracking-wider text-muted-foreground">SECTION MAPPING</h2>
+          <ul className="grid gap-2">
             {entries.map((entry) => {
-              const label = sectionLabel(entry.section);
-              let statusClass = 'acs-practice__section--ok';
+              let statusColor = 'text-success';
               let statusText;
 
               if (!entry.recognized) {
-                statusClass = 'acs-practice__section--unknown';
+                statusColor = 'text-destructive';
                 statusText = 'Not a valid ACS code';
               } else if (isLoading) {
+                statusColor = 'text-muted-foreground';
                 statusText = 'Checking questions...';
               } else if (entry.matchCount > 0) {
                 statusText = `${entry.matchCount} question${entry.matchCount === 1 ? '' : 's'}`;
               } else {
-                statusClass = 'acs-practice__section--empty';
+                statusColor = 'text-muted-foreground';
                 statusText = 'No questions yet';
               }
 
+              const label = sectionLabel(entry.section);
+
               return (
-                <li key={entry.code} className={`acs-practice__section ${statusClass}`}>
-                  <div className="acs-practice__section-main">
-                    <span className="acs-practice__section-code">{entry.code}</span>
-                    <span className="acs-practice__section-status">{statusText}</span>
+                <li key={entry.code} className="rounded-lg border bg-card p-3 shadow-sm">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="font-mono text-sm font-medium">{entry.code}</span>
+                    <span className={cn('text-xs', statusColor)}>{statusText}</span>
                   </div>
                   {entry.recognized && (
-                    <div className="acs-practice__section-meta">
-                      <span className="acs-practice__section-path">
+                    <div className="mt-1.5 flex flex-col gap-1">
+                      <span className="text-xs text-muted-foreground">
                         {label}
                         {entry.section.topicId ? ` (${entry.section.topicId})` : ''}
                       </span>
                       {entry.section.element?.text && (
-                        <span className="acs-practice__section-text">{entry.section.element.text}</span>
+                        <span className="text-xs text-muted-foreground">{entry.section.element.text}</span>
                       )}
                     </div>
                   )}
@@ -138,19 +135,18 @@ export default function AcsPracticeScreen({
       )}
 
       {hasCodes && !isLoading && matchCount === 0 && (
-        <div className="acs-practice__empty">
+        <Card className="mt-4 p-4 text-sm text-muted-foreground">
           None of those ACS codes have questions yet. Enter a code from a section
-          that has questions, like <strong>AM.II.F.K1</strong>, or a prefix like <strong>AM.II.F</strong>.
-        </div>
+          that has questions, like <strong className="text-foreground">AM.II.F.K1</strong>, or a prefix like{' '}
+          <strong className="text-foreground">AM.II.F</strong>.
+        </Card>
       )}
 
-      <button
-        className="acs-practice__start"
-        onClick={() => onStart({ input })}
-        disabled={!canStart}
-      >
+      <Separator className="my-5" />
+
+      <Button size="lg" className="w-full" onClick={() => onStart({ input })} disabled={!canStart}>
         Start ACS Targeted Practice
-      </button>
-    </div>
+      </Button>
+    </Screen>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useHistory } from '../HistoryContext.jsx';
-import './NotesEditor.css';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function NotesEditor({ topicId }) {
   const { getNote, saveNote } = useHistory();
@@ -24,10 +24,9 @@ export default function NotesEditor({ topicId }) {
   };
 
   return (
-    <div className="notes-editor">
-      <h3 className="notes-editor__title">Notes</h3>
-      <textarea
-        className="notes-editor__textarea"
+    <div className="mt-7">
+      <h3 className="mb-2 text-xs font-semibold tracking-wider text-muted-foreground">NOTES</h3>
+      <Textarea
         value={text}
         onChange={handleChange}
         onBlur={handleBlur}

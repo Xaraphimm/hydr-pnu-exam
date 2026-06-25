@@ -1,7 +1,10 @@
 import { useMemo, useState } from 'react';
+import { Infinity as InfinityIcon } from 'lucide-react';
 import { useHistory } from '../HistoryContext.jsx';
-import { TOPICS, CATEGORIES } from '../data/index.js';
-import './ExamSelectionScreen.css';
+import { TOPICS } from '../data/index.js';
+import { Screen, PageHeader } from './Screen.jsx';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 
 function createExamSeed(version) {
   return version === 'random' ? Date.now() : version;
@@ -11,7 +14,6 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
   const [activeTab, setActiveTab] = useState('study');
   const { attempts } = useHistory();
 
-  // topicId is null or 'airframe' for full-category, or 'AF-01' etc for per-subtopic
   const isFullCategory = !topicId || topicId === 'airframe';
   const title = isFullCategory ? 'Airframe Knowledge Exam' : TOPICS[topicId]?.name;
 
@@ -42,54 +44,50 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
   };
 
   return (
-    <div className="exam-select">
-      <div className="exam-select__header">
-        <button className="exam-select__back" onClick={onBack}>&larr;</button>
-        <h1 className="exam-select__title">{title}</h1>
-      </div>
+    <Screen>
+      <PageHeader title={title} onBack={onBack} />
 
-      <div className="exam-select__tabs">
-        <button
-          className={`exam-select__tab ${activeTab === 'study' ? 'exam-select__tab--active' : ''}`}
-          onClick={() => setActiveTab('study')}
-        >
-          Study
-        </button>
-        <button
-          className={`exam-select__tab ${activeTab === 'test' ? 'exam-select__tab--active' : ''}`}
-          onClick={() => setActiveTab('test')}
-        >
-          Test
-        </button>
-      </div>
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-4">
+        <TabsList className="w-full">
+          <TabsTrigger value="study">Study</TabsTrigger>
+          <TabsTrigger value="test">Test</TabsTrigger>
+        </TabsList>
+      </Tabs>
 
-      <p className="exam-select__subtitle">
+      <p className="mb-4 text-sm text-muted-foreground">
         Select a version — each draws {isFullCategory ? '100' : 'all'} questions
         {isFullCategory ? ' weighted by ACS topics' : ''}
       </p>
 
-      <div className="exam-select__grid">
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
         {[1, 2, 3, 4, 5].map((v) => (
-          <button key={v} className="exam-select__card" onClick={() => handleSelect(v)}>
-            <span className="exam-select__card-num">{v}</span>
-            <span className="exam-select__card-label">Exam {v}</span>
-            <span className={`exam-select__card-score ${bestScores[v] ? 'exam-select__card-score--taken' : ''}`}>
+          <button
+            key={v}
+            onClick={() => handleSelect(v)}
+            className="flex cursor-pointer flex-col items-center gap-1 rounded-lg border bg-card p-4 shadow-sm transition-colors hover:bg-accent/50 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
+          >
+            <span className="text-2xl font-bold tabular-nums">{v}</span>
+            <span className="text-sm font-medium">Exam {v}</span>
+            <span className={cn('text-xs', bestScores[v] ? 'text-success' : 'text-muted-foreground')}>
               {bestScores[v] ? `Best: ${bestScores[v]}%` : 'Not taken'}
             </span>
           </button>
         ))}
-        <button className="exam-select__card exam-select__card--random" onClick={() => handleSelect('random')}>
-          <span className="exam-select__card-icon">&infin;</span>
-          <span className="exam-select__card-label exam-select__card-label--accent">Random</span>
-          <span className="exam-select__card-score">Unique exam</span>
+        <button
+          onClick={() => handleSelect('random')}
+          className="flex cursor-pointer flex-col items-center gap-1 rounded-lg border border-primary/40 bg-card p-4 shadow-sm transition-colors hover:bg-accent/50 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
+        >
+          <InfinityIcon className="size-7 text-primary" />
+          <span className="text-sm font-medium text-primary">Random</span>
+          <span className="text-xs text-muted-foreground">Unique exam</span>
         </button>
       </div>
 
-      <div className="exam-select__info">
+      <div className="mt-5 flex flex-wrap justify-center gap-x-6 gap-y-1 text-xs text-muted-foreground">
         <span>{isFullCategory ? '100 questions' : 'All questions'}</span>
         <span>{isFullCategory ? '2 hr time limit' : 'No time limit'}</span>
         <span>70% to pass</span>
       </div>
-    </div>
+    </Screen>
   );
 }

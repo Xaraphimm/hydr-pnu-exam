@@ -1,7 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
+import { Search } from 'lucide-react';
 import { loadAllQuestions } from '../data/index.js';
 import { TOPICS } from '../data/index.js';
-import './SearchScreen.css';
+import { Screen } from './Screen.jsx';
+import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/card';
 
 export default function SearchScreen() {
   const [query, setQuery] = useState('');
@@ -35,31 +38,41 @@ export default function SearchScreen() {
   const totalResults = Object.values(results).reduce((sum, arr) => sum + arr.length, 0);
 
   return (
-    <div className="search-screen">
-      <h2 className="search-screen__title">Search</h2>
-      <input
-        className="search-screen__input"
-        type="text"
-        placeholder="Search questions, answers, explanations..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        autoFocus
-      />
-      {loading && <p className="search-screen__status">Loading questions...</p>}
+    <Screen>
+      <h1 className="mb-4 text-2xl font-semibold tracking-tight">Search</h1>
+
+      <div className="relative">
+        <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          type="text"
+          placeholder="Search questions, answers, explanations..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          autoFocus
+          className="h-11 pl-9"
+        />
+      </div>
+
+      {loading && <p className="mt-4 text-sm text-muted-foreground">Loading questions...</p>}
       {!loading && query.trim().length >= 2 && (
-        <p className="search-screen__status">{totalResults} result{totalResults !== 1 ? 's' : ''}</p>
+        <p className="mt-4 text-sm text-muted-foreground">{totalResults} result{totalResults !== 1 ? 's' : ''}</p>
       )}
+
       {Object.entries(results).map(([topicId, questions]) => (
-        <div key={topicId} className="search-screen__group">
-          <h3 className="search-screen__group-title">{TOPICS[topicId]?.name || topicId}</h3>
-          {questions.map((q) => (
-            <div key={q.id} className="search-screen__result">
-              <span className="search-screen__qid">{q.id}</span>
-              <p className="search-screen__qtext">{q.q}</p>
-            </div>
-          ))}
+        <div key={topicId} className="mt-4">
+          <h2 className="mb-2 text-xs font-semibold tracking-wider text-muted-foreground">
+            {TOPICS[topicId]?.name || topicId}
+          </h2>
+          <div className="grid gap-2.5">
+            {questions.map((q) => (
+              <Card key={q.id} className="gap-1 p-3.5">
+                <span className="font-mono text-xs text-muted-foreground">{q.id}</span>
+                <p className="text-sm">{q.q}</p>
+              </Card>
+            ))}
+          </div>
         </div>
       ))}
-    </div>
+    </Screen>
   );
 }

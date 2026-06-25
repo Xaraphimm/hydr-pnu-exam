@@ -1,8 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
+import { Screen } from './Screen.jsx'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 import logo from '../assets/phnx-logo.jpeg'
-import './ResultsScreen.css'
 
 export default function ResultsScreen({
   questions,
@@ -42,15 +46,7 @@ export default function ResultsScreen({
   useEffect(() => {
     if (savedRef.current) return
     savedRef.current = true
-    saveAttempt({
-      topicId,
-      mode,
-      questions,
-      answers,
-      startTime,
-      endTime,
-    })
-    // Record confidence for each question
+    saveAttempt({ topicId, mode, questions, answers, startTime, endTime })
     questions.forEach((q) => {
       recordAnswer(q.id, answers[q.id] === q.c)
     })
@@ -62,7 +58,7 @@ export default function ResultsScreen({
 
   const modeLabel = getModeLabel(mode)
 
-  const [shareLabel, setShareLabel] = useState('SHARE')
+  const [shareLabel, setShareLabel] = useState('Share')
 
   const handleShare = async () => {
     const title = topicName || 'A&P Exam Practice'
@@ -74,74 +70,73 @@ export default function ResultsScreen({
       try {
         await navigator.share({ text })
       } catch {
-        setShareLabel('SHARE')
+        setShareLabel('Share')
       }
     } else {
       try {
         await navigator.clipboard.writeText(text)
-        setShareLabel('COPIED!')
-        setTimeout(() => setShareLabel('SHARE'), 2000)
+        setShareLabel('Copied!')
+        setTimeout(() => setShareLabel('Share'), 2000)
       } catch {
-        setShareLabel('SHARE')
+        setShareLabel('Share')
       }
     }
   }
 
   return (
-    <div className="results">
-      <div className="results-score">
-        <div className="results-mode-badge">{topicName} &mdash; {modeLabel}</div>
-        <div className={`results-pct ${passed ? 'results-pct--pass' : 'results-pct--fail'}`}>
+    <Screen>
+      <div className="flex flex-col items-center gap-1.5 py-4 text-center">
+        <Badge variant="secondary">{topicName} &mdash; {modeLabel}</Badge>
+        <div className={cn('mt-2 text-5xl font-bold tabular-nums', passed ? 'text-success' : 'text-destructive')}>
           {pct}%
         </div>
-        <div className={`results-verdict ${passed ? 'results-verdict--pass' : 'results-verdict--fail'}`}>
+        <div className={cn('text-sm font-semibold tracking-wider', passed ? 'text-success' : 'text-destructive')}>
           {passed ? 'PASSED' : 'NOT YET'}
         </div>
-        <div className="results-detail">
+        <div className="text-sm text-muted-foreground">
           {score} / {questions.length} correct in {formatTime(elapsed)}
         </div>
       </div>
 
-      <div className="results-card">
-        <span className="results-card-label">SCORE BREAKDOWN</span>
-        <div className="results-overview">
-          <div className="results-overview-row">
-            <span className="results-overview-label">Correct</span>
-            <span className="results-overview-value results-overview-value--pass">{score}</span>
+      <Card className="gap-3 p-4">
+        <span className="text-xs font-semibold tracking-wider text-muted-foreground">SCORE BREAKDOWN</span>
+        <div className="grid gap-1.5 text-sm">
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Correct</span>
+            <span className="font-semibold text-success tabular-nums">{score}</span>
           </div>
-          <div className="results-overview-row">
-            <span className="results-overview-label">Missed</span>
-            <span className="results-overview-value results-overview-value--fail">{missed.length}</span>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Missed</span>
+            <span className="font-semibold text-destructive tabular-nums">{missed.length}</span>
           </div>
-          <div className="results-overview-row">
-            <span className="results-overview-label">Total</span>
-            <span className="results-overview-value">{questions.length}</span>
+          <div className="flex justify-between">
+            <span className="text-muted-foreground">Total</span>
+            <span className="font-semibold tabular-nums">{questions.length}</span>
           </div>
         </div>
-        <div className="results-bar">
-          <div
-            className={`results-bar-fill ${pct >= 70 ? '' : 'results-bar-fill--fail'}`}
-            style={{ width: `${pct}%` }}
-          />
+        <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+          <div className={cn('h-full rounded-full', passed ? 'bg-success' : 'bg-destructive')} style={{ width: `${pct}%` }} />
         </div>
-      </div>
+      </Card>
 
       {missed.length > 0 && (
-        <div className="results-card">
-          <span className="results-card-label">MISSED QUESTIONS ({missed.length})</span>
-          <div className="results-missed">
+        <div className="mt-4">
+          <span className="mb-2 block text-xs font-semibold tracking-wider text-muted-foreground">
+            MISSED QUESTIONS ({missed.length})
+          </span>
+          <div className="grid gap-2.5">
             {missed.map(mq => (
               <button
                 key={mq.id}
-                className="results-missed-item"
                 onClick={() => onGoToQuestion(mq.examIndex)}
+                className="flex w-full cursor-pointer flex-col gap-1 rounded-lg border bg-card p-3.5 text-left shadow-sm transition-colors hover:bg-accent/50"
               >
-                <div className="results-missed-qid">Q{mq.examIndex + 1} (#{mq.id})</div>
-                <div className="results-missed-text">{mq.q}</div>
-                <div className="results-missed-answers">
-                  Your answer: <span className="results-missed-yours">{mq.a[answers[mq.id]] ?? 'Skipped'}</span>
+                <div className="font-mono text-xs text-muted-foreground">Q{mq.examIndex + 1} (#{mq.id})</div>
+                <div className="text-sm font-medium">{mq.q}</div>
+                <div className="text-xs text-muted-foreground">
+                  Your answer: <span className="text-destructive">{mq.a[answers[mq.id]] ?? 'Skipped'}</span>
                   {' | '}
-                  Correct: <span className="results-missed-correct">{mq.a[mq.c]}</span>
+                  Correct: <span className="text-success">{mq.a[mq.c]}</span>
                 </div>
               </button>
             ))}
@@ -149,15 +144,15 @@ export default function ResultsScreen({
         </div>
       )}
 
-      <div className="results-actions">
-        <button className="results-retake" onClick={onRetake}>RETAKE</button>
-        <button className="results-share" onClick={handleShare}>{shareLabel}</button>
-        <button className="results-home" onClick={onHome}>HOME</button>
+      <div className="mt-5 grid grid-cols-3 gap-2.5">
+        <Button onClick={onRetake}>Retake</Button>
+        <Button variant="outline" onClick={handleShare}>{shareLabel}</Button>
+        <Button variant="secondary" onClick={onHome}>Home</Button>
       </div>
 
-      <div className="results-footer">
-        <img src={logo} alt="PHNX Foundries" className="results-footer-logo" />
+      <div className="mt-8 flex justify-center opacity-60">
+        <img src={logo} alt="PHNX Foundries" className="size-10 rounded-md object-cover" />
       </div>
-    </div>
+    </Screen>
   )
 }
