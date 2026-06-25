@@ -1,8 +1,12 @@
 import { useState } from 'react'
+import { Bookmark, BookmarkCheck } from 'lucide-react'
 import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
 import diagrams from '../diagrams/index.js'
-import './FlashcardSession.css'
+import { Screen } from './Screen.jsx'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 export default function FlashcardSession({ questions, topicId, onFinish, onBack }) {
   const { recordAnswer, toggleQuestionBookmark, isQuestionBookmarked } = useHistory()
@@ -13,6 +17,7 @@ export default function FlashcardSession({ questions, topicId, onFinish, onBack 
   const q = questions[currentIndex]
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const topicName = TOPICS[topicId]?.name ?? 'All Questions'
+  const bookmarked = isQuestionBookmarked(q.id)
 
   const handleFlip = () => {
     if (!flipped) setFlipped(true)
@@ -32,46 +37,65 @@ export default function FlashcardSession({ questions, topicId, onFinish, onBack 
   }
 
   return (
-    <div className="fc-session">
-      <div className="fc-session-header">
-        <button className="fc-session-back" onClick={onBack}>&larr; Back</button>
-        <span className="fc-session-progress">Card {currentIndex + 1} / {questions.length}</span>
-        <span className="fc-session-badge">{topicName}</span>
+    <Screen>
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <Button variant="ghost" size="sm" onClick={onBack} className="-ml-2 text-muted-foreground">
+          &larr; Back
+        </Button>
+        <span className="text-sm text-muted-foreground tabular-nums">Card {currentIndex + 1} / {questions.length}</span>
+        <Badge variant="secondary" className="max-w-[40%] truncate">{topicName}</Badge>
       </div>
 
-      <div className="fc-card-container" onClick={handleFlip}>
-        <div className={`fc-card ${flipped ? 'fc-card--flipped' : ''}`}>
-          <div className="fc-card-front">
-            <p className="fc-card-question">{q.q}</p>
-            {DiagramComponent && (
-              <div className="fc-card-diagram">
-                <DiagramComponent />
+      <button
+        type="button"
+        onClick={handleFlip}
+        className="block w-full cursor-pointer text-left focus-visible:outline-none"
+      >
+        <Card className="min-h-[18rem] justify-center gap-4 p-6 text-center">
+          {!flipped ? (
+            <>
+              <p className="text-lg leading-relaxed font-medium">{q.q}</p>
+              {DiagramComponent && (
+                <div className="overflow-x-auto rounded-lg border bg-muted/40 p-3">
+                  <DiagramComponent />
+                </div>
+              )}
+              <span className="text-sm text-muted-foreground">Tap to reveal answer</span>
+            </>
+          ) : (
+            <>
+              <div className="text-xl font-semibold text-success">{q.a[q.c]}</div>
+              <div className="text-sm leading-relaxed text-muted-foreground">{q.exp}</div>
+              <div className="flex justify-center">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                >
+                  <span
+                    role="button"
+                    tabIndex={0}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleQuestionBookmark(q.id)
+                    }}
+                  >
+                    {bookmarked ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />}
+                    {bookmarked ? 'Bookmarked' : 'Bookmark'}
+                  </span>
+                </Button>
               </div>
-            )}
-            <span className="fc-card-hint">Tap to reveal answer</span>
-          </div>
-          <div className="fc-card-back">
-            <div className="fc-card-answer">{q.a[q.c]}</div>
-            <div className="fc-card-explanation">{q.exp}</div>
-            <button
-              className={`fc-card-bookmark ${isQuestionBookmarked(q.id) ? 'fc-card-bookmark--active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleQuestionBookmark(q.id)
-              }}
-            >
-              {isQuestionBookmarked(q.id) ? '\u{1F516} Bookmarked' : '\u{1F517} Bookmark'}
-            </button>
-          </div>
-        </div>
-      </div>
+            </>
+          )}
+        </Card>
+      </button>
 
       {flipped && (
-        <div className="fc-session-actions">
-          <button className="fc-session-got-it" onClick={() => handleGrade(true)}>GOT IT</button>
-          <button className="fc-session-missed" onClick={() => handleGrade(false)}>MISSED IT</button>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <Button variant="success" onClick={() => handleGrade(true)}>Got it</Button>
+          <Button variant="destructive" onClick={() => handleGrade(false)}>Missed it</Button>
         </div>
       )}
-    </div>
+    </Screen>
   )
 }

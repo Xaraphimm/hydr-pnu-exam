@@ -23,9 +23,6 @@ import { buildAcsTargetedExam } from './utils/acs-filter.js'
 import { loadQuestions, TOPICS, CATEGORIES } from './data/index.js'
 import { shuffle } from './utils/shuffle.js'
 import { buildCategoryStudyQuestions } from './utils/study-session.js'
-import './styles/reset.css'
-import './styles/theme.css'
-import './styles/global.css'
 import './styles/index.css'
 
 export default function App() {
@@ -270,7 +267,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="app">
+      <div className="min-h-dvh bg-background text-foreground">
         <ThemeToggle />
 
         {tab === 'home' && screen === 'topic-list' && (

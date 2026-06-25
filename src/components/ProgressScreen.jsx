@@ -4,7 +4,11 @@ import { useHistory } from '../HistoryContext.jsx';
 import { getTopicMastery, getTopicCounts, getMasteryColor } from '../utils/mastery.js';
 import ProgressBarMulti from './ProgressBarMulti.jsx';
 import TrendChart from './TrendChart.jsx';
-import './ProgressScreen.css';
+import { Screen } from './Screen.jsx';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { masteryText } from '@/lib/ui.js';
+import { cn } from '@/lib/utils';
 
 export default function ProgressScreen() {
   const { confidence, attempts, clearHistory } = useHistory();
@@ -40,21 +44,22 @@ export default function ProgressScreen() {
   };
 
   return (
-    <div className="progress-screen">
-      <h2 className="progress-screen__title">Progress</h2>
-      <div className="progress-screen__stats">
-        <div className="progress-screen__stat">
-          <span className="progress-screen__stat-value">{attempts.length}</span>
-          <span className="progress-screen__stat-label">Attempts</span>
-        </div>
-        <div className="progress-screen__stat">
-          <span className="progress-screen__stat-value">{totalStudyTime}</span>
-          <span className="progress-screen__stat-label">Study Time</span>
-        </div>
+    <Screen>
+      <h1 className="mb-5 text-2xl font-semibold tracking-tight">Progress</h1>
+
+      <div className="grid grid-cols-2 gap-2.5">
+        <Card className="items-center gap-0.5 p-3">
+          <span className="text-2xl font-bold tabular-nums">{attempts.length}</span>
+          <span className="text-xs text-muted-foreground">Attempts</span>
+        </Card>
+        <Card className="items-center gap-0.5 p-3">
+          <span className="text-2xl font-bold tabular-nums">{totalStudyTime}</span>
+          <span className="text-xs text-muted-foreground">Study Time</span>
+        </Card>
       </div>
 
       {attempts.length > 0 && (
-        <div className="progress-screen__chart">
+        <div className="mt-4">
           <TrendChart attempts={attempts} />
         </div>
       )}
@@ -68,36 +73,39 @@ export default function ProgressScreen() {
         const catPct = catTotal > 0 ? Math.round((catMastered / catTotal) * 100) : 0;
 
         return (
-          <div key={catKey} className="progress-screen__category">
-            <div className="progress-screen__cat-header">
-              <h3 className="progress-screen__cat-name">{cat.name.toUpperCase()}</h3>
-              <span className="progress-screen__cat-pct">{catPct}% ready</span>
+          <section key={catKey} className="mt-6">
+            <div className="mb-3 flex items-center justify-between">
+              <h2 className="text-xs font-semibold tracking-wider text-muted-foreground">{cat.name.toUpperCase()}</h2>
+              <span className="text-xs font-medium text-primary">{catPct}% ready</span>
             </div>
-            {cat.topics.map((topicId) => {
-              const topic = TOPICS[topicId];
-              const stats = topicStats[topicId];
-              const hasAttempts = stats.counts.mastered + stats.counts.learning > 0;
-              const colorKey = getMasteryColor(stats.mastery, hasAttempts);
-              const COLORS = { 'passing': 'var(--color-mastered)', 'learning': 'var(--color-learning)', 'struggling': 'var(--color-struggling)', 'not-started': 'var(--color-not-started)' };
-              return (
-                <div key={topicId} className="progress-screen__topic">
-                  <span className="progress-screen__topic-name">{topic.name}</span>
-                  <div className="progress-screen__topic-bar">
-                    <ProgressBarMulti mastered={stats.counts.mastered} learning={stats.counts.learning} total={stats.questionCount} />
+            <Card className="gap-3 p-4">
+              {cat.topics.map((topicId) => {
+                const topic = TOPICS[topicId];
+                const stats = topicStats[topicId];
+                const hasAttempts = stats.counts.mastered + stats.counts.learning > 0;
+                const colorKey = getMasteryColor(stats.mastery, hasAttempts);
+                return (
+                  <div key={topicId} className="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-1.5">
+                    <span className="truncate text-sm">{topic.name}</span>
+                    <span className={cn('text-sm font-medium tabular-nums', masteryText[colorKey])}>
+                      {hasAttempts ? `${stats.mastery}%` : '--'}
+                    </span>
+                    <div className="col-span-2">
+                      <ProgressBarMulti mastered={stats.counts.mastered} learning={stats.counts.learning} total={stats.questionCount} />
+                    </div>
                   </div>
-                  <span className="progress-screen__topic-pct" style={{ color: COLORS[colorKey] }}>
-                    {hasAttempts ? `${stats.mastery}%` : '--'}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </Card>
+          </section>
         );
       })}
 
       {attempts.length > 0 && (
-        <button className="progress-screen__clear" onClick={handleClear}>Clear All Progress</button>
+        <Button variant="outline" className="mt-6 w-full text-destructive hover:text-destructive" onClick={handleClear}>
+          Clear All Progress
+        </Button>
       )}
-    </div>
+    </Screen>
   );
 }
