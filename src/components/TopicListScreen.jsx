@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
+import { ChevronRight, FileText, Target } from 'lucide-react';
 import { TOPICS, CATEGORIES, getCachedQuestionIds, getQuestionCount, hasQuestionData } from '../data/index.js';
 import { useHistory } from '../HistoryContext.jsx';
 import { getTopicMastery, getTopicCounts } from '../utils/mastery.js';
 import ReadinessRing from './ReadinessRing.jsx';
 import TopicCard from './TopicCard.jsx';
-import './TopicListScreen.css';
+import { Screen } from './Screen.jsx';
 import logo from '../assets/phnx-logo.jpeg';
 
 export default function TopicListScreen({ onSelectTopic, onStartExam, onStartAcsPractice, onStartReadinessStudy }) {
@@ -52,63 +53,85 @@ export default function TopicListScreen({ onSelectTopic, onStartExam, onStartAcs
   };
 
   return (
-    <div className="topic-list">
-      <div className="topic-list__header">
-        <img src={logo} alt="PHNX" className="topic-list__logo" />
-        <span className="topic-list__title">PHNX FOUNDRIES</span>
+    <Screen>
+      <div className="mb-5 flex items-center gap-3">
+        <img src={logo} alt="PHNX" className="size-9 rounded-md object-cover" />
+        <span className="text-lg font-bold tracking-tight">PHNX FOUNDRIES</span>
       </div>
+
       <ReadinessRing
         percentage={globalStats.pct}
         mastered={globalStats.mastered}
         total={globalStats.total}
         onClick={onStartReadinessStudy}
       />
+
       {Object.entries(CATEGORIES).map(([catKey, cat]) => (
-        <div key={catKey} className="topic-list__category">
-          <div className="topic-list__cat-header">
-            <div>
-              <h2 className="topic-list__cat-name">{cat.name.toUpperCase()}</h2>
-              <span className="topic-list__cat-meta">{cat.code} &middot; {cat.examQuestions} Questions &middot; {cat.timeHours} hrs</span>
+        <section key={catKey} className="mt-7">
+          <div className="mb-3 flex items-end justify-between gap-3">
+            <div className="min-w-0">
+              <h2 className="text-xs font-semibold tracking-wider text-muted-foreground">
+                {cat.name.toUpperCase()}
+              </h2>
+              <span className="text-xs text-muted-foreground">
+                {cat.code} &middot; {cat.examQuestions} Questions &middot; {cat.timeHours} hrs
+              </span>
             </div>
-            <span className="topic-list__cat-ready">{categoryReadiness(catKey)}% ready</span>
+            <span className="shrink-0 text-xs font-medium text-primary">
+              {categoryReadiness(catKey)}% ready
+            </span>
           </div>
+
           {catKey === 'airframe' && (
-            <div className="topic-list__exam-actions">
-              <button className="topic-list__exam-card" onClick={() => onStartExam('airframe')}>
-                <span className="topic-list__exam-icon">&#128221;</span>
-                <div>
-                  <span className="topic-list__exam-name">Full Airframe Exam</span>
-                  <span className="topic-list__exam-desc">100 questions &middot; 2 hrs &middot; All topics</span>
+            <div className="mb-3 grid gap-2.5">
+              <button
+                onClick={() => onStartExam('airframe')}
+                className="flex cursor-pointer items-center gap-3 rounded-lg border bg-card p-3.5 text-left shadow-sm transition-colors hover:bg-accent/50 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
+              >
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                  <FileText className="size-5" />
+                </span>
+                <div className="flex min-w-0 flex-1 flex-col">
+                  <span className="text-sm font-semibold">Full Airframe Exam</span>
+                  <span className="text-xs text-muted-foreground">100 questions &middot; 2 hrs &middot; All topics</span>
                 </div>
-                <span className="topic-list__exam-arrow">&rsaquo;</span>
+                <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
               </button>
-              <button className="topic-list__exam-card topic-list__exam-card--acs" onClick={onStartAcsPractice}>
-                <span className="topic-list__exam-icon">ACS</span>
-                <div>
-                  <span className="topic-list__exam-name">ACS Targeted Practice</span>
-                  <span className="topic-list__exam-desc">Enter ACS codes &middot; Draws from topics and FAA bank</span>
+              <button
+                onClick={onStartAcsPractice}
+                className="flex cursor-pointer items-center gap-3 rounded-lg border bg-card p-3.5 text-left shadow-sm transition-colors hover:bg-accent/50 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
+              >
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                  <Target className="size-5" />
+                </span>
+                <div className="flex min-w-0 flex-1 flex-col">
+                  <span className="text-sm font-semibold">ACS Targeted Practice</span>
+                  <span className="text-xs text-muted-foreground">Enter ACS codes &middot; Draws from topics and FAA bank</span>
                 </div>
-                <span className="topic-list__exam-arrow">&rsaquo;</span>
+                <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
               </button>
             </div>
           )}
-          {cat.topics.map((topicId) => {
-            const topic = TOPICS[topicId];
-            const stats = topicStats[topicId];
-            return (
-              <TopicCard
-                key={topicId}
-                topic={topic}
-                mastery={stats.mastery}
-                counts={stats.counts}
-                questionCount={stats.questionCount}
-                hasQuestionData={hasQuestionData(topicId)}
-                onClick={() => onSelectTopic(topicId)}
-              />
-            );
-          })}
-        </div>
+
+          <div className="grid gap-2.5">
+            {cat.topics.map((topicId) => {
+              const topic = TOPICS[topicId];
+              const stats = topicStats[topicId];
+              return (
+                <TopicCard
+                  key={topicId}
+                  topic={topic}
+                  mastery={stats.mastery}
+                  counts={stats.counts}
+                  questionCount={stats.questionCount}
+                  hasQuestionData={hasQuestionData(topicId)}
+                  onClick={() => onSelectTopic(topicId)}
+                />
+              );
+            })}
+          </div>
+        </section>
       ))}
-    </div>
+    </Screen>
   );
 }
