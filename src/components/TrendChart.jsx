@@ -1,9 +1,9 @@
 import './TrendChart.css'
 
 export default function TrendChart({ attempts }) {
-  // Only show full exam attempts, oldest first
+  // Show current saved exam-like attempts, oldest first.
   const examAttempts = [...attempts]
-    .filter(a => a.mode === 'exam')
+    .filter(a => ['exam', 'test', 'mock', 'study', 'all', 'weak', 'acs'].includes(a.mode))
     .reverse()
 
   if (examAttempts.length < 2) return null
@@ -31,7 +31,7 @@ export default function TrendChart({ attempts }) {
   const threshY = PAD_T + chartH - (70 / 100) * chartH
 
   return (
-    <div className="trend-chart">
+    <div className="trend-chart" aria-label="Score trend">
       <svg viewBox={`0 0 ${W} ${H}`} className="trend-chart-svg">
         {/* Y-axis labels */}
         {[0, 25, 50, 75, 100].map(v => {

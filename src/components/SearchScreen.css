@@ -45,11 +45,15 @@
 }
 
 .search-screen__result {
+  display: block;
+  width: 100%;
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 10px 12px;
   margin-bottom: 8px;
+  text-align: left;
+  color: var(--color-text);
 }
 
 .search-screen__qid {

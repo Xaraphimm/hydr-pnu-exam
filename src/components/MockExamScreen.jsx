@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { TOPICS } from '../data/index.js'
 import diagrams from '../diagrams/index.js'
+import { getFigureCategory, getQuestionFigure } from '../utils/question-figures.js'
+import FigureViewer from './FigureViewer.jsx'
+import QuestionNav from './QuestionNav.jsx'
 import './MockExamScreen.css'
 
 export default function MockExamScreen({ questions, topicId, onFinish }) {
@@ -24,8 +27,8 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
 
   const finish = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current)
-    onFinish(answers)
-  }, [answers, onFinish])
+    onFinish(answers, flagged)
+  }, [answers, flagged, onFinish])
 
   const handleFinish = () => {
     const unanswered = questions.length - Object.keys(answers).length
@@ -56,7 +59,7 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
   // Auto-finish when timer hits 0
   useEffect(() => {
     if (remaining === 0) {
-      onFinish(answers)
+      onFinish(answers, flagged)
     }
   }, [remaining]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -91,6 +94,7 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
   }
 
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
+  const figure = getQuestionFigure(q, getFigureCategory(q, TOPICS[topicId]?.category ?? topicId ?? 'airframe'))
   const answeredCount = Object.keys(answers).length
   const progressPct = (answeredCount / questions.length) * 100
 
@@ -115,6 +119,7 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
           <span className="mock-qnum">Q {currentIndex + 1}</span>
           <button
             className={`mock-flag ${flagged.has(q.id) ? 'mock-flag--active' : ''}`}
+            title="Flag for review"
             onClick={() => toggleFlag(q.id)}
           >
             {flagged.has(q.id) ? '\u2605' : '\u2606'}
@@ -128,6 +133,7 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
             <DiagramComponent />
           </div>
         )}
+        <FigureViewer figure={figure} />
 
         <div className="mock-answers">
           {q.a.map((opt, i) => {
@@ -176,6 +182,17 @@ export default function MockExamScreen({ questions, topicId, onFinish }) {
           NEXT &rarr;
         </button>
       </div>
+
+      <QuestionNav
+        questions={questions}
+        answers={answers}
+        currentIndex={currentIndex}
+        flagged={flagged}
+        onGoTo={(idx) => {
+          setCurrentIndex(idx)
+          topRef.current?.scrollIntoView({ behavior: 'smooth' })
+        }}
+      />
 
       <button className="mock-finish" onClick={handleFinish}>
         Finish Exam

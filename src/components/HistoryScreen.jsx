@@ -1,13 +1,13 @@
-import { TOPICS } from '../data/index.js'
+import { CATEGORIES, TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
 import TrendChart from './TrendChart.jsx'
 import './HistoryScreen.css'
 
-export default function HistoryScreen({ topicId, onHome }) {
+export default function HistoryScreen({ topicId, onHome, onReviewAttempt }) {
   const { getTopicAttempts, clearHistory } = useHistory()
 
   const attempts = getTopicAttempts(topicId)
-  const topicName = TOPICS[topicId]?.name
+  const topicName = TOPICS[topicId]?.name ?? CATEGORIES[topicId]?.name ?? topicId
 
   const totalAttempts = attempts.length
   const bestPct = totalAttempts
@@ -97,6 +97,11 @@ export default function HistoryScreen({ topicId, onHome }) {
                   <span className="history-item-detail">
                     {a.score}/{a.total} in {formatTime(a.time || 0)}
                   </span>
+                  {a.questions && a.answers && onReviewAttempt && (
+                    <button className="history-item-review" onClick={() => onReviewAttempt(a)}>
+                      Review
+                    </button>
+                  )}
                 </div>
               </div>
             )

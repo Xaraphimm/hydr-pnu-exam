@@ -15,6 +15,9 @@ const diagramsIndex = path.resolve(rootDir, 'src/diagrams/index.js');
 const { CATEGORIES, TOPICS, loadAllQuestions } = await import(
   path.resolve(rootDir, 'src/data/index.js')
 );
+const { getQuestionFigure } = await import(
+  path.resolve(rootDir, 'src/utils/question-figures.js')
+);
 
 const errors = [];
 const warnings = [];
@@ -152,8 +155,14 @@ for (const [topicId, questions] of Object.entries(allQuestions)) {
     if (q.diagram !== null && q.diagram !== undefined) {
       if (typeof q.diagram !== 'string' || q.diagram.trim() === '') {
         errors.push(`${where}: diagram must be null or a non-empty string`);
-      } else if (!knownDiagramNames.has(q.diagram)) {
+      } else if (!knownDiagramNames.has(q.diagram) && !getQuestionFigure(q, getCategoryForTopic(topicId))) {
         warnings.push(`${where}: diagram "${q.diagram}" is not exported from src/diagrams/index.js`);
+      }
+    }
+
+    if (q.figure !== null && q.figure !== undefined) {
+      if (typeof q.figure !== 'object' || typeof q.figure.src !== 'string' || q.figure.src.trim() === '') {
+        errors.push(`${where}: figure must be null/undefined or an object with a non-empty src`);
       }
     }
   });

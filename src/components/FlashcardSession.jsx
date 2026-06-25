@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { TOPICS } from '../data/index.js'
 import { useHistory } from '../HistoryContext.jsx'
 import diagrams from '../diagrams/index.js'
+import { getFigureCategory, getQuestionFigure } from '../utils/question-figures.js'
+import FigureViewer from './FigureViewer.jsx'
 import './FlashcardSession.css'
 
 export default function FlashcardSession({ questions, topicId, onFinish, onBack }) {
@@ -13,6 +15,7 @@ export default function FlashcardSession({ questions, topicId, onFinish, onBack 
   const q = questions[currentIndex]
   const DiagramComponent = q.diagram ? diagrams[q.diagram] : null
   const topicName = TOPICS[topicId]?.name ?? 'All Questions'
+  const figure = getQuestionFigure(q, getFigureCategory(q, TOPICS[topicId]?.category ?? topicId ?? 'airframe'))
 
   const handleFlip = () => {
     if (!flipped) setFlipped(true)
@@ -48,6 +51,7 @@ export default function FlashcardSession({ questions, topicId, onFinish, onBack 
                 <DiagramComponent />
               </div>
             )}
+            <FigureViewer figure={figure} />
             <span className="fc-card-hint">Tap to reveal answer</span>
           </div>
           <div className="fc-card-back">

@@ -1,13 +1,13 @@
 .tab-bar {
   position: fixed;
-  bottom: 0;
+  bottom: 14px;
   left: 0;
   right: 0;
   display: flex;
   justify-content: space-around;
   background: var(--color-bg-card);
   border-top: 1px solid var(--color-border);
-  padding: 10px 0 20px;
+  padding: 10px 0 8px;
   z-index: 100;
 }
 

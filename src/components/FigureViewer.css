@@ -1,0 +1,41 @@
+.figure-viewer {
+  margin: 12px 0;
+}
+
+.figure-viewer__toggle {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg-card);
+  color: var(--color-accent);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.figure-viewer__frame {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 10px;
+  background: var(--color-bg);
+  overflow: auto;
+}
+
+.figure-viewer__image {
+  display: block;
+  max-width: 100%;
+  min-width: min(420px, 100%);
+  margin: 0 auto;
+}
+
+.figure-viewer__missing {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.figure-viewer__missing code {
+  color: var(--color-accent);
+}

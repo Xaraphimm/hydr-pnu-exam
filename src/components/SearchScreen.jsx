@@ -3,7 +3,7 @@ import { loadAllQuestions } from '../data/index.js';
 import { TOPICS } from '../data/index.js';
 import './SearchScreen.css';
 
-export default function SearchScreen() {
+export default function SearchScreen({ onOpenQuestion }) {
   const [query, setQuery] = useState('');
   const [allQuestions, setAllQuestions] = useState({});
   const [loading, setLoading] = useState(true);
@@ -53,10 +53,14 @@ export default function SearchScreen() {
         <div key={topicId} className="search-screen__group">
           <h3 className="search-screen__group-title">{TOPICS[topicId]?.name || topicId}</h3>
           {questions.map((q) => (
-            <div key={q.id} className="search-screen__result">
+            <button
+              key={q.id}
+              className="search-screen__result"
+              onClick={() => onOpenQuestion?.(topicId, q)}
+            >
               <span className="search-screen__qid">{q.id}</span>
               <p className="search-screen__qtext">{q.q}</p>
-            </div>
+            </button>
           ))}
         </div>
       ))}

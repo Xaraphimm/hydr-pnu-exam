@@ -38,6 +38,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+}
+
+.bookmarks-screen__open {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  text-align: left;
+  padding: 0;
+  font: inherit;
+}
+
+.bookmarks-screen__open:disabled {
+  opacity: 0.6;
+}
+
+.bookmarks-screen__remove {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-bg-card);
+  color: var(--color-text-secondary);
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .bookmarks-screen__qid {
