@@ -1,0 +1,15 @@
+.version-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--color-text-secondary);
+  opacity: 0.65;
+  padding: 3px 0 4px;
+  z-index: 101;
+  pointer-events: none;
+  user-select: none;
+}

@@ -18,6 +18,7 @@ import PdfViewer from './components/PdfViewer.jsx'
 import ExamSelectionScreen from './components/ExamSelectionScreen.jsx'
 import ExamResultsScreen from './components/ExamResultsScreen.jsx'
 import CustomExamScreen from './components/CustomExamScreen.jsx'
+import VersionFooter from './components/VersionFooter.jsx'
 import { generateExam, seededShuffle } from './utils/exam-generator.js'
 import { buildAcsTargetedExam } from './utils/acs-filter.js'
 import { buildCustomExam } from './utils/custom-exam.js'
@@ -586,6 +587,7 @@ export default function App() {
         {tab === 'progress' && <ProgressScreen />}
 
         <TabBar activeTab={tab} onTabChange={handleTabChange} />
+        <VersionFooter />
       </div>
     </ThemeProvider>
   )
