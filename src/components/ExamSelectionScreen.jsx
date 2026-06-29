@@ -11,13 +11,17 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
   const [activeTab, setActiveTab] = useState('study');
   const { attempts } = useHistory();
 
-  // topicId is null or 'airframe' for full-category, or 'AF-01' etc for per-subtopic
-  const isFullCategory = !topicId || topicId === 'airframe';
-  const title = isFullCategory ? 'Airframe Knowledge Exam' : TOPICS[topicId]?.name;
+  // topicId is null or a category key ('airframe'/'powerplant') for a
+  // full-category exam, or 'AF-01' / 'PP-01' etc. for a per-subtopic exam.
+  const isFullCategory = !topicId || topicId in CATEGORIES;
+  const category = isFullCategory ? (topicId ?? 'airframe') : null;
+  const title = isFullCategory
+    ? `${CATEGORIES[category].name} Knowledge Exam`
+    : TOPICS[topicId]?.name;
 
   const bestScores = useMemo(() => {
     const scores = {};
-    const filterTopicId = isFullCategory ? 'airframe' : topicId;
+    const filterTopicId = isFullCategory ? category : topicId;
     for (const a of attempts) {
       if (a.topicId !== filterTopicId) continue;
       if (a.mode !== activeTab) continue;
@@ -28,7 +32,7 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
       }
     }
     return scores;
-  }, [attempts, activeTab, topicId, isFullCategory]);
+  }, [attempts, activeTab, topicId, isFullCategory, category]);
 
   const handleSelect = (version) => {
     const seed = createExamSeed(version);
@@ -36,7 +40,7 @@ export default function ExamSelectionScreen({ topicId, onSelectExam, onBack }) {
       mode: activeTab,
       version,
       seed,
-      topicId: isFullCategory ? 'airframe' : topicId,
+      topicId: isFullCategory ? category : topicId,
       isFullCategory,
     });
   };

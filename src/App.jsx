@@ -27,6 +27,8 @@ import './styles/reset.css'
 import './styles/theme.css'
 import './styles/global.css'
 
+const isCategoryId = (id) => id != null && id in CATEGORIES
+
 export default function App() {
   const { confidence } = useHistory()
 
@@ -49,6 +51,7 @@ export default function App() {
   const [examSeed, setExamSeed] = useState(null)
   const [examMode, setExamMode] = useState(null)
   const [acsQuestionsByTopic, setAcsQuestionsByTopic] = useState(null)
+  const [acsCategory, setAcsCategory] = useState('airframe')
   const [acsSession, setAcsSession] = useState(null)
 
   // Flashcard state
@@ -62,27 +65,32 @@ export default function App() {
     setScreen('exam-select')
   }
 
-  const loadAcsQuestionPools = async () => {
+  const loadAcsQuestionPools = async (category) => {
     const questionsByTopic = {}
-    for (const tid of CATEGORIES.airframe.topics) {
+    for (const tid of CATEGORIES[category].topics) {
       const topicQs = await loadQuestions(tid)
       if (topicQs.length > 0) questionsByTopic[tid] = topicQs
     }
+    setAcsCategory(category)
     setAcsQuestionsByTopic(questionsByTopic)
     return questionsByTopic
   }
 
-  const openAcsPractice = async () => {
-    setActiveTopicId('airframe')
+  const openAcsPractice = async (category = 'airframe') => {
+    setActiveTopicId(category)
     setScreen('acs-practice')
-    if (!acsQuestionsByTopic) {
-      await loadAcsQuestionPools()
+    if (!acsQuestionsByTopic || acsCategory !== category) {
+      setAcsQuestionsByTopic(null)
+      await loadAcsQuestionPools(category)
     }
   }
 
   const startReadinessStudy = async () => {
+    // The readiness ring reflects mastery across every topic in every
+    // category, so the readiness study session draws from all of them.
+    const topicIds = Object.values(CATEGORIES).flatMap((cat) => cat.topics)
     const qs = await buildCategoryStudyQuestions({
-      topicIds: CATEGORIES.airframe.topics,
+      topicIds,
       loadQuestions,
     })
 
@@ -109,12 +117,13 @@ export default function App() {
 
     let qs
     if (isFullCategory) {
+      const category = isCategoryId(scopeId) ? scopeId : 'airframe'
       const questionsByTopic = {}
-      for (const tid of CATEGORIES.airframe.topics) {
+      for (const tid of CATEGORIES[category].topics) {
         const topicQs = await loadQuestions(tid)
         if (topicQs.length > 0) questionsByTopic[tid] = topicQs
       }
-      qs = generateExam(seed, questionsByTopic, 100)
+      qs = generateExam(seed, questionsByTopic, CATEGORIES[category].examQuestions)
     } else {
       const topicQs = await loadQuestions(scopeId)
       qs = seededShuffle(topicQs, seed)
@@ -126,7 +135,7 @@ export default function App() {
     setStartTime(Date.now())
     setEndTime(null)
     setReviewIndex(null)
-    setActiveTopicId(isFullCategory ? 'airframe' : scopeId)
+    setActiveTopicId(isFullCategory ? (isCategoryId(scopeId) ? scopeId : 'airframe') : scopeId)
 
     if (mode === 'study') {
       setMode('all')
@@ -138,12 +147,12 @@ export default function App() {
   }
 
   const handleAcsPracticeStart = async ({ input, seed = Date.now() }) => {
-    const questionsByTopic = acsQuestionsByTopic ?? (await loadAcsQuestionPools())
+    const questionsByTopic = acsQuestionsByTopic ?? (await loadAcsQuestionPools(acsCategory))
     const session = buildAcsTargetedExam({
       questionsByTopic,
       input,
       seed,
-      maxQuestions: CATEGORIES.airframe.examQuestions,
+      maxQuestions: CATEGORIES[acsCategory].examQuestions,
     })
 
     if (session.questions.length === 0) return
@@ -155,7 +164,7 @@ export default function App() {
     setStartTime(Date.now())
     setEndTime(null)
     setReviewIndex(null)
-    setActiveTopicId('airframe')
+    setActiveTopicId(acsCategory)
     setMode('acs')
     setExamMode('acs')
     setExamVersion('acs-targeted')
@@ -183,7 +192,7 @@ export default function App() {
       version: examVersion,
       seed: examVersion === 'random' ? Date.now() : examSeed,
       topicId: activeTopicId,
-      isFullCategory: activeTopicId === 'airframe',
+      isFullCategory: isCategoryId(activeTopicId),
     })
   }
 
@@ -387,10 +396,13 @@ export default function App() {
         {tab === 'home' && screen === 'acs-practice' && (
           <AcsPracticeScreen
             questionsByTopic={acsQuestionsByTopic ?? {}}
-            maxQuestions={CATEGORIES.airframe.examQuestions}
+            maxQuestions={CATEGORIES[acsCategory].examQuestions}
             isLoading={!acsQuestionsByTopic}
             onBack={goToTopicList}
             onStart={handleAcsPracticeStart}
+            categoryName={CATEGORIES[acsCategory].name}
+            exampleCode={acsCategory === 'powerplant' ? 'AM.III.A.K1' : 'AM.II.F.K1'}
+            examplePrefix={acsCategory === 'powerplant' ? 'AM.III.A' : 'AM.II.F'}
           />
         )}
 
@@ -398,7 +410,7 @@ export default function App() {
           <ExamSelectionScreen
             topicId={activeTopicId}
             onSelectExam={handleExamSelect}
-            onBack={() => activeTopicId === 'airframe' ? goToTopicList() : goToSubtopic()}
+            onBack={() => isCategoryId(activeTopicId) ? goToTopicList() : goToSubtopic()}
           />
         )}
 
@@ -425,7 +437,7 @@ export default function App() {
             }
             onRetake={handleRetakeFromResults}
             onStudyMissed={handleStudyMissedFromResults}
-            onHome={activeTopicId === 'airframe' ? goToTopicList : goToSubtopic}
+            onHome={isCategoryId(activeTopicId) ? goToTopicList : goToSubtopic}
           />
         )}
 
