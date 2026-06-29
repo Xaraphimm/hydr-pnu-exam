@@ -25,6 +25,9 @@ describe('TopicListScreen', () => {
     expect(screen.getByText('Metallic Structures')).toBeInTheDocument();
     expect(screen.getByText('130 questions')).toBeInTheDocument();
     expect(screen.getByText('Reciprocating Engines')).toBeInTheDocument();
-    expect(screen.getAllByText('Study content pending').length).toBeGreaterThan(0);
+    // All powerplant topics now have authored question banks, so no topic
+    // should render the "Study content pending" placeholder.
+    expect(screen.queryByText('Study content pending')).toBeNull();
+    expect(screen.getAllByText('100 questions').length).toBeGreaterThan(0);
   });
 });

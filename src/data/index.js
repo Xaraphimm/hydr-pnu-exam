@@ -17,7 +17,19 @@ const questionLoaders = {
   'AF-14': () => import('./airframe/rotorcraft-fundamentals.js'),
   'AF-15': () => import('./airframe/water-waste-systems.js'),
   'AF-PRACTICE': () => import('./airframe/airframe-faa-practice-test.js'),
+  'PP-01': () => import('./powerplant/reciprocating-engines.js'),
+  'PP-02': () => import('./powerplant/turbine-engines.js'),
+  'PP-03': () => import('./powerplant/engine-inspection.js'),
+  'PP-04': () => import('./powerplant/engine-instrument-systems.js'),
+  'PP-05': () => import('./powerplant/engine-fire-protection.js'),
+  'PP-06': () => import('./powerplant/engine-electrical-systems.js'),
   'PP-07': () => import('./powerplant/engine-lubrication-systems.js'),
+  'PP-08': () => import('./powerplant/ignition-starting-systems.js'),
+  'PP-09': () => import('./powerplant/engine-fuel-metering.js'),
+  'PP-10': () => import('./powerplant/recip-induction-cooling.js'),
+  'PP-11': () => import('./powerplant/turbine-engine-air-systems.js'),
+  'PP-12': () => import('./powerplant/engine-exhaust-reverser.js'),
+  'PP-13': () => import('./powerplant/propellers.js'),
 };
 
 export const QUESTION_COUNTS = {
@@ -37,7 +49,19 @@ export const QUESTION_COUNTS = {
   'AF-14': 16,
   'AF-15': 2,
   'AF-PRACTICE': 1000,
+  'PP-01': 100,
+  'PP-02': 100,
+  'PP-03': 100,
+  'PP-04': 100,
+  'PP-05': 100,
+  'PP-06': 100,
   'PP-07': 100,
+  'PP-08': 100,
+  'PP-09': 100,
+  'PP-10': 100,
+  'PP-11': 100,
+  'PP-12': 100,
+  'PP-13': 100,
 };
 
 const questionCache = {};

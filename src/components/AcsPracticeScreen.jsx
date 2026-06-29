@@ -20,6 +20,9 @@ export default function AcsPracticeScreen({
   isLoading,
   onBack,
   onStart,
+  categoryName = 'Airframe',
+  exampleCode = 'AM.II.F.K1',
+  examplePrefix = 'AM.II.F',
 }) {
   const [input, setInput] = useState('');
 
@@ -46,7 +49,7 @@ export default function AcsPracticeScreen({
         <div>
           <h1 className="acs-practice__title">ACS Targeted Practice</h1>
           <p className="acs-practice__subtitle">
-            Build an Airframe practice session from the ACS codes you want to brush up on.
+            Build a {categoryName} practice session from the ACS codes you want to brush up on.
           </p>
         </div>
       </div>
@@ -60,7 +63,7 @@ export default function AcsPracticeScreen({
           className="acs-practice__input"
           value={input}
           onChange={(event) => setInput(event.target.value)}
-          placeholder="AM.II.F.K1, AM.II.F"
+          placeholder={`${exampleCode}, ${examplePrefix}`}
           rows={5}
         />
         <p className="acs-practice__hint">
@@ -86,7 +89,7 @@ export default function AcsPracticeScreen({
         {hasCodes && matchCount > 0 && (
           <p className="acs-practice__cap-note">
             {isCapped
-              ? `This session will be capped to the ${maxQuestions}-question Airframe exam amount.`
+              ? `This session will be capped to the ${maxQuestions}-question ${categoryName} exam amount.`
               : `Fewer than ${maxQuestions} matches were found, so this session will use all matching questions.`}
           </p>
         )}
@@ -140,7 +143,7 @@ export default function AcsPracticeScreen({
       {hasCodes && !isLoading && matchCount === 0 && (
         <div className="acs-practice__empty">
           None of those ACS codes have questions yet. Enter a code from a section
-          that has questions, like <strong>AM.II.F.K1</strong>, or a prefix like <strong>AM.II.F</strong>.
+          that has questions, like <strong>{exampleCode}</strong>, or a prefix like <strong>{examplePrefix}</strong>.
         </div>
       )}
 
