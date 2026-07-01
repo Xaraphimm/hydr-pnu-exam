@@ -33,31 +33,18 @@
 }
 
 .fc-card-container {
-  perspective: 800px;
   margin-bottom: 20px;
   cursor: pointer;
 }
 
 .fc-card {
   position: relative;
-  min-height: 280px;
-  transition: transform 0.4s ease;
-  transform-style: preserve-3d;
-}
-
-.fc-card--flipped {
-  transform: rotateY(180deg);
 }
 
 .fc-card-front,
 .fc-card-back {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   min-height: 280px;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border-light);
   border-radius: 12px;
@@ -65,10 +52,25 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  animation: fc-face-reveal 0.35s ease;
 }
 
-.fc-card-back {
-  transform: rotateY(180deg);
+@keyframes fc-face-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fc-card-front,
+  .fc-card-back {
+    animation: none;
+  }
 }
 
 .fc-card-question {
