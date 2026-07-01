@@ -40,29 +40,32 @@ export default function FlashcardSession({ questions, topicId, onFinish, onBack 
       </div>
 
       <div className="fc-card-container" onClick={handleFlip}>
-        <div className={`fc-card ${flipped ? 'fc-card--flipped' : ''}`}>
-          <div className="fc-card-front">
-            <p className="fc-card-question">{q.q}</p>
-            {DiagramComponent && (
-              <div className="fc-card-diagram">
-                <DiagramComponent />
-              </div>
-            )}
-            <span className="fc-card-hint">Tap to reveal answer</span>
-          </div>
-          <div className="fc-card-back">
-            <div className="fc-card-answer">{q.a[q.c]}</div>
-            <div className="fc-card-explanation">{q.exp}</div>
-            <button
-              className={`fc-card-bookmark ${isQuestionBookmarked(q.id) ? 'fc-card-bookmark--active' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleQuestionBookmark(q.id)
-              }}
-            >
-              {isQuestionBookmarked(q.id) ? '\u{1F516} Bookmarked' : '\u{1F517} Bookmark'}
-            </button>
-          </div>
+        <div className="fc-card">
+          {!flipped ? (
+            <div className="fc-card-front">
+              <p className="fc-card-question">{q.q}</p>
+              {DiagramComponent && (
+                <div className="fc-card-diagram">
+                  <DiagramComponent />
+                </div>
+              )}
+              <span className="fc-card-hint">Tap to reveal answer</span>
+            </div>
+          ) : (
+            <div className="fc-card-back">
+              <div className="fc-card-answer">{q.a[q.c]}</div>
+              <div className="fc-card-explanation">{q.exp}</div>
+              <button
+                className={`fc-card-bookmark ${isQuestionBookmarked(q.id) ? 'fc-card-bookmark--active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleQuestionBookmark(q.id)
+                }}
+              >
+                {isQuestionBookmarked(q.id) ? '\u{1F516} Bookmarked' : '\u{1F517} Bookmark'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
